@@ -10,23 +10,24 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
 
   <style>
-    /* VARIABLES ESTILO DARK / NETFLIX / ACTIVISION */
+    /* VARIABLES CORPORATIVAS (Azul Profundo & Negro) */
     :root {
-      --bg-base: #050505;
-      --bg-surface: #121212;
-      --bg-gradient: linear-gradient(to bottom, #000000 0%, #1a1a24 100%);
-      --text-main: #ffffff;
-      --text-muted: #a3a3a3;
-      --accent: #0066ff;
-      --accent-glow: rgba(0, 102, 255, 0.4);
-      --border-color: rgba(255, 255, 255, 0.1);
+      --bg-base: #020617; /* Negro azulado muy profundo */
+      --bg-surface: #0f172a; /* Azul corporativo oscuro */
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #2563eb; /* Azul eléctrico */
+      --accent-glow: rgba(37, 99, 235, 0.4);
+      --border-color: rgba(255, 255, 255, 0.08);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body { 
       font-family: 'Inter', sans-serif; 
-      background-color: var(--bg-base); 
+      /* Degradado principal sutil azul a negro */
+      background: radial-gradient(circle at 50% -20%, #1e293b 0%, var(--bg-base) 70%);
+      background-color: var(--bg-base);
       color: var(--text-main); 
       line-height: 1.6; 
       overflow-x: hidden;
@@ -35,15 +36,14 @@
     /* NAVEGACIÓN */
     header {
       position: fixed; top: 0; width: 100%;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0) 100%);
-      backdrop-filter: blur(8px); border-bottom: 1px solid transparent;
-      z-index: 1000; padding: 1.2rem 0; transition: background 0.3s;
+      background: rgba(2, 6, 23, 0.85);
+      backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-color);
+      z-index: 1000; padding: 1.2rem 0; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
     }
     .nav-container {
       max-width: 1400px; margin: 0 auto; padding: 0 2rem;
       display: flex; justify-content: space-between; align-items: center;
     }
-    /* Logo agrandado y sin fondo */
     .brand img { 
       height: 65px; 
       filter: invert(1) brightness(2); 
@@ -54,24 +54,23 @@
     
     .nav-links { display: flex; gap: 2.5rem; list-style: none; }
     .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; transition: color 0.3s; }
-    .nav-links a:hover { color: var(--text-main); }
+    .nav-links a:hover { color: var(--text-main); text-shadow: 0 0 10px rgba(255,255,255,0.3); }
 
     /* BOTONES */
     .btn {
       display: inline-flex; align-items: center; justify-content: center;
       padding: 0.9rem 2.5rem; font-size: 0.85rem; font-weight: 800; 
       text-transform: uppercase; letter-spacing: 1.5px; text-decoration: none; 
-      cursor: pointer; transition: all 0.3s ease; border-radius: 4px;
+      cursor: pointer; transition: all 0.3s ease; border-radius: 6px;
     }
     .btn-primary { background: var(--text-main); color: var(--bg-base); border: 2px solid var(--text-main); }
-    .btn-primary:hover { background: transparent; color: var(--text-main); }
-    .btn-accent { background: var(--accent); color: #fff; border: 2px solid var(--accent); box-shadow: 0 0 15px var(--accent-glow); }
+    .btn-primary:hover { background: transparent; color: var(--text-main); box-shadow: 0 0 20px rgba(255,255,255,0.2); }
+    .btn-accent { background: var(--accent); color: #fff; border: 2px solid var(--accent); box-shadow: 0 0 20px var(--accent-glow); }
     .btn-accent:hover { background: transparent; color: var(--accent); }
 
-    /* HERO SECTION (Estilo Netflix / Activision) */
+    /* HERO SECTION */
     .hero {
       min-height: 100vh;
-      background: radial-gradient(circle at 80% 30%, #111827 0%, var(--bg-base) 60%);
       display: flex; align-items: center; padding: 8rem 2rem 4rem;
       position: relative;
     }
@@ -79,70 +78,88 @@
       max-width: 1400px; margin: 0 auto; width: 100%;
       display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
     }
-    .hero-text h1 { font-size: clamp(3rem, 5vw, 5.5rem); font-weight: 900; line-height: 1.05; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: -2px; }
-    .hero-text h1 span { background: -webkit-linear-gradient(45deg, #0066ff, #00d2ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero-text h1 { font-size: clamp(3rem, 5vw, 5.5rem); font-weight: 900; line-height: 1.05; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: -2px; text-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+    .hero-text h1 span { background: -webkit-linear-gradient(45deg, #3b82f6, #60a5fa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     .hero-text p { font-size: 1.25rem; color: var(--text-muted); margin-bottom: 2.5rem; max-width: 550px; }
     .hero-buttons { display: flex; gap: 1rem; }
 
-    /* PANEL LATERAL DEGRADADO DEL HERO */
+    /* PANEL LATERAL DEGRADADO (Con profundidad) */
     .hero-visual {
       position: relative; height: 500px; width: 100%;
-      background: linear-gradient(135deg, rgba(0, 102, 255, 0.15) 0%, rgba(0, 0, 0, 0.8) 100%);
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.6) 0%, rgba(2, 6, 23, 0.9) 100%);
       border: 1px solid rgba(255,255,255,0.05); border-radius: 24px;
       display: flex; flex-direction: column; justify-content: center; align-items: center;
-      overflow: hidden; box-shadow: inset 0 0 50px rgba(0,0,0,0.5), 0 20px 50px rgba(0,0,0,0.5);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(37, 99, 235, 0.1);
     }
     .hero-visual::before {
       content: '< / >'; position: absolute; font-family: monospace; font-size: 15rem; 
-      font-weight: 900; color: rgba(255,255,255,0.03); top: -20px; right: -20px;
+      font-weight: 900; color: rgba(255,255,255,0.02); top: -20px; right: -20px;
     }
-    .hero-visual img { width: 200px; filter: invert(1); mix-blend-mode: screen; margin-bottom: 2rem; z-index: 2; }
+    /* MÁSCARA PARA DIFUMINAR LOS BORDES DEL LOGO Y QUITAR EFECTO ESTAMPA */
+    .hero-visual img { 
+      width: 250px; 
+      filter: invert(1); 
+      mix-blend-mode: screen; 
+      margin-bottom: 2rem; 
+      z-index: 2; 
+      -webkit-mask-image: radial-gradient(circle, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 80%);
+      mask-image: radial-gradient(circle, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 80%);
+    }
     .visual-tags { display: flex; gap: 10px; z-index: 2; flex-wrap: wrap; justify-content: center; }
-    .v-tag { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); padding: 5px 15px; border-radius: 50px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); }
+    .v-tag { background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(59, 130, 246, 0.3); padding: 6px 18px; border-radius: 50px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #60a5fa; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
 
     /* SECCIONES GENERALES */
-    .section { padding: 8rem 2rem; max-width: 1400px; margin: 0 auto; border-top: 1px solid var(--border-color); }
-    .section-header { margin-bottom: 4rem; }
-    .section-title { font-size: 2.5rem; font-weight: 900; text-transform: uppercase; letter-spacing: -1px; }
-    .section-subtitle { color: var(--text-muted); font-size: 1.1rem; margin-top: 1rem; max-width: 700px; }
+    .section { padding: 8rem 2rem; max-width: 1400px; margin: 0 auto; position: relative; }
+    .section::before { content: ''; position: absolute; top: 0; left: 10%; width: 80%; height: 1px; background: linear-gradient(90deg, transparent, var(--border-color), transparent); }
+    .section-header { margin-bottom: 4rem; text-align: center; }
+    .section-title { font-size: 2.5rem; font-weight: 900; text-transform: uppercase; letter-spacing: -1px; text-shadow: 0 4px 20px rgba(0,0,0,0.5); }
+    .section-subtitle { color: var(--text-muted); font-size: 1.1rem; margin: 1rem auto 0; max-width: 700px; }
     
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; }
     
-    /* TARJETAS ESTILO NETFLIX/ACTIVISION */
+    /* TARJETAS CON PROFUNDIDAD Y EFECTO CRISTAL (Glassmorphism) */
     .card {
-      background: var(--bg-surface); padding: 3rem 2rem;
-      border: 1px solid transparent; cursor: pointer; border-radius: 8px;
+      background: linear-gradient(145deg, rgba(15,23,42,0.6) 0%, rgba(2,6,23,0.8) 100%);
+      padding: 3rem 2.5rem;
+      border: 1px solid rgba(255,255,255,0.03); border-radius: 16px; cursor: pointer;
       transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); position: relative; overflow: hidden;
+      box-shadow: 0 10px 30px -10px rgba(0,0,0,0.6);
+      backdrop-filter: blur(10px);
     }
-    .card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease; }
-    .card:hover { background: #1a1a1a; transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
+    .card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, var(--accent), #60a5fa); transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease; }
+    .card:hover { transform: translateY(-10px); box-shadow: 0 30px 60px -15px rgba(0,0,0,0.9), 0 0 20px rgba(37,99,235,0.15); border-color: rgba(59,130,246,0.2); }
     .card:hover::before { transform: scaleX(1); }
     
-    .card-icon { font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--accent); font-weight: 900; letter-spacing: 2px; }
+    .card-icon { font-size: 1.8rem; margin-bottom: 1.5rem; color: #60a5fa; font-weight: 900; letter-spacing: 2px; text-shadow: 0 0 15px rgba(59,130,246,0.5); }
     .card h3 { font-size: 1.4rem; font-weight: 800; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.5px; }
     .card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 2rem; }
     .card-action { font-size: 0.8rem; font-weight: 800; color: var(--text-main); text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 8px; transition: color 0.3s; }
-    .card:hover .card-action { color: var(--accent); }
+    .card:hover .card-action { color: #60a5fa; }
 
     /* SECCIÓN COMPROMISOS */
-    .grid-compromisos { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; }
-    .comp-item { background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); padding: 1.5rem; border-radius: 8px; display: flex; align-items: center; gap: 15px; font-weight: 600; font-size: 0.95rem; transition: background 0.3s; }
-    .comp-item:hover { background: rgba(0,102,255,0.1); border-color: rgba(0,102,255,0.3); }
-    .comp-icon { color: var(--accent); font-size: 1.2rem; }
+    .grid-compromisos { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+    .comp-item { 
+      background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(255,255,255,0.05); 
+      padding: 1.5rem; border-radius: 12px; display: flex; align-items: center; gap: 15px; 
+      font-weight: 600; font-size: 0.95rem; transition: all 0.3s; 
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    .comp-item:hover { background: rgba(37,99,235,0.1); border-color: rgba(37,99,235,0.3); transform: translateX(5px); }
+    .comp-icon { color: #60a5fa; font-size: 1.3rem; }
 
     /* MODAL FLOTANTE */
     .modal-overlay {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(15px);
+      background: rgba(2, 6, 23, 0.95); backdrop-filter: blur(15px);
       z-index: 2000; display: flex; justify-content: center; align-items: center;
       opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
     }
     .modal-overlay.active { opacity: 1; pointer-events: all; }
     .modal-content {
-      background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 12px;
+      background: var(--bg-surface); border: 1px solid rgba(59,130,246,0.2); border-radius: 16px;
       width: 90%; max-width: 800px; max-height: 90vh; overflow-y: auto;
       transform: translateY(50px) scale(0.95); transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      position: relative; box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+      position: relative; box-shadow: 0 40px 100px rgba(0,0,0,0.9);
     }
     .modal-overlay.active .modal-content { transform: translateY(0) scale(1); }
     
@@ -153,14 +170,15 @@
     
     .btn-close {
       position: absolute; top: 20px; right: 20px;
-      background: rgba(0,0,0,0.8); color: #fff; border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(0,0,0,0.6); color: #fff; border: 1px solid rgba(255,255,255,0.1);
       width: 45px; height: 45px; font-size: 1.2rem; cursor: pointer; border-radius: 50%;
       display: flex; align-items: center; justify-content: center; transition: all 0.2s; z-index: 10;
+      backdrop-filter: blur(5px);
     }
-    .btn-close:hover { background: var(--text-main); color: #000; transform: rotate(90deg); }
+    .btn-close:hover { background: #ef4444; color: #fff; border-color: #ef4444; transform: rotate(90deg); }
 
     /* FOOTER */
-    footer { background: #000; padding: 4rem 2rem; border-top: 1px solid var(--border-color); text-align: center; color: var(--text-muted); font-size: 0.85rem; }
+    footer { background: #01030a; padding: 4rem 2rem; text-align: center; color: var(--text-muted); font-size: 0.85rem; box-shadow: inset 0 20px 50px rgba(0,0,0,0.5); }
 
     @media (max-width: 992px) {
       .hero-container { grid-template-columns: 1fr; text-align: center; }
@@ -172,7 +190,6 @@
 </head>
 <body>
 
-  <!-- NAVEGACIÓN -->
   <header>
     <div class="nav-container">
       <a href="#" class="brand">
@@ -187,7 +204,6 @@
     </div>
   </header>
 
-  <!-- HERO (Estilo Netflix/Activision) -->
   <section class="hero">
     <div class="hero-container">
       <div class="hero-text">
@@ -198,7 +214,6 @@
         </div>
       </div>
       
-      <!-- Panel Lateral Degradado -->
       <div class="hero-visual">
         <img src="134241.png" alt="Logo Escudo" />
         <div class="visual-tags">
@@ -210,28 +225,24 @@
     </div>
   </section>
 
-  <!-- CORE BUSINESS -->
   <section id="soluciones" class="section">
     <div class="section-header">
       <h2 class="section-title">Core Business</h2>
       <p class="section-subtitle">Soluciones tecnológicas de alto rendimiento enfocadas en la optimización y protección de la información.</p>
     </div>
     <div class="grid">
-      <!-- Tarjeta Software -->
       <div class="card" onclick="abrirModal('software')">
         <div class="card-icon">01 //</div>
         <h3>Desarrollo de Software</h3>
         <p>Arquitectura y programación de sistemas a medida, aplicaciones nativas de escritorio y plataformas web escalables.</p>
         <div class="card-action">Expandir Módulo ➔</div>
       </div>
-      <!-- Tarjeta IA -->
       <div class="card" onclick="abrirModal('ia')">
         <div class="card-icon">02 //</div>
         <h3>Inteligencia Artificial</h3>
         <p>Modelos de automatización, análisis predictivo y visión por computadora integrados en sus procesos.</p>
         <div class="card-action">Expandir Módulo ➔</div>
       </div>
-      <!-- Tarjeta CCTV -->
       <div class="card" onclick="abrirModal('cctv')">
         <div class="card-icon">03 //</div>
         <h3>Sistemas CCTV</h3>
@@ -241,21 +252,18 @@
     </div>
   </section>
 
-  <!-- TAREAS SECUNDARIAS (Facility Services) -->
-  <section id="secundaria" class="section" style="background: rgba(255,255,255,0.01);">
+  <section id="secundaria" class="section">
     <div class="section-header">
       <h2 class="section-title">División Secundaria</h2>
       <p class="section-subtitle">Servicios de Limpieza Profesional y Mantenimiento Integral de edificios con personal capacitado, protocolos certificados y supervisión permanente.</p>
     </div>
     <div class="grid">
-      <!-- Limpieza -->
       <div class="card" onclick="abrirModal('limpieza')">
         <div class="card-icon">FS-1 //</div>
         <h3>Limpieza Institucional</h3>
         <p>Limpieza diaria y profunda de oficinas, espacios hospitalarios e industriales, incluyendo entregas de final de obra.</p>
         <div class="card-action">Ver Detalles ➔</div>
       </div>
-      <!-- Mantenimiento General -->
       <div class="card" onclick="abrirModal('mantenimiento')">
         <div class="card-icon">FS-2 //</div>
         <h3>Mantenimiento General</h3>
@@ -265,7 +273,6 @@
     </div>
   </section>
 
-  <!-- COMPROMISOS DE LA EMPRESA -->
   <section id="compromisos" class="section">
     <div class="section-header">
       <h2 class="section-title">Compromiso Corporativo</h2>
@@ -281,13 +288,11 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     <p>San Juan, Argentina | Contacto: sasescudologistico@gmail.com | +54 264 561 9131</p>
     <p style="margin-top: 1rem;">&copy; 2026 Escudo Logístico SAS. Todos los derechos reservados.</p>
   </footer>
 
-  <!-- CONTENEDOR DEL PANEL MODAL OCULTO -->
   <div class="modal-overlay" id="modalOverlay">
     <div class="modal-content">
       <button class="btn-close" onclick="cerrarModal()">✕</button>
@@ -300,9 +305,8 @@
     </div>
   </div>
 
-  <!-- SCRIPTS DE INTERACTIVIDAD -->
   <script>
-    // Base de datos de información para los modales
+    // Enlaces de imágenes actualizados y validados para garantizar su carga inmediata
     const dataPaneles = {
       software: {
         title: "Desarrollo de Software a Medida",
@@ -321,337 +325,13 @@
       },
       limpieza: {
         title: "Servicios de Limpieza Profesional",
-        image: "https://images.unsplash.com/photo-1584820927498-cafe2c1c6a6e?auto=format&fit=crop&w=1200&q=80",
+        image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1200&q=80",
         desc: "Espacios impecables, seguros y siempre operativos.<br><br><strong>• Limpieza Institucional:</strong> Áreas comunes, oficinas, sanitarios y fachadas.<br><strong>• Limpieza Hospitalaria:</strong> Protocolos de higiene y bioseguridad para clínicas y laboratorios.<br><strong>• Limpieza Industrial:</strong> Plantas, galpones y entregas finales de obra.<br><br>Insumos de calidad, gestión de consumibles y personal asegurado con ART."
       },
       mantenimiento: {
         title: "Mantenimiento General Integral",
-        image: "https://images.unsplash.com/photo-1581092918056-0c4c3cb37150?auto=format&fit=crop&w=1200&q=80",
+        image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=1200&q=80",
         desc: "Mantenimiento preventivo y correctivo de edificios.<br><br>Ofrecemos servicios de electricidad, plomería, pintura, albañilería menor y carpintería. Además, realizamos el mantenimiento de equipos de aire acondicionado, jardinería y cuidado de espacios exteriores. Garantizamos flexibilidad horaria y respuesta inmediata para que sus instalaciones nunca se detengan."
-      }
-    };
-
-    const overlay = document.getElementById('modalOverlay');
-    const mTitle = document.getElementById('modalTitle');
-    const mDesc = document.getElementById('modalDesc');
-    const mImage = document.getElementById('modalImage');
-
-    function abrirModal(id) {
-      const info = dataPaneles[id];
-      if(info) {
-        mTitle.innerHTML = info.title;
-        mDesc.innerHTML = info.desc;
-        mImage.src = info.image;
-        overlay.classList.add('active');
-        document.body.style.overflow = 'hidden';
-      }
-    }
-
-    function cerrarModal() {
-      overlay.classList.remove('active');
-      document.body.style.overflow = 'auto';
-    }
-
-    overlay.addEventListener('click', function(e) {
-      if(e.target === overlay) { cerrarModal(); }
-    });
-  </script>
-</body>
-</html>
-      position: fixed; top: 0; width: 100%;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0) 100%);
-      backdrop-filter: blur(8px); border-bottom: 1px solid transparent;
-      z-index: 1000; padding: 1.2rem 0; transition: background 0.3s;
-    }
-    .nav-container {
-      max-width: 1400px; margin: 0 auto; padding: 0 2rem;
-      display: flex; justify-content: space-between; align-items: center;
-    }
-    /* Logo agrandado y sin fondo */
-    .brand img { 
-      height: 65px; /* Logo más grande */
-      filter: invert(1) brightness(2); 
-      mix-blend-mode: screen; 
-      transition: transform 0.3s;
-    }
-    .brand img:hover { transform: scale(1.05); }
-    
-    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; transition: color 0.3s; }
-    .nav-links a:hover { color: var(--text-main); }
-
-    /* BOTONES */
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center;
-      padding: 0.9rem 2.5rem; font-size: 0.85rem; font-weight: 800; 
-      text-transform: uppercase; letter-spacing: 1.5px; text-decoration: none; 
-      cursor: pointer; transition: all 0.3s ease; border-radius: 4px;
-    }
-    .btn-primary { background: var(--text-main); color: var(--bg-base); border: 2px solid var(--text-main); }
-    .btn-primary:hover { background: transparent; color: var(--text-main); }
-    .btn-accent { background: var(--accent); color: #fff; border: 2px solid var(--accent); box-shadow: 0 0 15px var(--accent-glow); }
-    .btn-accent:hover { background: transparent; color: var(--accent); }
-
-    /* HERO SECTION (Estilo Netflix / Activision) */
-    .hero {
-      min-height: 100vh;
-      background: radial-gradient(circle at 80% 30%, #111827 0%, var(--bg-base) 60%);
-      display: flex; align-items: center; padding: 8rem 2rem 4rem;
-      position: relative;
-    }
-    .hero-container {
-      max-width: 1400px; margin: 0 auto; width: 100%;
-      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
-    }
-    .hero-text h1 { font-size: clamp(3rem, 5vw, 5.5rem); font-weight: 900; line-height: 1.05; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: -2px; }
-    .hero-text h1 span { background: -webkit-linear-gradient(45deg, #0066ff, #00d2ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .hero-text p { font-size: 1.25rem; color: var(--text-muted); margin-bottom: 2.5rem; max-width: 550px; }
-    .hero-buttons { display: flex; gap: 1rem; }
-
-    /* PANEL LATERAL DEGRADADO DEL HERO */
-    .hero-visual {
-      position: relative; height: 500px; width: 100%;
-      background: linear-gradient(135deg, rgba(0, 102, 255, 0.15) 0%, rgba(0, 0, 0, 0.8) 100%);
-      border: 1px solid rgba(255,255,255,0.05); border-radius: 24px;
-      display: flex; flex-direction: column; justify-content: center; align-items: center;
-      overflow: hidden; box-shadow: inset 0 0 50px rgba(0,0,0,0.5), 0 20px 50px rgba(0,0,0,0.5);
-    }
-    .hero-visual::before {
-      content: '< / >'; position: absolute; font-family: monospace; font-size: 15rem; 
-      font-weight: 900; color: rgba(255,255,255,0.03); top: -20px; right: -20px;
-    }
-    .hero-visual img { width: 200px; filter: invert(1); mix-blend-mode: screen; margin-bottom: 2rem; z-index: 2; }
-    .visual-tags { display: flex; gap: 10px; z-index: 2; flex-wrap: wrap; justify-content: center; }
-    .v-tag { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); padding: 5px 15px; border-radius: 50px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); }
-
-    /* SECCIONES GENERALES */
-    .section { padding: 8rem 2rem; max-width: 1400px; margin: 0 auto; border-top: 1px solid var(--border-color); }
-    .section-header { margin-bottom: 4rem; }
-    .section-title { font-size: 2.5rem; font-weight: 900; text-transform: uppercase; letter-spacing: -1px; }
-    .section-subtitle { color: var(--text-muted); font-size: 1.1rem; margin-top: 1rem; max-width: 700px; }
-    
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
-    
-    /* TARJETAS ESTILO NETFLIX/ACTIVISION */
-    .card {
-      background: var(--bg-surface); padding: 3rem 2rem;
-      border: 1px solid transparent; cursor: pointer; border-radius: 8px;
-      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); position: relative; overflow: hidden;
-    }
-    .card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease; }
-    .card:hover { background: #1a1a1a; transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
-    .card:hover::before { transform: scaleX(1); }
-    
-    .card-icon { font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--accent); font-weight: 900; letter-spacing: 2px; }
-    .card h3 { font-size: 1.4rem; font-weight: 800; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.5px; }
-    .card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 2rem; }
-    .card-action { font-size: 0.8rem; font-weight: 800; color: var(--text-main); text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 8px; transition: color 0.3s; }
-    .card:hover .card-action { color: var(--accent); }
-
-    /* SECCIÓN COMPROMISOS */
-    .grid-compromisos { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; }
-    .comp-item { background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); padding: 1.5rem; border-radius: 8px; display: flex; align-items: center; gap: 15px; font-weight: 600; font-size: 0.95rem; transition: background 0.3s; }
-    .comp-item:hover { background: rgba(0,102,255,0.1); border-color: rgba(0,102,255,0.3); }
-    .comp-icon { color: var(--accent); font-size: 1.2rem; }
-
-    /* MODAL FLOTANTE */
-    .modal-overlay {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(15px);
-      z-index: 2000; display: flex; justify-content: center; align-items: center;
-      opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
-    }
-    .modal-overlay.active { opacity: 1; pointer-events: all; }
-    .modal-content {
-      background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 12px;
-      width: 90%; max-width: 800px; max-height: 90vh; overflow-y: auto;
-      transform: translateY(50px) scale(0.95); transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      position: relative; box-shadow: 0 30px 60px rgba(0,0,0,0.8);
-    }
-    .modal-overlay.active .modal-content { transform: translateY(0) scale(1); }
-    
-    .modal-image { width: 100%; height: 350px; object-fit: cover; border-bottom: 1px solid var(--border-color); display: block; }
-    .modal-body { padding: 3rem; }
-    .modal-body h2 { font-size: 2.2rem; font-weight: 900; text-transform: uppercase; margin-bottom: 1rem; color: var(--text-main); }
-    .modal-body p { color: var(--text-muted); font-size: 1.05rem; margin-bottom: 2rem; line-height: 1.8; }
-    
-    .btn-close {
-      position: absolute; top: 20px; right: 20px;
-      background: rgba(0,0,0,0.8); color: #fff; border: 1px solid rgba(255,255,255,0.2);
-      width: 45px; height: 45px; font-size: 1.2rem; cursor: pointer; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center; transition: all 0.2s; z-index: 10;
-    }
-    .btn-close:hover { background: var(--text-main); color: #000; transform: rotate(90deg); }
-
-    /* FOOTER */
-    footer { background: #000; padding: 4rem 2rem; border-top: 1px solid var(--border-color); text-align: center; color: var(--text-muted); font-size: 0.85rem; }
-
-    @media (max-width: 992px) {
-      .hero-container { grid-template-columns: 1fr; text-align: center; }
-      .hero-visual { height: 350px; }
-      .hero-buttons { justify-content: center; }
-      .nav-links { display: none; }
-    }
-  </style>
-</head>
-<body>
-
-  <!-- NAVEGACIÓN -->
-  <header>
-    <div class="nav-container">
-      <a href="#" class="brand">
-        <img src="134241.png" alt="Escudo Logístico" />
-      </a>
-      <ul class="nav-links">
-        <li><a href="#soluciones">Software & Seguridad</a></li>
-        <li><a href="#secundaria">Mantenimiento</a></li>
-        <li><a href="#compromisos">Estándares</a></li>
-      </ul>
-      <a href="https://wa.me/542645619131" target="_blank" class="btn btn-primary" style="padding: 0.6rem 1.5rem;">CONTACTO</a>
-    </div>
-  </header>
-
-  <!-- HERO (Estilo Netflix/Activision) -->
-  <section class="hero">
-    <div class="hero-container">
-      <div class="hero-text">
-        <h1>Ingeniería de<br>Software <span>&</span><br>Seguridad.</h1>
-        <p>Desarrollo de sistemas de misión crítica, aplicaciones de escritorio, inteligencia artificial y despliegue de infraestructura táctica corporativa.</p>
-        <div class="hero-buttons">
-          <a href="#soluciones" class="btn btn-accent">Ver Soluciones</a>
-        </div>
-      </div>
-      
-      <!-- Panel Lateral Degradado -->
-      <div class="hero-visual">
-        <img src="134241.png" alt="Logo Escudo" />
-        <div class="visual-tags">
-          <span class="v-tag">Software Dev</span>
-          <span class="v-tag">Machine Learning</span>
-          <span class="v-tag">Cybersecurity</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CORE BUSINESS -->
-  <section id="soluciones" class="section">
-    <div class="section-header">
-      <h2 class="section-title">Core Business</h2>
-      <p class="section-subtitle">Soluciones tecnológicas de alto rendimiento enfocadas en la optimización y protección de la información.</p>
-    </div>
-    <div class="grid">
-      <!-- Tarjeta Software -->
-      <div class="card" onclick="abrirModal('software')">
-        <div class="card-icon">01 //</div>
-        <h3>Desarrollo de Software</h3>
-        <p>Arquitectura y programación de sistemas a medida, aplicaciones nativas de escritorio y plataformas web escalables.</p>
-        <div class="card-action">Expandir Módulo ➔</div>
-      </div>
-      <!-- Tarjeta IA -->
-      <div class="card" onclick="abrirModal('ia')">
-        <div class="card-icon">02 //</div>
-        <h3>Inteligencia Artificial</h3>
-        <p>Modelos de automatización, análisis predictivo y visión por computadora integrados en sus procesos.</p>
-        <div class="card-action">Expandir Módulo ➔</div>
-      </div>
-      <!-- Tarjeta CCTV -->
-      <div class="card" onclick="abrirModal('cctv')">
-        <div class="card-icon">03 //</div>
-        <h3>Sistemas CCTV</h3>
-        <p>Despliegue de redes de cámaras IP, centros de monitoreo (NOC/SOC) y analítica de video para protección 24/7.</p>
-        <div class="card-action">Expandir Módulo ➔</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- TAREAS SECUNDARIAS (Facility Services) -->
-  <section id="secundaria" class="section" style="background: rgba(255,255,255,0.01);">
-    <div class="section-header">
-      <h2 class="section-title">División Secundaria</h2>
-      <p class="section-subtitle">Servicios de Limpieza Profesional y Mantenimiento Integral de edificios con personal capacitado, protocolos certificados y supervisión permanente.</p>
-    </div>
-    <div class="grid">
-      <!-- Limpieza -->
-      <div class="card" onclick="abrirModal('limpieza')">
-        <div class="card-icon">FS-1 //</div>
-        <h3>Limpieza Institucional</h3>
-        <p>Limpieza diaria y profunda de oficinas, espacios hospitalarios e industriales, incluyendo entregas de final de obra[cite: 16].</p>
-        <div class="card-action">Ver Detalles ➔</div>
-      </div>
-      <!-- Mantenimiento General -->
-      <div class="card" onclick="abrirModal('mantenimiento')">
-        <div class="card-icon">FS-2 //</div>
-        <h3>Mantenimiento General</h3>
-        <p>Reparaciones preventivas y correctivas: electricidad, plomería, climatización de equipos de aire acondicionado y espacios verdes[cite: 16].</p>
-        <div class="card-action">Ver Detalles ➔</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- COMPROMISOS DE LA EMPRESA -->
-  <section id="compromisos" class="section">
-    <div class="section-header">
-      <h2 class="section-title">Compromiso Corporativo</h2>
-      <p class="section-subtitle">Estándares de trabajo aplicados a todos nuestros contratos y desarrollos.</p>
-    </div>
-    <div class="grid-compromisos">
-      <div class="comp-item"><span class="comp-icon">🛡️</span> Confidencialidad y acuerdo de no divulgación (NDA).</div>
-      <div class="comp-item"><span class="comp-icon">⚖️</span> Protección de datos personales (Ley 25.326).</div>
-      <div class="comp-item"><span class="comp-icon">🔒</span> Buenas prácticas ISO/IEC 27001, NIST y OWASP.</div>
-      <div class="comp-item"><span class="comp-icon">🧠</span> Uso ético y transparente de la Inteligencia Artificial.</div>
-      <div class="comp-item"><span class="comp-icon">📄</span> Documentación técnica y trazabilidad completa.</div>
-      <div class="comp-item"><span class="comp-icon">⚡</span> Atención personalizada y respuesta ágil.</div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <p>San Juan, Argentina | Contacto: sasescudologistico@gmail.com | +54 264 561 9131[cite: 16]</p>
-    <p style="margin-top: 1rem;">&copy; 2026 Escudo Logístico SAS. Todos los derechos reservados.</p>
-  </footer>
-
-  <!-- CONTENEDOR DEL PANEL MODAL OCULTO -->
-  <div class="modal-overlay" id="modalOverlay">
-    <div class="modal-content">
-      <button class="btn-close" onclick="cerrarModal()">✕</button>
-      <img src="" alt="Referencia Visual" class="modal-image" id="modalImage">
-      <div class="modal-body">
-        <h2 id="modalTitle">Título</h2>
-        <p id="modalDesc">Descripción...</p>
-        <a href="https://wa.me/542645619131" target="_blank" class="btn btn-accent" style="width: 100%;">Solicitar Presupuesto Especializado</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- SCRIPTS DE INTERACTIVIDAD -->
-  <script>
-    // Base de datos de información para los modales
-    const dataPaneles = {
-      software: {
-        title: "Desarrollo de Software a Medida",
-        image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=80",
-        desc: "Ingeniería de software adaptada a la lógica real de su empresa. <br><br><strong>• Aplicaciones de Escritorio:</strong> Desarrollo de software robusto y nativo para Windows o macOS, ideal para sistemas de gestión interna, control de hardware y ERPs cerrados.<br><strong>• Plataformas Web:</strong> Intranets y paneles en la nube.<br><br>Garantizamos código limpio, pruebas rigurosas y despliegues estables sin interrupciones operativas."
-      },
-      ia: {
-        title: "Inteligencia Artificial Aplicada",
-        image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1200&q=80",
-        desc: "Llevamos su empresa al siguiente nivel mediante el procesamiento inteligente de datos.<br><br>Desarrollamos e integramos modelos de Machine Learning y Visión por Computadora capaces de automatizar tareas repetitivas y proveer alertas predictivas para la toma de decisiones gerenciales con total precisión."
-      },
-      cctv: {
-        title: "Sistemas CCTV",
-        image: "https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=1200&q=80",
-        desc: "Control absoluto y monitoreo en tiempo real para sus instalaciones.<br><br>Diseñamos, instalamos y configuramos redes de cámaras IP de alta resolución, circuitos cerrados de televisión (CCTV) con visión nocturna y sistemas NVR. Integramos analíticas de video para detección de intrusos."
-      },
-      limpieza: {
-        title: "Servicios de Limpieza Profesional",
-        image: "https://images.unsplash.com/photo-1584820927498-cafe2c1c6a6e?auto=format&fit=crop&w=1200&q=80",
-        desc: "Espacios impecables, seguros y siempre operativos[cite: 16].<br><br><strong>• Limpieza Institucional:</strong> Áreas comunes, oficinas, sanitarios y fachadas[cite: 16].<br><strong>• Limpieza Hospitalaria:</strong> Protocolos de higiene y bioseguridad para clínicas y laboratorios[cite: 16].<br><strong>• Limpieza Industrial:</strong> Plantas, galpones y entregas finales de obra[cite: 16].<br><br>Insumos de calidad, gestión de consumibles y personal asegurado con ART[cite: 16]."
-      },
-      mantenimiento: {
-        title: "Mantenimiento General Integral",
-        image: "https://images.unsplash.com/photo-1581092918056-0c4c3cb37150?auto=format&fit=crop&w=1200&q=80",
-        desc: "Mantenimiento preventivo y correctivo de edificios[cite: 16].<br><br>Ofrecemos servicios de electricidad, plomería, pintura, albañilería menor y carpintería[cite: 16]. Además, realizamos el mantenimiento de equipos de aire acondicionado, jardinería y cuidado de espacios exteriores[cite: 16]. Garantizamos flexibilidad horaria y respuesta inmediata para que sus instalaciones nunca se detengan[cite: 16]."
       }
     };
 
