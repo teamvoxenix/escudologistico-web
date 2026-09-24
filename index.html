@@ -10,7 +10,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap" rel="stylesheet">
 
   <style>
-    /* VARIABLES CORPORATIVAS (Azul Profundo & Negro) */
     :root {
       --bg-base: #020617; 
       --bg-surface: #0f172a; 
@@ -32,7 +31,6 @@
       overflow-x: hidden;
     }
 
-    /* NAVEGACIÓN */
     header {
       position: fixed; top: 0; width: 100%;
       background: rgba(2, 6, 23, 0.85);
@@ -44,7 +42,6 @@
       display: flex; justify-content: space-between; align-items: center;
     }
     
-    /* LOGO BARRA SUPERIOR */
     .brand img { 
       height: 85px; 
       transition: transform 0.3s;
@@ -56,7 +53,6 @@
     .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; transition: color 0.3s; }
     .nav-links a:hover { color: var(--text-main); text-shadow: 0 0 10px rgba(255,255,255,0.3); }
 
-    /* BOTONES */
     .btn {
       display: inline-flex; align-items: center; justify-content: center;
       padding: 0.9rem 2.5rem; font-size: 0.85rem; font-weight: 800; 
@@ -68,7 +64,6 @@
     .btn-accent { background: var(--accent); color: #fff; border: 2px solid var(--accent); box-shadow: 0 0 20px var(--accent-glow); }
     .btn-accent:hover { background: transparent; color: var(--accent); }
 
-    /* HERO SECTION */
     .hero {
       min-height: 100vh;
       display: flex; align-items: center; padding: 8rem 2rem 4rem;
@@ -83,7 +78,6 @@
     .hero-text p { font-size: 1.25rem; color: var(--text-muted); margin-bottom: 2.5rem; max-width: 550px; }
     .hero-buttons { display: flex; gap: 1rem; }
 
-    /* PANEL LATERAL DEGRADADO */
     .hero-visual {
       position: relative; height: 500px; width: 100%;
       background: linear-gradient(135deg, rgba(15, 23, 42, 0.6) 0%, rgba(2, 6, 23, 0.9) 100%);
@@ -96,7 +90,6 @@
       font-weight: 900; color: rgba(255,255,255,0.02); top: -20px; right: -20px;
     }
     
-    /* LOGO GRANDE DEL PANEL */
     .hero-visual img { 
       width: 320px; 
       margin-bottom: 2rem; 
@@ -106,7 +99,6 @@
     .visual-tags { display: flex; gap: 10px; z-index: 2; flex-wrap: wrap; justify-content: center; }
     .v-tag { background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(59, 130, 246, 0.3); padding: 6px 18px; border-radius: 50px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: #60a5fa; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
 
-    /* SECCIONES GENERALES */
     .section { padding: 8rem 2rem; max-width: 1400px; margin: 0 auto; position: relative; }
     .section::before { content: ''; position: absolute; top: 0; left: 10%; width: 80%; height: 1px; background: linear-gradient(90deg, transparent, var(--border-color), transparent); }
     .section-header { margin-bottom: 4rem; text-align: center; }
@@ -115,7 +107,6 @@
     
     .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; }
     
-    /* TARJETAS CON PROFUNDIDAD */
     .card {
       background: linear-gradient(145deg, rgba(15,23,42,0.6) 0%, rgba(2,6,23,0.8) 100%);
       padding: 3rem 2.5rem;
@@ -134,7 +125,6 @@
     .card-action { font-size: 0.8rem; font-weight: 800; color: var(--text-main); text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 8px; transition: color 0.3s; }
     .card:hover .card-action { color: #60a5fa; }
 
-    /* SECCIÓN COMPROMISOS */
     .grid-compromisos { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
     .comp-item { 
       background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(255,255,255,0.05); 
@@ -145,7 +135,6 @@
     .comp-item:hover { background: rgba(37,99,235,0.1); border-color: rgba(37,99,235,0.3); transform: translateX(5px); }
     .comp-icon { color: #60a5fa; font-size: 1.3rem; }
 
-    /* MODAL FLOTANTE */
     .modal-overlay {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       background: rgba(2, 6, 23, 0.95); backdrop-filter: blur(15px);
@@ -155,17 +144,24 @@
     .modal-overlay.active { opacity: 1; pointer-events: all; }
     .modal-content {
       background: var(--bg-surface); border: 1px solid rgba(59,130,246,0.2); border-radius: 16px;
-      width: 90%; max-width: 800px; max-height: 90vh; overflow-y: auto;
+      width: 90%; max-width: 850px; max-height: 90vh; overflow-y: auto;
       transform: translateY(50px) scale(0.95); transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       position: relative; box-shadow: 0 40px 100px rgba(0,0,0,0.9);
     }
     .modal-overlay.active .modal-content { transform: translateY(0) scale(1); }
     
-    .modal-image { width: 100%; height: 350px; object-fit: cover; border-bottom: 1px solid var(--border-color); display: block; }
+    .modal-image { width: 100%; height: 280px; object-fit: cover; border-bottom: 1px solid var(--border-color); display: block; }
     .modal-body { padding: 3rem; }
     .modal-body h2 { font-size: 2.2rem; font-weight: 900; text-transform: uppercase; margin-bottom: 1rem; color: var(--text-main); }
-    .modal-body p { color: var(--text-muted); font-size: 1.05rem; margin-bottom: 2rem; line-height: 1.8; }
+    .modal-body p { color: var(--text-muted); font-size: 1.05rem; margin-bottom: 1.5rem; line-height: 1.8; }
     
+    /* Estilos adicionales para estructurar la nueva propuesta comercial en el modal */
+    .modal-body h4 { color: #60a5fa; margin-top: 1.5rem; margin-bottom: 0.5rem; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 1px; }
+    .modal-body ul { list-style: none; margin-bottom: 1.5rem; }
+    .modal-body ul li { margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative; color: var(--text-muted); line-height: 1.6; }
+    .modal-body ul li::before { content: '➔'; position: absolute; left: 0; color: var(--accent); font-size: 0.9rem; }
+    .modal-body strong { color: var(--text-main); }
+
     .btn-close {
       position: absolute; top: 20px; right: 20px;
       background: rgba(0,0,0,0.6); color: #fff; border: 1px solid rgba(255,255,255,0.1);
@@ -175,7 +171,6 @@
     }
     .btn-close:hover { background: #ef4444; color: #fff; border-color: #ef4444; transform: rotate(90deg); }
 
-    /* FOOTER */
     footer { background: #01030a; padding: 4rem 2rem; text-align: center; color: var(--text-muted); font-size: 0.85rem; box-shadow: inset 0 20px 50px rgba(0,0,0,0.5); }
 
     @media (max-width: 992px) {
@@ -191,8 +186,8 @@
   <header>
     <div class="nav-container">
       <a href="#" class="brand">
-        <!-- TRUCO DE CACHÉ: ?v=2 agregado al enlace de la imagen -->
-        <img src="134241.png?v=2" alt="Escudo Logístico" />
+        <!-- Truco de caché actualizado a v=4 -->
+        <img src="134241.png?v=4" alt="Escudo Logístico" />
       </a>
       <ul class="nav-links">
         <li><a href="#soluciones">Software & Seguridad</a></li>
@@ -214,8 +209,7 @@
       </div>
       
       <div class="hero-visual">
-        <!-- TRUCO DE CACHÉ: ?v=2 agregado al enlace de la imagen -->
-        <img src="134241.png?v=2" alt="Logo Escudo" />
+        <img src="134241.png?v=4" alt="Logo Escudo" />
         <div class="visual-tags">
           <span class="v-tag">Software Dev</span>
           <span class="v-tag">Machine Learning</span>
@@ -248,6 +242,13 @@
         <h3>Sistemas CCTV</h3>
         <p>Despliegue de redes de cámaras IP, centros de monitoreo (NOC/SOC) y analítica de video para protección 24/7.</p>
         <div class="card-action">Expandir Módulo ➔</div>
+      </div>
+      <!-- NUEVA TARJETA: PLATAFORMA SAAS -->
+      <div class="card" onclick="abrirModal('saas')">
+        <div class="card-icon">04 //</div>
+        <h3>Plataforma SaaS B2B</h3>
+        <p>Seguridad como Servicio. Gestión de identidades, prevención de ransomware, Zero Trust y cumplimiento normativo.</p>
+        <div class="card-action">Ver Propuesta ➔</div>
       </div>
     </div>
   </section>
@@ -299,8 +300,8 @@
       <img src="" alt="Referencia Visual" class="modal-image" id="modalImage">
       <div class="modal-body">
         <h2 id="modalTitle">Título</h2>
-        <p id="modalDesc">Descripción...</p>
-        <a href="https://wa.me/542645619131" target="_blank" class="btn btn-accent" style="width: 100%;">Solicitar Presupuesto Especializado</a>
+        <div id="modalDesc">Descripción...</div>
+        <a href="https://wa.me/542645619131" target="_blank" class="btn btn-accent" style="width: 100%; margin-top: 1rem;">Solicitar Presupuesto Especializado</a>
       </div>
     </div>
   </div>
@@ -310,27 +311,32 @@
       software: {
         title: "Desarrollo de Software a Medida",
         image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=80",
-        desc: "Ingeniería de software adaptada a la lógica real de su empresa. <br><br><strong>• Aplicaciones de Escritorio:</strong> Desarrollo de software robusto y nativo para Windows o macOS, ideal para sistemas de gestión interna, control de hardware y ERPs cerrados.<br><strong>• Plataformas Web:</strong> Intranets y paneles en la nube.<br><br>Garantizamos código limpio, pruebas rigurosas y despliegues estables sin interrupciones operativas."
+        desc: "<p>Ingeniería de software adaptada a la lógica real de su empresa.</p><ul><li><strong>Aplicaciones de Escritorio:</strong> Desarrollo de software robusto y nativo para Windows o macOS, ideal para sistemas de gestión interna, control de hardware y ERPs cerrados.</li><li><strong>Plataformas Web:</strong> Intranets y paneles en la nube.</li></ul><p>Garantizamos código limpio, pruebas rigurosas y despliegues estables sin interrupciones operativas.</p>"
       },
       ia: {
         title: "Inteligencia Artificial Aplicada",
         image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=1200&q=80",
-        desc: "Llevamos su empresa al siguiente nivel mediante el procesamiento inteligente de datos.<br><br>Desarrollamos e integramos modelos de Machine Learning y Visión por Computadora capaces de automatizar tareas repetitivas y proveer alertas predictivas para la toma de decisiones gerenciales con total precisión."
+        desc: "<p>Llevamos su empresa al siguiente nivel mediante el procesamiento inteligente de datos.</p><p>Desarrollamos e integramos modelos de Machine Learning y Visión por Computadora capaces de automatizar tareas repetitivas y proveer alertas predictivas para la toma de decisiones gerenciales con total precisión.</p>"
       },
       cctv: {
         title: "Sistemas CCTV",
         image: "https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=1200&q=80",
-        desc: "Control absoluto y monitoreo en tiempo real para sus instalaciones.<br><br>Diseñamos, instalamos y configuramos redes de cámaras IP de alta resolución, circuitos cerrados de televisión (CCTV) con visión nocturna y sistemas NVR. Integramos analíticas de video para detección de intrusos."
+        desc: "<p>Control absoluto y monitoreo en tiempo real para sus instalaciones.</p><p>Diseñamos, instalamos y configuramos redes de cámaras IP de alta resolución, circuitos cerrados de televisión (CCTV) con visión nocturna y sistemas NVR. Integramos analíticas de video para detección de intrusos.</p>"
+      },
+      saas: {
+        title: "Plataforma SaaS de Ciberseguridad B2B",
+        image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=1200&q=80",
+        desc: "<p><strong>Resumen Ejecutivo:</strong> El mercado actual requiere soluciones que superen el antivirus tradicional. Nuestra Plataforma de Seguridad como Servicio (SaaS) se centra en la protección de datos, la prevención de ransomware y el cumplimiento normativo para resolver las amenazas corporativas más críticas.</p><h4>1. Módulos Core del Producto (MVP)</h4><ul><li><strong>Gestión de Identidades (IAM):</strong> Autenticación Multifactor (MFA), Control de Acceso Basado en Roles (RBAC) y gestión inteligente de sesiones.</li><li><strong>Protección y Cifrado:</strong> Cifrado de Extremo a Extremo (E2EE) y Bóveda Segura para almacenamiento de documentos críticos.</li><li><strong>Auditoría y Trazabilidad:</strong> Generación de logs inmutables para rastreo e investigaciones forenses.</li><li><strong>Prevención de Ransomware:</strong> Copias de seguridad automatizadas y aisladas en la nube.</li></ul><h4>2. Soluciones Avanzadas (Fase 2)</h4><ul><li><strong>Zero Trust Network Access (ZTNA):</strong> Sustitución de VPNs por verificación de Confianza Cero.</li><li><strong>DLP (Prevención de Pérdida):</strong> Detección y bloqueo de exfiltración de datos sensibles a dispositivos USB o nubes no autorizadas.</li><li><strong>CSPM:</strong> Auditoría automatizada para detección proactiva de puertos o bases expuestas en la nube.</li><li><strong>Phishing Simulator:</strong> Evaluación del riesgo humano y micro-entrenamiento de empleados.</li></ul><h4>3. Arquitectura y Estrategia</h4><p>Nuestra infraestructura escalable se basa en tecnologías de backend en tiempo real como <strong>Firebase o Supabase</strong>, operando bajo un marco estricto de DevSecOps con análisis SAST y herramientas como <strong>GitHub Copilot</strong>. Comercialmente, enfocamos la plataforma como el vehículo definitivo de cumplimiento normativo (Compliance), dotando a la alta dirección de un Dashboard Gerencial con un 'Security Score' para justificar proactivamente la inversión en seguridad.</p>"
       },
       limpieza: {
         title: "Servicios de Limpieza Profesional",
         image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1200&q=80",
-        desc: "Espacios impecables, seguros y siempre operativos.<br><br><strong>• Limpieza Institucional:</strong> Áreas comunes, oficinas, sanitarios y fachadas.<br><strong>• Limpieza Hospitalaria:</strong> Protocolos de higiene y bioseguridad para clínicas y laboratorios.<br><strong>• Limpieza Industrial:</strong> Plantas, galpones y entregas finales de obra.<br><br>Insumos de calidad, gestión de consumibles y personal asegurado con ART."
+        desc: "<p>Espacios impecables, seguros y siempre operativos.</p><ul><li><strong>Limpieza Institucional:</strong> Áreas comunes, oficinas, sanitarios y fachadas.</li><li><strong>Limpieza Hospitalaria:</strong> Protocolos de higiene y bioseguridad para clínicas y laboratorios.</li><li><strong>Limpieza Industrial:</strong> Plantas, galpones y entregas finales de obra.</li></ul><p>Insumos de calidad, gestión de consumibles y personal asegurado con ART.</p>"
       },
       mantenimiento: {
         title: "Mantenimiento General Integral",
         image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=1200&q=80",
-        desc: "Mantenimiento preventivo y correctivo de edificios.<br><br>Ofrecemos servicios de electricidad, plomería, pintura, albañilería menor y carpintería. Además, realizamos el mantenimiento de equipos de aire acondicionado, jardinería y cuidado de espacios exteriores. Garantizamos flexibilidad horaria y respuesta inmediata para que sus instalaciones nunca se detengan."
+        desc: "<p>Mantenimiento preventivo y correctivo de edificios.</p><p>Ofrecemos servicios de electricidad, plomería, pintura, albañilería menor y carpintería. Además, realizamos el mantenimiento de equipos de aire acondicionado, jardinería y cuidado de espacios exteriores. Garantizamos flexibilidad horaria y respuesta inmediata para que sus instalaciones nunca se detengan.</p>"
       }
     };
 
