@@ -16,11 +16,10 @@
       --color-bone-white: #ffffff;
       --color-ash-gray: #9a9a9a;
       --color-silver-mist: #bdbdbd;
-      --color-trust-blue: #0052ff; /* Color de confianza principal para CRM */
+      --color-trust-blue: #0052ff; /* Color B2B de confianza */
       --color-saffron-spark: #ffb829;
-      --color-deep-verdant: #15846e;
 
-      /* Escala Tipográfica Monumental */
+      /* Escala Tipográfica */
       --text-nav-label: 14px;
       --text-body: 18px;
       --text-heading-2xs: 24px;
@@ -69,12 +68,13 @@
       color: var(--color-ash-gray); font-size: var(--text-nav-label); font-weight: 600;
       text-transform: uppercase; letter-spacing: 0.35px; text-decoration: none; background: transparent; border: none; cursor: pointer; transition: color 0.3s ease;
     }
-    .btn-ghost:hover, .btn-ghost.active { color: var(--color-bone-white); }
+    .btn-ghost:hover { color: var(--color-bone-white); }
 
     /* LAYOUT BASE */
     .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
     .section-gap { padding: 120px 0; }
     .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .text-right { text-align: left; }
     
     /* NAV */
     .nav-bar {
@@ -92,6 +92,13 @@
     /* INTEGRACIONES LOGOS */
     .integrations { border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); padding: 40px 0; overflow: hidden; }
     .integrations-track { display: flex; gap: 60px; justify-content: space-around; align-items: center; opacity: 0.5; font-size: 24px; font-weight: 400; letter-spacing: -0.5px; }
+
+    /* LISTA DE SERVICIOS INTERACTIVA */
+    .feature-list { list-style: none; margin-top: 36px; }
+    .feature-item { margin-bottom: 40px; cursor: pointer; border-left: 2px solid transparent; padding-left: 24px; transition: all 0.3s; }
+    .feature-item:hover { border-left-color: var(--color-trust-blue); }
+    .feature-item:hover h3 { color: var(--color-trust-blue); }
+    .feature-item h3 { margin-bottom: 12px; transition: color 0.3s; }
     
     /* PIPELINE VISUALIZATION (Minimalista UI) */
     .pipeline-preview {
@@ -114,6 +121,27 @@
     /* CTA FINAL */
     .cta-section { background: linear-gradient(180deg, var(--color-void) 0%, #030a1a 100%); text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
 
+    /* MODAL DE VACÍO */
+    .void-modal {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: var(--color-void); z-index: 2000; overflow-y: auto;
+      display: none; opacity: 0; transition: opacity 0.4s ease; padding: 100px 24px;
+    }
+    .void-modal.active { display: block; opacity: 1; }
+    .modal-content { max-width: 800px; margin: 0 auto; position: relative; }
+    
+    .btn-close {
+      position: absolute; top: -40px; right: 0; color: var(--color-ash-gray); font-size: 42px; 
+      font-weight: 200; background: transparent; border: none; cursor: pointer;
+    }
+    .btn-close:hover { color: var(--color-bone-white); }
+    
+    .modal-body h4 { color: var(--color-trust-blue); font-size: 20px; letter-spacing: -0.48px; margin: 40px 0 20px; text-transform: uppercase; }
+    .modal-body ul { list-style: none; margin-bottom: 36px; }
+    .modal-body ul li { margin-bottom: 18px; position: relative; padding-left: 24px; color: var(--color-silver-mist); }
+    .modal-body ul li::before { content: '→'; position: absolute; left: 0; color: var(--color-trust-blue); }
+    .modal-body strong { color: var(--color-bone-white); font-weight: 600; }
+
     footer { padding: 60px 24px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
 
     @media (max-width: 992px) {
@@ -132,10 +160,10 @@
         <img src="134241.png?v=4" alt="Escudo Logístico" class="brand-logo" />
       </a>
       <div class="nav-links">
-        <a href="#plataforma" class="btn-ghost">SaaS</a>
+        <a href="#core" class="btn-ghost">Tecnología</a>
         <a href="#pipeline" class="btn-ghost">Pipeline</a>
         <a href="#facilities" class="btn-ghost">Facilities</a>
-        <a href="https://wa.me/542645619131" target="_blank" class="btn-pill">Prueba Gratuita</a>
+        <a href="https://wa.me/542645619131" target="_blank" class="btn-pill">Contacto</a>
       </div>
     </div>
   </nav>
@@ -147,8 +175,8 @@
       <div class="hero-text">
         <span class="label">PLATAFORMA B2B INTEGRAL</span>
         <h1 class="display-text">El control<br>total de sus<br>operaciones.</h1>
-        <p>Una suite SaaS que unifica ciberseguridad Zero Trust, desarrollo a medida y gestión de instalaciones en un solo flujo de trabajo inquebrantable.</p>
-        <a href="https://wa.me/542645619131" class="btn-pill">Iniciar Prueba de 14 Días</a>
+        <p>Una suite que unifica ciberseguridad Zero Trust, desarrollo de software a medida y gestión de instalaciones en un solo flujo de trabajo inquebrantable.</p>
+        <a href="#core" class="btn-pill">Explorar Servicios</a>
       </div>
       <div></div>
     </div>
@@ -167,25 +195,36 @@
     </div>
   </section>
 
-  <!-- FEATURE SHOWCASE 1: SAAS -->
-  <section id="plataforma" class="section-gap">
+  <!-- SECCIÓN 01: CORE BUSINESS CON MODALES -->
+  <section id="core" class="section-gap">
     <div class="container two-col">
       <div>
-        <h2 class="heading-lg">01 /<br>Plataforma SaaS</h2>
+        <h2 class="heading-lg">01 /<br>Core Business</h2>
+        <p style="margin-top: 20px;">Soluciones tecnológicas de alto rendimiento enfocadas en la optimización y protección de la información corporativa.</p>
       </div>
       <div>
-        <div style="margin-bottom: 60px;">
-          <h3 class="heading-sm" style="margin-bottom: 12px;">Gestión de Identidades (IAM)</h3>
-          <p>Autenticación Multifactor (MFA) y Control de Acceso Basado en Roles. Supervise quién ingresa y desde dónde con registros inmutables.</p>
-        </div>
-        <div style="margin-bottom: 60px;">
-          <h3 class="heading-sm" style="margin-bottom: 12px;">Prevención Ransomware</h3>
-          <p>Copias de seguridad automatizadas y aisladas en la nube. Bóveda segura con cifrado E2EE para sus contratos y datos corporativos.</p>
-        </div>
-        <div>
-          <h3 class="heading-sm" style="margin-bottom: 12px;">Desarrollo a Medida</h3>
-          <p>Aplicaciones de escritorio nativas y plataformas web creadas exclusivamente para la lógica de su modelo de negocio.</p>
-        </div>
+        <ul class="feature-list">
+          <li class="feature-item" onclick="abrirModal('software')">
+            <h3 class="heading-sm">Desarrollo de Software</h3>
+            <p>Arquitectura y programación nativa. Aplicaciones de escritorio y plataformas web escalables a medida.</p>
+            <button class="btn-ghost" style="color: var(--color-trust-blue);">Leer Especificaciones →</button>
+          </li>
+          <li class="feature-item" onclick="abrirModal('ia')">
+            <h3 class="heading-sm">Inteligencia Artificial</h3>
+            <p>Modelos de automatización, análisis predictivo y visión por computadora integrados en sus procesos.</p>
+            <button class="btn-ghost" style="color: var(--color-trust-blue);">Leer Especificaciones →</button>
+          </li>
+          <li class="feature-item" onclick="abrirModal('cctv')">
+            <h3 class="heading-sm">Sistemas CCTV & NOC</h3>
+            <p>Despliegue de redes de cámaras IP de alta resolución y analítica de video para protección 24/7.</p>
+            <button class="btn-ghost" style="color: var(--color-trust-blue);">Leer Especificaciones →</button>
+          </li>
+          <li class="feature-item" onclick="abrirModal('saas')">
+            <h3 class="heading-sm">Plataforma SaaS B2B</h3>
+            <p>Seguridad como Servicio. Gestión de identidades (IAM), prevención de ransomware y Zero Trust.</p>
+            <button class="btn-ghost" style="color: var(--color-trust-blue);">Ver Propuesta Comercial →</button>
+          </li>
+        </ul>
       </div>
     </div>
   </section>
@@ -199,7 +238,6 @@
         <p>Desde la ingesta de datos hasta la mitigación activa, nuestra arquitectura garantiza que cada etapa del ciclo de vida de la información esté monitorizada.</p>
       </div>
       
-      <!-- CSS Minimalist Pipeline -->
       <div class="pipeline-preview">
         <div class="pipeline-step">
           <h4>1. Ingesta de Datos (Lead)</h4>
@@ -221,20 +259,44 @@
     </div>
   </section>
 
-  <!-- CUSTOMER SUCCESS STORY -->
-  <section class="testimonial">
-    <div class="container">
-      <p class="quote">"Implementar la plataforma de Escudo Logístico no solo blindó nuestros datos ante intentos de ransomware, sino que unificó el control de nuestros accesos en un solo dashboard. La visibilidad es absoluta."</p>
-      <p class="author">Director de Tecnología <span>/ Empresa del Sector Financiero</span></p>
+  <!-- SECCIÓN 02: FACILITIES CON MODALES -->
+  <section id="facilities" class="section-gap">
+    <div class="container two-col">
+      <div>
+        <h2 class="heading-lg">02 /<br>Facilities</h2>
+        <p style="margin-top: 20px;">Servicios integrales para el mantenimiento y limpieza de edificios con personal capacitado y protocolos certificados.</p>
+      </div>
+      <div>
+        <ul class="feature-list">
+          <li class="feature-item" onclick="abrirModal('limpieza')">
+            <h3 class="heading-sm">Limpieza Institucional</h3>
+            <p>Protocolos de higiene y bioseguridad para oficinas, clínicas e industrias.</p>
+            <button class="btn-ghost" style="color: var(--color-trust-blue);">Ver Detalles →</button>
+          </li>
+          <li class="feature-item" onclick="abrirModal('mantenimiento')">
+            <h3 class="heading-sm">Mantenimiento General</h3>
+            <p>Reparaciones preventivas y correctivas para que sus instalaciones nunca se detengan.</p>
+            <button class="btn-ghost" style="color: var(--color-trust-blue);">Ver Detalles →</button>
+          </li>
+        </ul>
+      </div>
     </div>
   </section>
 
-  <!-- FREE TRIAL CTA SECTION -->
+  <!-- CUSTOMER SUCCESS STORY -->
+  <section class="testimonial">
+    <div class="container">
+      <p class="quote">"Implementar la plataforma y servicios de Escudo Logístico no solo blindó nuestros datos, sino que unificó el control de nuestras operaciones en un solo proveedor de confianza."</p>
+      <p class="author">Director de Operaciones <span>/ Cliente Corporativo</span></p>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
   <section class="section-gap cta-section">
     <div class="container">
       <h2 class="heading-lg" style="margin-bottom: 24px;">Proteja su activo más valioso.</h2>
-      <p style="margin: 0 auto 40px;">No espere a sufrir una brecha de seguridad. Despliegue nuestra plataforma SaaS hoy mismo.</p>
-      <a href="https://wa.me/542645619131" class="btn-pill" style="font-size: 16px; padding: 20px 40px;">Agendar Demo Gratuita</a>
+      <p style="margin: 0 auto 40px;">No espere a sufrir una brecha de seguridad o problemas operativos. Inicie hoy.</p>
+      <a href="https://wa.me/542645619131" class="btn-pill" style="font-size: 16px; padding: 20px 40px;">Solicitar Presupuesto</a>
     </div>
   </section>
 
@@ -246,14 +308,84 @@
     </div>
   </footer>
 
+  <!-- MODAL DE VACÍO INTERACTIVO -->
+  <div class="void-modal" id="modalOverlay">
+    <div class="modal-content">
+      <button class="btn-close" onclick="cerrarModal()">×</button>
+      <div class="modal-body">
+        <span class="label" id="modalLabel">Detalle Técnico</span>
+        <h2 class="heading-lg" id="modalTitle" style="margin-bottom: 24px;">Título</h2>
+        <div id="modalDesc">Descripción...</div>
+        <div style="margin-top: 60px;">
+          <a href="https://wa.me/542645619131" target="_blank" class="btn-pill">Contactar Especialista</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
+    /* DATOS DEL MODAL */
+    const dataPaneles = {
+      software: {
+        label: "CORE BUSINESS",
+        title: "Desarrollo de Software",
+        desc: "<p>Ingeniería de software adaptada a la lógica real de su empresa.</p><ul><li><strong>Aplicaciones de Escritorio:</strong> Desarrollo de software robusto y nativo para Windows o macOS. Ideal para sistemas de gestión interna, control de hardware y ERPs cerrados.</li><li><strong>Plataformas Web:</strong> Intranets, APIs y paneles en la nube.</li></ul><p>Garantizamos código limpio, pruebas rigurosas y despliegues estables sin interrupciones operativas.</p>"
+      },
+      ia: {
+        label: "CORE BUSINESS",
+        title: "Inteligencia Artificial",
+        desc: "<p>Llevamos su empresa al siguiente nivel mediante el procesamiento inteligente de datos.</p><p>Desarrollamos e integramos modelos de Machine Learning y Visión por Computadora capaces de automatizar tareas repetitivas y proveer alertas predictivas para la toma de decisiones gerenciales con total precisión.</p>"
+      },
+      cctv: {
+        label: "CORE BUSINESS",
+        title: "Sistemas CCTV & NOC",
+        desc: "<p>Control absoluto y monitoreo en tiempo real para sus instalaciones.</p><p>Diseñamos, instalamos y configuramos redes de cámaras IP de alta resolución, circuitos cerrados de televisión (CCTV) con visión nocturna y sistemas NVR. Integramos analíticas de video para detección de intrusos y centralización en Centros de Monitoreo.</p>"
+      },
+      saas: {
+        label: "PROPUESTA COMERCIAL",
+        title: "Plataforma SaaS B2B",
+        desc: "<p>Nuestra Plataforma de Seguridad como Servicio (SaaS) se centra en la protección de datos, la prevención de ransomware y el cumplimiento normativo para resolver las amenazas corporativas más críticas.</p><h4>1. Módulos Core del Producto (MVP)</h4><ul><li><strong>Gestión de Identidades (IAM):</strong> Autenticación Multifactor (MFA), Control de Acceso Basado en Roles (RBAC) y gestión inteligente de sesiones.</li><li><strong>Protección y Cifrado:</strong> Cifrado de Extremo a Extremo (E2EE) y Bóveda Segura para almacenamiento crítico.</li><li><strong>Auditoría y Trazabilidad:</strong> Logs inmutables para rastreo e investigaciones forenses.</li><li><strong>Prevención de Ransomware:</strong> Copias de seguridad automatizadas y aisladas en la nube.</li></ul><h4>2. Soluciones Avanzadas (Fase 2)</h4><ul><li><strong>Zero Trust Network Access (ZTNA):</strong> Sustitución de VPNs por verificación de Confianza Cero.</li><li><strong>DLP (Prevención de Pérdida):</strong> Bloqueo de exfiltración de datos a USB o nubes no autorizadas.</li><li><strong>CSPM:</strong> Auditoría automatizada de postura de seguridad en la nube.</li></ul><h4>3. Arquitectura DevSecOps</h4><p>Infraestructura escalable (Firebase/Supabase), operando bajo un marco estricto de DevSecOps con análisis SAST y GitHub Copilot. Dotamos a la alta dirección de un Dashboard Gerencial con un 'Security Score' para justificar la inversión proactiva en ciberseguridad.</p>"
+      },
+      limpieza: {
+        label: "DIVISIÓN SECUNDARIA",
+        title: "Limpieza Profesional",
+        desc: "<p>Espacios impecables, seguros y siempre operativos.</p><ul><li><strong>Limpieza Institucional:</strong> Áreas comunes, oficinas, sanitarios y fachadas.</li><li><strong>Limpieza Hospitalaria:</strong> Protocolos de higiene y bioseguridad para clínicas y laboratorios.</li><li><strong>Limpieza Industrial:</strong> Plantas, galpones y entregas finales de obra.</li></ul><p>Insumos de calidad, gestión de consumibles y personal asegurado con ART.</p>"
+      },
+      mantenimiento: {
+        label: "DIVISIÓN SECUNDARIA",
+        title: "Mantenimiento General",
+        desc: "<p>Mantenimiento preventivo y correctivo integral de edificios.</p><p>Ofrecemos servicios de electricidad, plomería, pintura, albañilería menor y carpintería. Además, realizamos el mantenimiento de equipos de aire acondicionado, jardinería y cuidado de espacios exteriores. Garantizamos flexibilidad horaria y respuesta inmediata para que sus instalaciones nunca se detengan.</p>"
+      }
+    };
+
+    /* LÓGICA DEL MODAL */
+    const overlay = document.getElementById('modalOverlay');
+    const mLabel = document.getElementById('modalLabel');
+    const mTitle = document.getElementById('modalTitle');
+    const mDesc = document.getElementById('modalDesc');
+
+    function abrirModal(id) {
+      const info = dataPaneles[id];
+      if(info) {
+        mLabel.innerHTML = info.label;
+        mTitle.innerHTML = info.title;
+        mDesc.innerHTML = info.desc;
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function cerrarModal() {
+      overlay.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+
     /* MOTOR DE PARTÍCULAS (Configurado con Trust Colors) */
     const canvas = document.getElementById('particle-canvas');
     const ctx = canvas.getContext('2d');
     let width, height;
     let particles = [];
 
-    // Colores enfocados en confianza B2B: Azules corporativos, blanco, cian oscuro.
     const colors = ['#0052ff', '#15846e', '#ffffff', '#38bdf8', '#0f172a'];
 
     function initCanvas() {
