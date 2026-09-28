@@ -5,14 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Escudo Logístico SAS | Workspace & Security</title>
   
-  <!-- ==========================================
-       SECURITY HEADERS (Client-Side Hardening)
-       ========================================== -->
-  <!-- 1. Content Security Policy (CSP): Bloquea scripts no autorizados, iframes maliciosos y rastreadores -->
+  <!-- SECURITY HEADERS -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; base-uri 'self'; form-action 'self';">
-  <!-- 2. Referrer Policy: Protege la privacidad de tus usuarios al navegar a otros sitios -->
   <meta name="referrer" content="strict-origin-when-cross-origin">
-  <!-- 3. Previene que los navegadores traten de "adivinar" tipos de archivos (mitiga ataques MIME) -->
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -87,10 +82,10 @@
     }
     .btn-dark-pill:hover { background: rgba(255, 255, 255, 0.1); border-color: var(--color-white); }
 
-    .btn-ghost { color: var(--color-silver); font-size: 14px; font-weight: 500; text-decoration: none; transition: color 0.2s; }
+    .btn-ghost { color: var(--color-silver); font-size: 14px; font-weight: 500; text-decoration: none; transition: color 0.2s; cursor: pointer; background: none; border: none; }
     .btn-ghost:hover { color: var(--color-white); }
 
-    /* LAYOUT BASE (PC Default) */
+    /* LAYOUT BASE */
     .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
     .section-gap { padding: 120px 0; }
     .responsive-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
@@ -185,30 +180,27 @@
     }
     .modal-close { position: absolute; top: 24px; right: 24px; background: transparent; border: none; color: var(--color-ash); font-size: 24px; cursor: pointer; }
     .modal-close:hover { color: var(--color-white); }
+    
+    /* Legal text formatting inside modal */
+    .legal-text h4 { font-family: 'Inter', sans-serif; font-weight: 600; color: var(--color-white); margin: 24px 0 8px; font-size: 16px; }
+    .legal-text p, .legal-text ul { margin-bottom: 16px; }
+    .legal-text ul { padding-left: 20px; }
 
-    /* ========================================================
-       MEDIA QUERIES (Optimización Móvil/Tablet)
-       ======================================================== */
+    /* MEDIA QUERIES */
     @media (max-width: 992px) {
       .container { padding: 0 20px; } 
       .section-gap { padding: 80px 0; } 
-      
       .nav-bar { padding: 16px 20px; }
       .nav-links { display: none; } 
       .brand-logo { height: 45px; } 
-      
       .responsive-grid { grid-template-columns: 1fr; gap: 40px; }
       .demo-panel { grid-template-columns: 1fr; padding: 32px 24px; gap: 32px; }
-      
       .hero-buttons { flex-direction: column; width: 100%; max-width: 320px; }
       .btn-orange-pill, .btn-dark-pill { width: 100%; text-align: center; }
-      
       .trust-track { flex-wrap: wrap; gap: 24px 40px; justify-content: center; }
       .trust-logo { font-size: 18px; }
-      
       .prompt-composer { padding: 8px 8px 8px 16px; margin: 32px auto 24px; }
       .comparison-table { display: block; overflow-x: auto; white-space: nowrap; }
-      
       .modal-content { padding: 32px 24px; }
       .void-modal { padding: 5vh 16px; }
     }
@@ -219,13 +211,12 @@
   <!-- NAVEGACIÓN -->
   <nav class="nav-bar">
     <a href="#" class="brand">
-      <img src="134241.png?v=10" alt="Escudo Logístico" class="brand-logo" />
+      <img src="134241.png?v=11" alt="Escudo Logístico" class="brand-logo" />
     </a>
     <div class="nav-links">
       <a href="#core" class="btn-ghost">Workspace</a>
       <a href="#facilities" class="btn-ghost">Facilities</a>
       <a href="#media" class="btn-ghost">Media</a>
-      <!-- REL NOOPENER NOREFERRER APLICADO POR SEGURIDAD -->
       <a href="https://wa.me/542645619131" target="_blank" rel="noopener noreferrer" class="btn-dark-pill">Contáctanos</a>
     </div>
   </nav>
@@ -236,7 +227,6 @@
     <h1 class="hero-display">Ingeniería. Seguridad. Código.</h1>
     <p style="margin-top: 16px; font-size: 16px;">Plataforma SaaS corporativa. Despliegue ciberseguridad Zero Trust, arquitecturas a medida y gestión de facilities desde una única consola.</p>
     
-    <!-- PROMPT COMPOSER -->
     <div class="prompt-composer">
       <input type="text" class="prompt-text" value="deploy --env production --shield active" readonly />
       <button class="prompt-submit" aria-label="Desplegar">
@@ -245,7 +235,6 @@
     </div>
 
     <div class="hero-buttons">
-      <!-- REL NOOPENER NOREFERRER APLICADO POR SEGURIDAD -->
       <a href="https://wa.me/542645619131" target="_blank" rel="noopener noreferrer" class="btn-orange-pill">Contáctanos</a>
       <a href="#core" class="btn-dark-pill">Ver Documentación</a>
     </div>
@@ -285,8 +274,8 @@
           <h3 class="sub-display" style="margin-bottom: 24px;">Plataforma SaaS B2B</h3>
           <p style="margin-bottom: 32px;">No dependas de soluciones fragmentadas. Nuestra API unifica la gestión de identidades (IAM), copias de seguridad aisladas para ransomware y registros inmutables.</p>
           <div class="hero-buttons" style="justify-content: flex-start;">
-            <a href="javascript:abrirModal('saas')" class="btn-dark-pill">Ver Arquitectura SaaS</a>
-            <a href="javascript:abrirModal('software')" class="btn-ghost">Desarrollo a Medida →</a>
+            <button onclick="abrirModal('saas')" class="btn-dark-pill">Ver Arquitectura SaaS</button>
+            <button onclick="abrirModal('software')" class="btn-ghost">Desarrollo a Medida →</button>
           </div>
         </div>
       </div>
@@ -331,7 +320,7 @@
           <div class="demo-content">
             <h3>Limpieza Institucional</h3>
             <p style="margin-bottom: 32px;">La bioseguridad es el primer anillo de defensa físico. Protocolos estrictos para oficinas, clínicas e industrias pesadas.</p>
-            <a href="javascript:abrirModal('limpieza')" class="btn-dark-pill">Ver Protocolos</a>
+            <button onclick="abrirModal('limpieza')" class="btn-dark-pill">Ver Protocolos</button>
           </div>
           <div style="background: var(--color-carbon); height: 200px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center;">
             <span class="micro-label">Facility.Status = "Clean"</span>
@@ -342,7 +331,7 @@
           <div class="demo-content">
             <h3>Mantenimiento General</h3>
             <p style="margin-bottom: 32px;">Infraestructura ininterrumpida. Soporte eléctrico, plomería y climatización (HVAC) con respuesta inmediata.</p>
-            <a href="javascript:abrirModal('mantenimiento')" class="btn-dark-pill">Solicitar Soporte</a>
+            <button onclick="abrirModal('mantenimiento')" class="btn-dark-pill">Solicitar Soporte</button>
           </div>
           <div style="background: var(--color-carbon); height: 200px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center;">
             <span class="micro-label">Hardware.Uptime = "99.9%"</span>
@@ -360,7 +349,6 @@
           <span class="micro-label">03 / Visibilidad & Media</span>
           <h2 class="section-display" style="margin: 16px 0 24px;">Impacto masivo.</h2>
           <p style="margin-bottom: 40px;">No basta con construir la mejor herramienta, su mercado debe verla. Nuestra plataforma mediática conecta su marca con conversiones reales.</p>
-          <!-- REL NOOPENER NOREFERRER APLICADO POR SEGURIDAD -->
           <a href="https://quepasaensanjuan.com/" target="_blank" rel="noopener noreferrer" class="btn-orange-pill">Visitar Portal →</a>
         </div>
 
@@ -372,16 +360,18 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- FOOTER CON LEGALES -->
   <footer style="border-top: 1px solid rgba(255,255,255,0.1); padding: 80px 20px; text-align: center;">
     <h2 class="display-font" style="font-size: 24px; margin-bottom: 24px;">Escudo Logístico SAS</h2>
+    
     <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 24px; margin-bottom: 40px;">
-      <!-- REL NOOPENER NOREFERRER APLICADO POR SEGURIDAD -->
-      <a href="https://wa.me/542645619131" target="_blank" rel="noopener noreferrer" class="btn-ghost">Contacto</a>
-      <a href="#" class="btn-ghost">Documentación</a>
-      <a href="#" class="btn-ghost">Privacidad</a>
+      <button onclick="abrirModal('privacidad')" class="btn-ghost">Políticas de Privacidad</button>
+      <button onclick="abrirModal('cookies')" class="btn-ghost">Políticas de Cookies</button>
+      <button onclick="abrirModal('terminos')" class="btn-ghost">Términos y Condiciones</button>
+      <button onclick="abrirModal('legales')" class="btn-ghost">Notas Adicionales</button>
     </div>
-    <span class="micro-label">© 2026 Escudo Logístico. Todos los derechos reservados. San Juan, Argentina.</span>
+    
+    <span class="micro-label">© 2026 Escudo Logístico SAS. CUIT/Registro corporativo en trámite. San Juan, Argentina.</span>
   </footer>
 
   <!-- MODAL -->
@@ -390,36 +380,67 @@
       <button class="modal-close" onclick="cerrarModal()" aria-label="Cerrar">×</button>
       <span class="micro-label" id="modalLabel" style="margin-bottom: 16px;">SYS.INFO</span>
       <h2 class="sub-display" id="modalTitle" style="margin-bottom: 24px;">Título</h2>
-      <div id="modalDesc" style="color: var(--color-fog); font-size: 14px; line-height: 1.6;">Descripción...</div>
-      <div style="margin-top: 48px;">
-        <!-- REL NOOPENER NOREFERRER APLICADO POR SEGURIDAD -->
+      <div id="modalDesc" style="color: var(--color-fog); font-size: 14px; line-height: 1.6;" class="legal-text">Descripción...</div>
+      
+      <!-- Contenedor del botón dinámico (Se oculta en los legales) -->
+      <div style="margin-top: 48px;" id="modalCtaWrapper">
         <a href="https://wa.me/542645619131" target="_blank" rel="noopener noreferrer" class="btn-orange-pill">Agendar Implementación</a>
       </div>
     </div>
   </div>
 
   <script>
-    /* DATOS DEL MODAL */
+    /* DATOS DEL MODAL (Servicios y Legales) */
     const dataPaneles = {
+      // SERVICIOS
       software: {
         label: "PKG: SOFTWARE_DEV",
         title: "Arquitectura a Medida",
-        desc: "<p style='margin-bottom:16px;'>Ingeniería de software adaptada a la lógica real de su empresa.</p><ul style='margin-left: 20px; margin-bottom:16px;'><li><strong>Desktop Apps:</strong> Software nativo para Windows/macOS.</li><li><strong>Web Platforms:</strong> APIs RESTful y paneles en la nube.</li></ul><p>Despliegues estables bajo CI/CD estricto.</p>"
+        desc: "<p>Ingeniería de software adaptada a la lógica real de su empresa.</p><ul><li><strong>Desktop Apps:</strong> Software nativo para Windows/macOS.</li><li><strong>Web Platforms:</strong> APIs RESTful y paneles en la nube.</li></ul><p>Despliegues estables bajo CI/CD estricto.</p>",
+        hideCta: false
       },
       saas: {
         label: "PKG: CYBER_SECURITY",
         title: "SaaS B2B & Zero Trust",
-        desc: "<p style='margin-bottom:16px;'>Plataforma centralizada para mitigación de riesgos.</p><ul style='margin-left: 20px; margin-bottom:16px;'><li><strong>IAM & Auth:</strong> MFA y RBAC.</li><li><strong>Bóveda:</strong> Cifrado E2EE para almacenamiento crítico.</li><li><strong>Logs:</strong> Registros inmutables forenses.</li></ul><p>Desarrollado sobre infraestructura Supabase y AWS.</p>"
+        desc: "<p>Plataforma centralizada para mitigación de riesgos.</p><ul><li><strong>IAM & Auth:</strong> MFA y RBAC.</li><li><strong>Bóveda:</strong> Cifrado E2EE para almacenamiento crítico.</li><li><strong>Logs:</strong> Registros inmutables forenses.</li></ul><p>Desarrollado sobre infraestructura Supabase y AWS.</p>",
+        hideCta: false
       },
       limpieza: {
         label: "SRV: CLEANING",
         title: "Limpieza Institucional",
-        desc: "<p style='margin-bottom:16px;'>Protocolos higiénicos para continuity operativa.</p><ul style='margin-left: 20px; margin-bottom:16px;'><li><strong>Corporate:</strong> Oficinas y fachadas.</li><li><strong>Healthcare:</strong> Bioseguridad para clínicas.</li><li><strong>Industrial:</strong> Plantas de producción.</li></ul><p>Personal 100% asegurado bajo normativas laborales vigentes.</p>"
+        desc: "<p>Protocolos higiénicos para continuidad operativa.</p><ul><li><strong>Corporate:</strong> Oficinas y fachadas.</li><li><strong>Healthcare:</strong> Bioseguridad para clínicas.</li><li><strong>Industrial:</strong> Plantas de producción.</li></ul><p>Personal 100% asegurado bajo normativas laborales vigentes.</p>",
+        hideCta: false
       },
       mantenimiento: {
         label: "SRV: MAINTENANCE",
         title: "Mantenimiento General",
-        desc: "<p style='margin-bottom:16px;'>Infraestructura física sin interrupciones.</p><p>Soporte correctivo y preventivo en electricidad, plomería y sistemas HVAC. Flexibilidad de horarios para no afectar su operación principal.</p>"
+        desc: "<p>Infraestructura física sin interrupciones.</p><p>Soporte correctivo y preventivo en electricidad, plomería y sistemas HVAC. Flexibilidad de horarios para no afectar su operación principal.</p>",
+        hideCta: false
+      },
+      // LEGALES
+      privacidad: {
+        label: "LEGAL: PRIVACY_POLICY",
+        title: "Políticas de Privacidad",
+        desc: "<h4>Protección de Datos Personales</h4><p>En cumplimiento con la <strong>Ley N° 25.326 de Protección de Datos Personales</strong> de la República Argentina, Escudo Logístico SAS garantiza la estricta confidencialidad y el manejo ético de toda información corporativa y personal recabada a través de nuestros sistemas.</p><h4>Uso de la Información</h4><p>Los datos obtenidos mediante nuestra arquitectura Zero Trust y formularios de contacto son utilizados exclusivamente para la autenticación de usuarios, monitoreo de amenazas (Security Logs) y la prestación directa de nuestros servicios B2B.</p><h4>Derechos del Usuario</h4><p>El titular de los datos personales tiene la facultad de ejercer el derecho de acceso a los mismos en forma gratuita, así como solicitar su rectificación, actualización o supresión comunicándose con nuestro equipo de soporte técnico.</p>",
+        hideCta: true
+      },
+      cookies: {
+        label: "LEGAL: COOKIE_POLICY",
+        title: "Políticas de Cookies",
+        desc: "<h4>Gestión de Sesiones y Telemetría</h4><p>Escudo Logístico SAS utiliza cookies técnicas, tokens de sesión (JWT) y tecnologías de almacenamiento local estrictamente necesarias para el funcionamiento seguro de nuestra plataforma SaaS y la persistencia de autenticación Zero Trust.</p><h4>Cookies de Terceros</h4><p>Empleamos herramientas analíticas y de integración de infraestructura (como AWS o Supabase) que pueden establecer cookies de telemetría de rendimiento y seguridad. Estas cookies no recopilan datos sensibles no anonimizados y están diseñadas para la prevención proactiva de ataques DDoS y anomalías de tráfico.</p><h4>Control y Desactivación</h4><p>Usted puede configurar su navegador para bloquear o alertar sobre estas cookies; sin embargo, algunas funcionalidades de la arquitectura de seguridad pueden dejar de operar correctamente.</p>",
+        hideCta: true
+      },
+      terminos: {
+        label: "LEGAL: TERMS_CONDITIONS",
+        title: "Términos y Condiciones",
+        desc: "<h4>Alcance de los Servicios</h4><p>El acceso y uso de las herramientas de software, infraestructura de ciberseguridad, y contratación de servicios físicos (Facilities) operados por Escudo Logístico SAS están condicionados a la aceptación plena de estos términos. La prestación final de los servicios se regirá por un contrato de nivel de servicio (SLA) específico firmado entre las partes.</p><h4>Propiedad Intelectual</h4><p>Todo el código fuente, la arquitectura SaaS, el diseño de interfaces y los algoritmos predictivos desplegados por Escudo Logístico SAS son propiedad exclusiva de la empresa, protegidos por las leyes de propiedad intelectual internacionales, salvo que se estipule una licencia de código abierto (Open Source) expresa.</p><h4>Limitación de Responsabilidad</h4><p>Aunque garantizamos protocolos de seguridad de grado militar, Escudo Logístico SAS no será responsable por brechas de datos derivadas de negligencia directa del cliente, uso indebido de credenciales, o ingeniería social (phishing) contra los empleados del contratante.</p>",
+        hideCta: true
+      },
+      legales: {
+        label: "LEGAL: ADDITIONAL_NOTES",
+        title: "Notas Adicionales & Jurisdicción",
+        desc: "<h4>Confidencialidad y NDAs</h4><p>Como política base de Escudo Logístico SAS, todas las interacciones técnicas, auditorías de sistemas y negociaciones previas están amparadas bajo un Acuerdo de No Divulgación (NDA) tácito, garantizando que su topología de red y vulnerabilidades nunca serán expuestas.</p><h4>Jurisdicción Aplicable</h4><p>Para cualquier controversia legal derivada del uso de nuestros sistemas, servicios o interpretación de los contratos, las partes se someterán a la jurisdicción y competencia de los Tribunales Ordinarios de la Ciudad de San Juan, Provincia de San Juan, República Argentina, renunciando a cualquier otro fuero que pudiera corresponder.</p>",
+        hideCta: true
       }
     };
 
@@ -427,15 +448,21 @@
     const mLabel = document.getElementById('modalLabel');
     const mTitle = document.getElementById('modalTitle');
     const mDesc = document.getElementById('modalDesc');
+    const mCtaWrapper = document.getElementById('modalCtaWrapper');
 
     function abrirModal(id) {
       const info = dataPaneles[id];
       if(info) {
-        // SEGURIDAD: Uso de textContent en lugar de innerHTML para prevenir DOM XSS en etiquetas inyectables
         mLabel.textContent = info.label;
         mTitle.textContent = info.title;
-        // mDesc usa innerHTML porque contiene etiquetas <p> y <ul> confiables harcodeadas
         mDesc.innerHTML = info.desc;
+        
+        // Mostrar u Ocultar el botón comercial según el panel
+        if(info.hideCta) {
+          mCtaWrapper.style.display = 'none';
+        } else {
+          mCtaWrapper.style.display = 'block';
+        }
         
         overlay.classList.add('active');
         document.body.style.overflow = 'hidden';
