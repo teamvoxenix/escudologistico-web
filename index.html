@@ -210,13 +210,15 @@
 
   <!-- NAVEGACIÓN -->
   <nav class="nav-bar">
-    <a href="#" class="brand">
-      <img src="134241.png?v=11" alt="Escudo Logístico" class="brand-logo" />
+    <a href="javascript:void(0)" class="brand">
+      <img src="134241.png?v=12" alt="Escudo Logístico" class="brand-logo" />
     </a>
     <div class="nav-links">
       <a href="#core" class="btn-ghost">Workspace</a>
       <a href="#facilities" class="btn-ghost">Facilities</a>
       <a href="#media" class="btn-ghost">Media</a>
+      <!-- SECURE NON-JUMP LINKS -->
+      <a href="javascript:abrirModal('saas')" class="btn-ghost">Docs</a>
       <a href="https://wa.me/542645619131" target="_blank" rel="noopener noreferrer" class="btn-dark-pill">Contáctanos</a>
     </div>
   </nav>
@@ -236,7 +238,7 @@
 
     <div class="hero-buttons">
       <a href="https://wa.me/542645619131" target="_blank" rel="noopener noreferrer" class="btn-orange-pill">Contáctanos</a>
-      <a href="#core" class="btn-dark-pill">Ver Documentación</a>
+      <a href="javascript:abrirModal('saas')" class="btn-dark-pill">Ver Documentación</a>
     </div>
   </header>
 
@@ -274,8 +276,8 @@
           <h3 class="sub-display" style="margin-bottom: 24px;">Plataforma SaaS B2B</h3>
           <p style="margin-bottom: 32px;">No dependas de soluciones fragmentadas. Nuestra API unifica la gestión de identidades (IAM), copias de seguridad aisladas para ransomware y registros inmutables.</p>
           <div class="hero-buttons" style="justify-content: flex-start;">
-            <button onclick="abrirModal('saas')" class="btn-dark-pill">Ver Arquitectura SaaS</button>
-            <button onclick="abrirModal('software')" class="btn-ghost">Desarrollo a Medida →</button>
+            <a href="javascript:abrirModal('saas')" class="btn-dark-pill">Ver Arquitectura SaaS</a>
+            <a href="javascript:abrirModal('software')" class="btn-ghost">Desarrollo a Medida →</a>
           </div>
         </div>
       </div>
@@ -320,7 +322,7 @@
           <div class="demo-content">
             <h3>Limpieza Institucional</h3>
             <p style="margin-bottom: 32px;">La bioseguridad es el primer anillo de defensa físico. Protocolos estrictos para oficinas, clínicas e industrias pesadas.</p>
-            <button onclick="abrirModal('limpieza')" class="btn-dark-pill">Ver Protocolos</button>
+            <a href="javascript:abrirModal('limpieza')" class="btn-dark-pill">Ver Protocolos</a>
           </div>
           <div style="background: var(--color-carbon); height: 200px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center;">
             <span class="micro-label">Facility.Status = "Clean"</span>
@@ -331,7 +333,7 @@
           <div class="demo-content">
             <h3>Mantenimiento General</h3>
             <p style="margin-bottom: 32px;">Infraestructura ininterrumpida. Soporte eléctrico, plomería y climatización (HVAC) con respuesta inmediata.</p>
-            <button onclick="abrirModal('mantenimiento')" class="btn-dark-pill">Solicitar Soporte</button>
+            <a href="javascript:abrirModal('mantenimiento')" class="btn-dark-pill">Solicitar Soporte</a>
           </div>
           <div style="background: var(--color-carbon); height: 200px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center;">
             <span class="micro-label">Hardware.Uptime = "99.9%"</span>
@@ -364,11 +366,12 @@
   <footer style="border-top: 1px solid rgba(255,255,255,0.1); padding: 80px 20px; text-align: center;">
     <h2 class="display-font" style="font-size: 24px; margin-bottom: 24px;">Escudo Logístico SAS</h2>
     
+    <!-- ENLACES LEGALES (Javascript seguro sin saltos) -->
     <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 24px; margin-bottom: 40px;">
-      <button onclick="abrirModal('privacidad')" class="btn-ghost">Políticas de Privacidad</button>
-      <button onclick="abrirModal('cookies')" class="btn-ghost">Políticas de Cookies</button>
-      <button onclick="abrirModal('terminos')" class="btn-ghost">Términos y Condiciones</button>
-      <button onclick="abrirModal('legales')" class="btn-ghost">Notas Adicionales</button>
+      <a href="javascript:abrirModal('privacidad')" class="btn-ghost">Políticas de Privacidad</a>
+      <a href="javascript:abrirModal('cookies')" class="btn-ghost">Políticas de Cookies</a>
+      <a href="javascript:abrirModal('terminos')" class="btn-ghost">Términos y Condiciones</a>
+      <a href="javascript:abrirModal('legales')" class="btn-ghost">Notas Adicionales</a>
     </div>
     
     <span class="micro-label">© 2026 Escudo Logístico SAS. CUIT/Registro corporativo en trámite. San Juan, Argentina.</span>
@@ -382,7 +385,6 @@
       <h2 class="sub-display" id="modalTitle" style="margin-bottom: 24px;">Título</h2>
       <div id="modalDesc" style="color: var(--color-fog); font-size: 14px; line-height: 1.6;" class="legal-text">Descripción...</div>
       
-      <!-- Contenedor del botón dinámico (Se oculta en los legales) -->
       <div style="margin-top: 48px;" id="modalCtaWrapper">
         <a href="https://wa.me/542645619131" target="_blank" rel="noopener noreferrer" class="btn-orange-pill">Agendar Implementación</a>
       </div>
@@ -390,7 +392,6 @@
   </div>
 
   <script>
-    /* DATOS DEL MODAL (Servicios y Legales) */
     const dataPaneles = {
       // SERVICIOS
       software: {
@@ -457,7 +458,6 @@
         mTitle.textContent = info.title;
         mDesc.innerHTML = info.desc;
         
-        // Mostrar u Ocultar el botón comercial según el panel
         if(info.hideCta) {
           mCtaWrapper.style.display = 'none';
         } else {
