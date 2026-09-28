@@ -3,387 +3,365 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Escudo Logístico SAS | Plataforma Integral</title>
+  <title>Escudo Logístico SAS | Workspace & Security</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      /* Raycast Core Colors */
-      --color-void-black: #040506;
-      --color-ink: #07080a;
-      --color-obsidian: #111214;
-      --color-graphite: #1b1c1e;
-      --color-smoke: #6a6b6c;
-      --color-ash: #9c9c9d;
-      --color-mist: #e6e6e6; 
-      --color-iron: #454647;
-      --color-slate: #2f3031;
-      --color-pure-white: #ffffff;
-      
-      /* Brand Accents (Adaptados a B2B) */
-      --color-trust-blue: #0052ff;
+      /* Linearity Color Tokens */
+      --color-void: #000000;
+      --color-near-black: #050505;
+      --color-carbon: #292929;
+      --color-graphite: #4d4d4d;
+      --color-ash: #666666;
+      --color-steel: #808080;
+      --color-fog: #999999;
+      --color-silver: #bfbfbf;
+      --color-white: #ffffff;
+      --color-signal-orange: #ff4800;
+      --color-ember: #ff5e23;
+      --color-electric-yellow: #ffd900;
+      --color-vector-green: #08c380;
+      --color-vector-purple: #9500ff;
 
-      /* Shadows (Keyboard Key Effect) */
-      --shadow-subtle-3: rgba(255, 255, 255, 0.05) 0px 1px 0px 0px inset, rgba(255, 255, 255, 0.15) 0px 0px 0px 1px, rgba(0, 0, 0, 0.4) 0px -1px 0px 0px inset;
-      --shadow-subtle-4: rgba(0, 0, 0, 0.03) 0px 7px 3px 0px, rgba(0, 0, 0, 0.25) 0px 4px 4px 0px;
+      /* UI Spacing & Radius */
+      --radius-pill: 9999px;
+      --radius-card: 17px;
+      --radius-panel: 25.7px;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; background: var(--color-void); }
     
     body { 
-      font-family: 'Inter', system-ui, sans-serif; 
-      background-color: var(--color-void-black);
-      color: var(--color-pure-white); 
+      font-family: 'Inter', sans-serif; 
+      background-color: var(--color-void);
+      color: var(--color-white); 
       font-weight: 400; 
-      font-size: 16px;
+      font-size: 14px;
       line-height: 1.5; 
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
 
-    h1, h2, h3, h4 { font-weight: 400; color: var(--color-pure-white); margin: 0; letter-spacing: -0.5px; }
+    /* TYPOGRAPHY */
+    h1, h2, h3, h4, .display-font { font-family: 'Space Grotesk', sans-serif; font-weight: 400; color: var(--color-white); }
     
-    .display-text { font-size: clamp(48px, 8vw, 64px); line-height: 1.1; letter-spacing: -1px; }
-    .heading-lg { font-size: clamp(32px, 5vw, 56px); line-height: 1.17; letter-spacing: 0.22px; }
-    .heading-sm { font-size: 24px; line-height: 1.15; letter-spacing: 0px; }
-    .subheading { font-size: 20px; line-height: 1.2; letter-spacing: 0.2px; color: var(--color-pure-white); }
+    .hero-display { font-size: clamp(40px, 6vw, 75px); line-height: 1.1; letter-spacing: -1.5px; }
+    .section-display { font-size: clamp(32px, 4vw, 45px); line-height: 1.2; letter-spacing: -0.45px; }
+    .sub-display { font-size: 34px; line-height: 1.2; letter-spacing: -0.34px; }
     
-    .eyebrow {
-      font-family: 'Geist Mono', monospace;
-      font-size: 11px; font-weight: 500; color: var(--color-ash);
-      text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 16px; display: block;
+    .micro-label { font-size: 10px; font-weight: 500; color: var(--color-steel); text-transform: uppercase; letter-spacing: 2px; }
+    p { color: var(--color-fog); max-width: 600px; font-size: 14px; line-height: 1.6; }
+
+    /* CONTROLS & BUTTONS */
+    .btn-orange-pill {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: var(--color-signal-orange); color: var(--color-white);
+      border: 1px solid var(--color-white); border-radius: var(--radius-pill);
+      padding: 12px 24px; font-size: 12px; font-weight: 500; font-family: 'Inter', sans-serif;
+      text-decoration: none; cursor: pointer; transition: background 0.2s;
+      box-shadow: 0 0 15px rgba(255, 217, 0, 0.3); /* Electric Yellow glow */
     }
+    .btn-orange-pill:hover { background: var(--color-ember); }
 
-    p { color: var(--color-smoke); max-width: 520px; margin-bottom: 24px; font-size: 16px; }
+    .btn-dark-pill {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: rgba(255, 255, 255, 0.05); color: var(--color-white);
+      border: 1px solid rgba(255, 255, 255, 0.2); border-radius: var(--radius-pill);
+      padding: 12px 24px; font-size: 12px; font-weight: 500; font-family: 'Inter', sans-serif;
+      text-decoration: none; cursor: pointer; transition: background 0.2s, border-color 0.2s;
+    }
+    .btn-dark-pill:hover { background: rgba(255, 255, 255, 0.1); border-color: var(--color-white); }
 
-    /* LAYOUT BASE */
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .btn-ghost { color: var(--color-silver); font-size: 14px; font-weight: 500; text-decoration: none; transition: color 0.2s; }
+    .btn-ghost:hover { color: var(--color-white); }
+
+    /* LAYOUT */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
     .section-gap { padding: 120px 0; }
     
-    /* NAV (Píldora Flotante Cristalina) */
-    .nav-wrapper { position: fixed; top: 24px; left: 0; width: 100%; z-index: 1000; display: flex; justify-content: center; padding: 0 24px; }
+    /* NAV */
     .nav-bar {
-      background: rgba(4, 5, 6, 0.7);
-      backdrop-filter: blur(48px); -webkit-backdrop-filter: blur(48px);
-      border: 1px solid var(--color-slate);
-      border-radius: 12px; /* Ligeramente más redondo para acomodar el logo grande */
-      padding: 10px 20px;
       display: flex; justify-content: space-between; align-items: center;
-      width: 100%; max-width: 1200px;
+      padding: 24px 40px; position: absolute; top: 0; left: 0; width: 100%; z-index: 100;
     }
+    .brand-logo { height: 60px; }
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+
+    /* HERO & PROMPT COMPOSER */
+    .hero { min-height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding-top: 80px; }
     
-    /* LOGO MÁS GRANDE */
-    .brand-logo { 
-      height: 52px; /* Aumentado para que el texto sea visible */
-      margin-right: 32px; 
-      filter: drop-shadow(0 0 10px rgba(0, 82, 255, 0.3)); 
+    .prompt-composer {
+      background: var(--color-carbon);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 17px;
+      padding: 8px 8px 8px 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      width: 100%; max-width: 580px; margin: 40px auto 32px;
+      box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);
     }
+    .prompt-text { font-family: 'JetBrains Mono', monospace; color: var(--color-steel); font-size: 13px; border: none; background: transparent; outline: none; width: 100%; }
+    .prompt-submit {
+      width: 36px; height: 36px; border-radius: var(--radius-pill);
+      background: var(--color-signal-orange); display: flex; align-items: center; justify-content: center;
+      cursor: pointer; border: none; box-shadow: 0 0 10px rgba(255, 217, 0, 0.4);
+    }
+    .prompt-submit svg { width: 16px; height: 16px; fill: var(--color-white); }
+
+    /* INTEGRATIONS MARQUEE */
+    .trust-strip { border-top: 1px solid rgba(255,255,255,0.1); padding: 40px 0; margin-top: 40px; }
+    .trust-track { display: flex; gap: 64px; justify-content: center; align-items: center; }
+    .trust-logo { color: var(--color-graphite); font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 500; letter-spacing: -0.5px; transition: color 0.3s; }
+    .trust-logo:hover { color: var(--color-silver); }
+
+    /* CODE SNIPPET (Developer Tool UI) */
+    .code-window {
+      background: var(--color-near-black);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-card);
+      padding: 24px; text-align: left;
+      font-family: 'JetBrains Mono', monospace; font-size: 13px; line-height: 1.6;
+      box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+      position: relative; overflow: hidden;
+    }
+    .code-window::before {
+      content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
+      background: var(--color-vector-purple);
+    }
+    .code-keyword { color: var(--color-vector-green); }
+    .code-string { color: var(--color-signal-orange); }
+    .code-comment { color: var(--color-ash); }
+    .code-function { color: var(--color-electric-yellow); }
+
+    /* COMPARISON TABLE */
+    .comparison-table { width: 100%; border-collapse: collapse; margin-top: 40px; }
+    .comparison-table th, .comparison-table td { padding: 16px 24px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .comparison-table th { font-family: 'Space Grotesk', sans-serif; font-weight: 400; color: var(--color-silver); font-size: 16px; }
+    .comparison-table tr:last-child td { border-bottom: none; }
+    .comparison-table td:nth-child(2) { color: var(--color-ash); } /* Competidor */
+    .comparison-table td:nth-child(3) { color: var(--color-white); background: rgba(255,255,255,0.03); border-left: 1px solid rgba(255,255,255,0.1); border-right: 1px solid rgba(255,255,255,0.1); } /* Escudo Logístico */
+
+    /* PRODUCT DEMO PANELS (Activities) */
+    .panel-grid { display: grid; grid-template-columns: 1fr; gap: 40px; margin-top: 64px; }
+    .demo-panel {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-panel);
+      padding: 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;
+      transition: background 0.3s, border-color 0.3s;
+    }
+    .demo-panel:hover { background: rgba(255, 255, 255, 0.06); border-color: rgba(255, 255, 255, 0.2); }
+    .demo-content h3 { font-size: 34px; margin-bottom: 16px; letter-spacing: -0.34px; }
     
-    .nav-links { display: flex; gap: 24px; align-items: center; }
-    .nav-link { color: var(--color-ash); font-size: 13px; font-weight: 500; text-decoration: none; transition: color 0.2s; }
-    .nav-link:hover { color: var(--color-pure-white); }
-
-    /* BOTONES */
-    .btn-neutral {
-      background: var(--color-mist); color: var(--color-iron);
-      border-radius: 8px; padding: 10px 20px; font-size: 13px; font-weight: 500;
-      text-decoration: none; border: none; cursor: pointer; transition: all 0.2s;
-      box-shadow: var(--shadow-subtle-4);
-      display: inline-flex; align-items: center; justify-content: center;
-    }
-    .btn-neutral:hover { background: var(--color-pure-white); color: var(--color-void-black); }
-
-    /* HERO */
-    .hero { min-height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; padding-top: 80px; }
-    .hero-content { position: relative; z-index: 10; max-width: 800px; }
-    .hero p { color: var(--color-ash); font-size: 20px; max-width: 600px; margin: 24px auto 40px; }
-    
-    /* GRADIENTE DE FONDO */
-    .hero-bg {
-      position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; overflow: hidden; pointer-events: none;
-    }
-    .hero-bg::before {
-      content: ''; position: absolute; top: -20%; left: 10%; width: 80%; height: 80%;
-      background: radial-gradient(circle at 50% 50%, rgba(0, 82, 255, 0.15) 0%, rgba(4, 5, 6, 0) 70%);
-      filter: blur(60px);
-    }
-    .hero-bg::after {
-      content: ''; position: absolute; top: 20%; left: 30%; width: 40%; height: 40%;
-      background: linear-gradient(45deg, rgba(0, 82, 255, 0.2), transparent);
-      filter: blur(40px); transform: rotate(-15deg);
-    }
-
-    .meta-strip { font-family: 'Geist Mono', monospace; font-size: 12px; color: var(--color-smoke); margin-top: 16px; }
-
-    /* CARDS (Keyboard Key Shadow) */
-    .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 48px; }
-    .ray-card {
-      background: var(--color-ink);
-      border-radius: 16px;
-      padding: 32px 24px;
-      box-shadow: var(--shadow-subtle-3);
-      cursor: pointer;
-      transition: transform 0.2s, background 0.2s;
-    }
-    .ray-card:hover { transform: translateY(-2px); background: #0a0b0e; }
-    
-    .icon-container {
-      width: 48px; height: 48px; border-radius: 99999px;
-      background: var(--color-obsidian);
-      display: flex; align-items: center; justify-content: center; margin-bottom: 24px;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.05);
-    }
-    .icon-container svg { width: 20px; height: 20px; fill: var(--color-mist); }
-    
-    .ray-card .subheading { margin-bottom: 12px; font-size: 18px; }
-    .ray-card p { font-size: 14px; margin-bottom: 0; }
-
-    /* PIPELINE LIST */
-    .pipeline-list { margin-top: 48px; border-left: 1px solid var(--color-slate); padding-left: 32px; }
-    .pipeline-item { position: relative; margin-bottom: 32px; }
-    .pipeline-item::before {
-      content: ''; position: absolute; left: -36px; top: 6px; width: 8px; height: 8px;
-      border-radius: 50%; background: var(--color-smoke); border: 2px solid var(--color-void-black);
-      box-sizing: content-box; transition: background 0.3s;
-    }
-    .pipeline-item:hover::before { background: var(--color-trust-blue); }
-    .pipeline-item h4 { font-size: 16px; margin-bottom: 8px; color: var(--color-pure-white); }
-    .pipeline-item p { font-size: 14px; margin-bottom: 0; }
-
-    /* INTEGRATIONS */
-    .integrations { border-top: 1px solid var(--color-slate); border-bottom: 1px solid var(--color-slate); padding: 48px 0; }
-    .integrations-track { display: flex; gap: 48px; justify-content: space-around; align-items: center; opacity: 0.4; font-family: 'Geist Mono', monospace; font-size: 14px; }
-
-    /* MODAL */
+    /* MODAL LINEARITY STYLE */
     .void-modal {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(4, 5, 6, 0.9); backdrop-filter: blur(10px);
+      background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(10px);
       z-index: 2000; overflow-y: auto;
-      display: none; opacity: 0; transition: opacity 0.2s ease; padding: 10vh 24px;
+      display: none; opacity: 0; transition: opacity 0.3s ease; padding: 10vh 24px;
     }
     .void-modal.active { display: block; opacity: 1; }
-    
     .modal-content { 
-      max-width: 640px; margin: 0 auto; position: relative;
-      background: var(--color-ink); border-radius: 12px;
-      box-shadow: var(--shadow-subtle-3), 0 20px 40px rgba(0,0,0,0.5);
-      border: 1px solid var(--color-slate);
+      max-width: 680px; margin: 0 auto; position: relative;
+      background: var(--color-near-black); border-radius: var(--radius-panel);
+      border: 1px solid rgba(255,255,255,0.15); padding: 48px;
+      box-shadow: 0 40px 100px rgba(0,0,0,0.8);
     }
-    
-    .modal-header {
-      padding: 16px 24px; border-bottom: 1px solid var(--color-slate);
-      display: flex; justify-content: space-between; align-items: center;
-    }
-    .modal-header .eyebrow { margin: 0; }
-    
-    .btn-close { color: var(--color-smoke); font-size: 20px; font-weight: 300; background: transparent; border: none; cursor: pointer; }
-    .btn-close:hover { color: var(--color-pure-white); }
-    
-    .modal-body { padding: 32px 24px; }
-    .modal-body h4 { font-size: 20px; margin-bottom: 16px; color: var(--color-pure-white); }
-    .modal-body p { font-size: 14px; margin-bottom: 16px; }
-    .modal-body ul { list-style: none; margin-bottom: 32px; }
-    .modal-body ul li { font-size: 14px; color: var(--color-smoke); margin-bottom: 12px; padding-left: 20px; position: relative; }
-    .modal-body ul li::before { content: '›'; position: absolute; left: 0; color: var(--color-trust-blue); font-family: 'Geist Mono', monospace; }
-    .modal-body strong { color: var(--color-ash); font-weight: 500; }
-
-    footer { padding: 60px 24px; text-align: center; border-top: 1px solid var(--color-slate); }
+    .modal-close { position: absolute; top: 24px; right: 24px; background: transparent; border: none; color: var(--color-ash); font-size: 24px; cursor: pointer; }
+    .modal-close:hover { color: var(--color-white); }
 
     @media (max-width: 992px) {
       .nav-links { display: none; }
-      .integrations-track { flex-direction: column; gap: 24px; }
-      .two-col-layout { grid-template-columns: 1fr !important; gap: 40px !important; }
+      .demo-panel { grid-template-columns: 1fr; padding: 32px; }
+      .trust-track { flex-direction: column; gap: 24px; }
+      .comparison-table { display: block; overflow-x: auto; }
     }
   </style>
 </head>
 <body>
 
   <!-- NAVEGACIÓN -->
-  <div class="nav-wrapper">
-    <nav class="nav-bar">
-      <div style="display: flex; align-items: center;">
-        <!-- Logo aumentado y con v=6 -->
-        <img src="134241.png?v=6" alt="Escudo Logístico" class="brand-logo" />
-        <div class="nav-links">
-          <a href="#core" class="nav-link">Arquitectura</a>
-          <a href="#facilities" class="nav-link">Facilities</a>
-          <a href="#publicidad" class="nav-link">Media</a>
-        </div>
-      </div>
-      <a href="https://wa.me/542645619131" target="_blank" class="btn-neutral">Contacto</a>
-    </nav>
-  </div>
+  <nav class="nav-bar">
+    <a href="#" class="brand">
+      <img src="134241.png?v=7" alt="Escudo Logístico" class="brand-logo" />
+    </a>
+    <div class="nav-links">
+      <a href="#core" class="btn-ghost">Workspace</a>
+      <a href="#facilities" class="btn-ghost">Facilities</a>
+      <a href="#media" class="btn-ghost">Media</a>
+      <a href="#" class="btn-ghost">Docs</a>
+      <a href="https://wa.me/542645619131" target="_blank" class="btn-dark-pill">Get Started</a>
+    </div>
+  </nav>
 
   <!-- HERO -->
-  <header class="hero">
-    <div class="hero-bg"></div>
-    <div class="container hero-content">
-      <h1 class="display-text">Infraestructura.<br>Seguridad. Código.</h1>
-      <p>Una suite B2B diseñada para operaciones escalables. Ciberseguridad Zero Trust, software a medida, facilities y publicidad en un solo ecosistema.</p>
-      
-      <div style="margin-top: 24px;">
-        <a href="#core" class="btn-neutral" style="padding: 12px 24px;">Inicializar Sistema</a>
-      </div>
-      <div class="meta-strip">
-        v3.0.01 | B2B Operations | Trust Level: Absolute
-      </div>
+  <header class="hero container">
+    <span class="micro-label" style="margin-bottom: 16px;">V 3.0.0 — Production Ready</span>
+    <h1 class="hero-display">Ingeniería. Seguridad. Código.</h1>
+    <p style="margin-top: 16px; font-size: 16px;">Plataforma SaaS corporativa. Despliegue ciberseguridad Zero Trust, arquitecturas a medida y gestión de facilities desde una única consola.</p>
+    
+    <!-- PROMPT COMPOSER -->
+    <div class="prompt-composer">
+      <input type="text" class="prompt-text" value="deploy --env production --shield active" readonly />
+      <button class="prompt-submit">
+        <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+      </button>
+    </div>
+
+    <div style="display: flex; gap: 16px;">
+      <a href="https://wa.me/542645619131" class="btn-orange-pill">Start Free Trial</a>
+      <a href="#core" class="btn-dark-pill">Read Documentation</a>
     </div>
   </header>
 
-  <!-- INTEGRATION LOGOS -->
-  <section class="integrations">
-    <div class="container">
-      <div class="integrations-track">
-        <span>sys.azure</span>
-        <span>aws_security_hub</span>
-        <span>db.supabase</span>
-        <span>github_copilot</span>
-        <span>cert_iso27001</span>
-      </div>
+  <!-- TRUST STRIP (Integrations) -->
+  <div class="trust-strip">
+    <div class="container trust-track">
+      <span class="trust-logo">Microsoft Azure</span>
+      <span class="trust-logo">Supabase</span>
+      <span class="trust-logo">AWS Security Hub</span>
+      <span class="trust-logo">GitHub Enterprise</span>
+      <span class="trust-logo">ISO 27001</span>
     </div>
-  </section>
+  </div>
 
-  <!-- SECCIÓN 01: CORE BUSINESS -->
-  <section id="core" class="section-gap">
+  <!-- SECCIÓN 01: CORE BUSINESS (Dev Tools) -->
+  <section id="core" class="section-gap" style="border-top: 1px solid rgba(255,255,255,0.05);">
     <div class="container">
-      <div style="text-align: center; max-width: 600px; margin: 0 auto 64px;">
-        <span class="eyebrow">Tecnología</span>
-        <h2 class="heading-lg">01 / Core Business</h2>
-      </div>
+      <span class="micro-label">01 / Dev Tools & Security</span>
+      <h2 class="section-display" style="margin: 16px 0 64px;">Construye con confianza.</h2>
       
-      <div class="card-grid">
-        <div class="ray-card" onclick="abrirModal('software')">
-          <div class="icon-container">
-            <svg viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
-          </div>
-          <h3 class="subheading">Desarrollo de Software</h3>
-          <p>Arquitectura y programación nativa. Aplicaciones de escritorio y plataformas web escalables.</p>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;">
+        <!-- Code Snippet -->
+        <div class="code-window">
+          <span class="code-comment">// Inicializar Escudo Zero Trust Auth</span><br><br>
+          <span class="code-keyword">import</span> { <span class="code-function">EscudoAuth</span> } <span class="code-keyword">from</span> <span class="code-string">'@escudo/saas'</span>;<br><br>
+          <span class="code-keyword">const</span> shield = <span class="code-keyword">new</span> <span class="code-function">EscudoAuth</span>({<br>
+          &nbsp;&nbsp;apiKey: <span class="code-string">process.env.ESCUDO_API_KEY</span>,<br>
+          &nbsp;&nbsp;region: <span class="code-string">'sa-east-1'</span>,<br>
+          &nbsp;&nbsp;mfaEnforced: <span class="code-keyword">true</span><br>
+          });<br><br>
+          <span class="code-keyword">await</span> shield.<span class="code-function">verifyAccess</span>(userRequest);<br>
+          <span class="code-comment">// Access granted. Logs securely stored.</span>
         </div>
 
-        <div class="ray-card" onclick="abrirModal('ia')">
-          <div class="icon-container">
-            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
-          </div>
-          <h3 class="subheading">Inteligencia Artificial</h3>
-          <p>Modelos de automatización, análisis predictivo y visión por computadora.</p>
+        <div>
+          <h3 class="sub-display" style="margin-bottom: 24px;">Plataforma SaaS B2B</h3>
+          <p style="margin-bottom: 32px;">No dependas de soluciones fragmentadas. Nuestra API unifica la gestión de identidades (IAM), copias de seguridad aisladas para ransomware y registros inmutables.</p>
+          <a href="javascript:abrirModal('saas')" class="btn-dark-pill">Ver Arquitectura SaaS</a>
+          <a href="javascript:abrirModal('software')" class="btn-ghost" style="margin-left: 24px;">Desarrollo a Medida →</a>
         </div>
+      </div>
 
-        <div class="ray-card" onclick="abrirModal('saas')" style="box-shadow: var(--shadow-subtle-3), 0 0 0 1px rgba(0, 82, 255, 0.2) inset;">
-          <div class="icon-container" style="background: rgba(0, 82, 255, 0.1); border-color: rgba(0, 82, 255, 0.2);">
-            <svg viewBox="0 0 24 24" style="fill: var(--color-trust-blue);"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
-          </div>
-          <h3 class="subheading" style="color: var(--color-trust-blue);">Plataforma SaaS B2B</h3>
-          <p>Seguridad como Servicio. IAM, prevención de ransomware y Zero Trust Network Access.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PIPELINE -->
-  <section class="section-gap" style="background: #050608; border-top: 1px solid var(--color-slate); border-bottom: 1px solid var(--color-slate);">
-    <div class="container two-col-layout" style="display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;">
-      <div>
-        <span class="eyebrow">Trazabilidad</span>
-        <h2 class="heading-lg">Pipeline de Seguridad</h2>
-        <p style="margin-top: 24px;">Desde la ingesta de datos hasta la mitigación activa. Nuestra arquitectura asegura que cada etapa del ciclo de vida esté auditada en tiempo real.</p>
-      </div>
-      
-      <div class="pipeline-list">
-        <div class="pipeline-item">
-          <h4>Ingesta de Datos (Lead)</h4>
-          <p>Conexión encriptada de terminales y bases corporativas.</p>
-        </div>
-        <div class="pipeline-item">
-          <h4>Análisis Zero Trust (Auth)</h4>
-          <p>Verificación independiente y multifactor por cada solicitud de acceso.</p>
-        </div>
-        <div class="pipeline-item">
-          <h4>Bóveda Segura (Storage)</h4>
-          <p>Aislamiento de amenazas y cifrado E2EE de contratos y documentos.</p>
-        </div>
-        <div class="pipeline-item">
-          <h4>Auditoría (Logs)</h4>
-          <p>Dashboard gerencial con Security Score inmutable.</p>
-        </div>
-      </div>
+      <!-- Feature Comparison Table -->
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Capacidad</th>
+            <th>Seguridad Tradicional</th>
+            <th>Escudo Zero Trust</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Autenticación</td>
+            <td>Contraseñas estáticas</td>
+            <td>MFA Enforced + Roles (RBAC)</td>
+          </tr>
+          <tr>
+            <td>Almacenamiento (Bóveda)</td>
+            <td>Servidores locales vulnerables</td>
+            <td>Cifrado E2EE en Nube Aislada</td>
+          </tr>
+          <tr>
+            <td>Trazabilidad (Logs)</td>
+            <td>Editables, bajo riesgo forense</td>
+            <td>Inmutables y auditables en tiempo real</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </section>
 
   <!-- SECCIÓN 02: FACILITIES -->
-  <section id="facilities" class="section-gap">
+  <section id="facilities" class="section-gap" style="border-top: 1px solid rgba(255,255,255,0.05);">
     <div class="container">
-      <div style="text-align: center; max-width: 600px; margin: 0 auto 64px;">
-        <span class="eyebrow">Operaciones Físicas</span>
-        <h2 class="heading-lg">02 / Facilities</h2>
-      </div>
-      
-      <!-- Se centra en 2 columnas para equilibrar la lectura -->
-      <div class="card-grid" style="grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));">
-        <div class="ray-card" onclick="abrirModal('limpieza')">
-          <h3 class="subheading">Limpieza Institucional</h3>
-          <p>Protocolos de higiene y bioseguridad para oficinas, clínicas e industrias.</p>
+      <span class="micro-label">02 / Operaciones Físicas</span>
+      <h2 class="section-display" style="margin: 16px 0 64px;">El hardware también importa.</h2>
+
+      <div class="panel-grid">
+        <!-- Panel Limpieza -->
+        <div class="demo-panel">
+          <div class="demo-content">
+            <h3>Limpieza Institucional</h3>
+            <p style="margin-bottom: 32px;">La bioseguridad es el primer anillo de defensa físico. Protocolos estrictos para oficinas, clínicas e industrias pesadas.</p>
+            <a href="javascript:abrirModal('limpieza')" class="btn-dark-pill">Ver Protocolos</a>
+          </div>
+          <!-- Abstract representation inside panel -->
+          <div style="background: var(--color-carbon); height: 200px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center;">
+            <span class="micro-label">Facility.Status = "Clean"</span>
+          </div>
         </div>
 
-        <div class="ray-card" onclick="abrirModal('mantenimiento')">
-          <h3 class="subheading">Mantenimiento General</h3>
-          <p>Electricidad, plomería y climatización. Respuesta inmediata y mantenimiento preventivo.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SECCIÓN 03: PUBLICIDAD & MEDIA -->
-  <section id="publicidad" class="section-gap" style="background: #050608; border-top: 1px solid var(--color-slate);">
-    <div class="container two-col-layout" style="display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;">
-      <div>
-        <span class="eyebrow">Publicidad & Media</span>
-        <h2 class="heading-lg">03 / Visibilidad</h2>
-        <p style="margin-top: 24px;">Difusión, estrategia digital y presencia de alto impacto a través de nuestra plataforma líder de comunicación y contenido en la región de Cuyo.</p>
-      </div>
-      
-      <div>
-        <div class="ray-card" onclick="window.open('https://quepasaensanjuan.com/', '_blank')" style="border-left: 2px solid var(--color-trust-blue);">
-          <h3 class="subheading">Qué pasa en San Juan ??</h3>
-          <p>La vitrina publicitaria que conecta su marca con miles de interacciones reales. Actualidad, eventos y cultura con alcance masivo para potenciar sus conversiones.</p>
-          <span style="font-family: 'Geist Mono', monospace; font-size: 11px; color: var(--color-trust-blue); display: block; margin-top: 16px;">Ir al portal ↗</span>
+        <!-- Panel Mantenimiento -->
+        <div class="demo-panel">
+          <div class="demo-content">
+            <h3>Mantenimiento General</h3>
+            <p style="margin-bottom: 32px;">Infraestructura ininterrumpida. Soporte eléctrico, plomería y climatización (HVAC) con respuesta inmediata.</p>
+            <a href="javascript:abrirModal('mantenimiento')" class="btn-dark-pill">Solicitar Soporte</a>
+          </div>
+          <div style="background: var(--color-carbon); height: 200px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center;">
+            <span class="micro-label">Hardware.Uptime = "99.9%"</span>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CTA FINAL -->
-  <section class="section-gap" style="text-align: center; border-top: 1px solid var(--color-slate);">
+  <!-- SECCIÓN 03: MEDIA & PUBLICIDAD -->
+  <section id="media" class="section-gap" style="border-top: 1px solid rgba(255,255,255,0.05);">
     <div class="container">
-      <h2 class="heading-lg" style="margin-bottom: 24px;">Despliegue el sistema.</h2>
-      <p style="margin: 0 auto 40px; color: var(--color-ash);">Proteja su infraestructura e impulse sus operaciones.</p>
-      <a href="https://wa.me/542645619131" class="btn-neutral" style="padding: 12px 24px;">Solicitar Instancia</a>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;">
+        <div>
+          <span class="micro-label">03 / Visibilidad & Media</span>
+          <h2 class="section-display" style="margin: 16px 0 24px;">Impacto masivo.</h2>
+          <p style="margin-bottom: 40px;">No basta con construir la mejor herramienta, su mercado debe verla. Nuestra plataforma mediática conecta su marca con conversiones reales.</p>
+          <a href="https://quepasaensanjuan.com/" target="_blank" class="btn-orange-pill">Visitar Portal →</a>
+        </div>
+
+        <!-- Campaign Asset Tile -->
+        <div style="background: var(--color-near-black); border-radius: 12px; padding: 40px; border: 1px solid rgba(255, 94, 35, 0.4); text-align: center;">
+          <h3 class="display-font" style="font-size: 28px; margin-bottom: 16px; color: var(--color-white);">Qué pasa en San Juan ??</h3>
+          <p style="margin: 0 auto; font-size: 13px;">Estrategia digital y vitrina publicitaria líder en Cuyo. Alcance masivo hiper-segmentado.</p>
+        </div>
+      </div>
     </div>
   </section>
 
-  <footer>
-    <div class="container meta-strip">
-      Escudo Logístico SAS | San Juan, Argentina | sasescudologistico@gmail.com
+  <!-- FOOTER -->
+  <footer style="border-top: 1px solid rgba(255,255,255,0.1); padding: 80px 40px; text-align: center;">
+    <h2 class="display-font" style="font-size: 24px; margin-bottom: 24px;">Escudo Logístico SAS</h2>
+    <div style="display: flex; justify-content: center; gap: 24px; margin-bottom: 40px;">
+      <a href="https://wa.me/542645619131" class="btn-ghost">Contacto</a>
+      <a href="#" class="btn-ghost">Documentación</a>
+      <a href="#" class="btn-ghost">Privacidad</a>
     </div>
+    <span class="micro-label">© 2026 Escudo Logístico. Todos los derechos reservados. San Juan, Argentina.</span>
   </footer>
 
-  <!-- MODAL DE VACÍO (Estilo Raycast Window) -->
+  <!-- MODAL (Frosted Dark Glass) -->
   <div class="void-modal" id="modalOverlay">
     <div class="modal-content">
-      <div class="modal-header">
-        <span class="eyebrow" id="modalLabel">Detalle Técnico</span>
-        <button class="btn-close" onclick="cerrarModal()">×</button>
-      </div>
-      <div class="modal-body">
-        <h2 class="heading-sm" id="modalTitle" style="margin-bottom: 24px;">Título</h2>
-        <div id="modalDesc">Descripción...</div>
-        <div style="margin-top: 40px;">
-          <a href="https://wa.me/542645619131" target="_blank" class="btn-neutral">Requerir Especificaciones</a>
-        </div>
+      <button class="modal-close" onclick="cerrarModal()">×</button>
+      <span class="micro-label" id="modalLabel" style="margin-bottom: 16px;">SYS.INFO</span>
+      <h2 class="sub-display" id="modalTitle" style="margin-bottom: 24px;">Título</h2>
+      <div id="modalDesc" style="color: var(--color-fog); font-size: 14px; line-height: 1.6;">Descripción...</div>
+      <div style="margin-top: 48px;">
+        <a href="https://wa.me/542645619131" target="_blank" class="btn-orange-pill">Agendar Implementación</a>
       </div>
     </div>
   </div>
@@ -392,29 +370,24 @@
     /* DATOS DEL MODAL */
     const dataPaneles = {
       software: {
-        label: "pkg: software_dev",
-        title: "Arquitectura de Software",
-        desc: "<p>Ingeniería de software adaptada a la lógica real de su empresa.</p><ul><li><strong>Aplicaciones de Escritorio:</strong> Desarrollo de software robusto y nativo para Windows o macOS. Ideal para sistemas de gestión interna, control de hardware y ERPs cerrados.</li><li><strong>Plataformas Web:</strong> Intranets, APIs RESTful y paneles en la nube.</li></ul><p>Garantizamos código limpio, pruebas rigurosas y despliegues estables sin interrupciones operativas.</p>"
-      },
-      ia: {
-        label: "pkg: machine_learning",
-        title: "Inteligencia Artificial",
-        desc: "<p>Procesamiento inteligente de datos para automatización corporativa.</p><p>Desarrollamos e integramos modelos de Machine Learning y Visión por Computadora capaces de automatizar tareas repetitivas y proveer alertas predictivas para la toma de decisiones gerenciales con precisión estadística.</p>"
+        label: "PKG: SOFTWARE_DEV",
+        title: "Arquitectura a Medida",
+        desc: "<p style='margin-bottom:16px;'>Ingeniería de software adaptada a la lógica real de su empresa.</p><ul style='margin-left: 20px; margin-bottom:16px;'><li><strong>Desktop Apps:</strong> Software nativo para Windows/macOS.</li><li><strong>Web Platforms:</strong> APIs RESTful y paneles en la nube.</li></ul><p>Despliegues estables bajo CI/CD estricto.</p>"
       },
       saas: {
-        label: "pkg: cyber_security",
-        title: "Plataforma SaaS B2B",
-        desc: "<p>Seguridad como Servicio (SaaS) centrada en la protección de datos, prevención de ransomware y cumplimiento normativo.</p><h4>1. Módulos Core (MVP)</h4><ul><li><strong>IAM:</strong> Autenticación Multifactor (MFA) y Control de Acceso (RBAC).</li><li><strong>Bóveda:</strong> Cifrado Extremo a Extremo (E2EE) para almacenamiento crítico.</li><li><strong>Auditoría:</strong> Logs inmutables para rastreo forense.</li><li><strong>Backups:</strong> Copias de seguridad automatizadas y aisladas.</li></ul><h4>2. Soluciones Avanzadas (Fase 2)</h4><ul><li><strong>ZTNA:</strong> Sustitución de VPNs por Confianza Cero.</li><li><strong>DLP:</strong> Bloqueo de exfiltración a dispositivos no autorizados.</li></ul><h4>3. Arquitectura DevSecOps</h4><p>Infraestructura escalable (Supabase), análisis SAST y GitHub Copilot. Dashboard Gerencial con 'Security Score' para justificar inversión.</p>"
+        label: "PKG: CYBER_SECURITY",
+        title: "SaaS B2B & Zero Trust",
+        desc: "<p style='margin-bottom:16px;'>Plataforma centralizada para mitigación de riesgos.</p><ul style='margin-left: 20px; margin-bottom:16px;'><li><strong>IAM & Auth:</strong> MFA y RBAC.</li><li><strong>Bóveda:</strong> Cifrado E2EE para almacenamiento crítico.</li><li><strong>Logs:</strong> Registros inmutables forenses.</li></ul><p>Desarrollado sobre infraestructura Supabase y AWS.</p>"
       },
       limpieza: {
-        label: "srv: cleaning_facilities",
+        label: "SRV: CLEANING",
         title: "Limpieza Institucional",
-        desc: "<p>Mantenimiento higiénico de espacios operativos.</p><ul><li><strong>Institucional:</strong> Oficinas, sanitarios y fachadas.</li><li><strong>Hospitalaria:</strong> Protocolos de bioseguridad para clínicas.</li><li><strong>Industrial:</strong> Plantas y entregas finales de obra.</li></ul><p>Insumos estandarizados y personal asegurado con ART.</p>"
+        desc: "<p style='margin-bottom:16px;'>Protocolos higiénicos para continuidad operativa.</p><ul style='margin-left: 20px; margin-bottom:16px;'><li><strong>Corporate:</strong> Oficinas y fachadas.</li><li><strong>Healthcare:</strong> Bioseguridad para clínicas.</li><li><strong>Industrial:</strong> Plantas de producción.</li></ul><p>Personal 100% asegurado bajo normativas laborales vigentes.</p>"
       },
       mantenimiento: {
-        label: "srv: maintenance",
+        label: "SRV: MAINTENANCE",
         title: "Mantenimiento General",
-        desc: "<p>Mantenimiento preventivo y correctivo integral.</p><p>Servicios de electricidad, plomería, pintura y climatización. Garantizamos flexibilidad horaria y respuesta inmediata para mantener la continuidad operativa de sus instalaciones físicas.</p>"
+        desc: "<p style='margin-bottom:16px;'>Infraestructura física sin interrupciones.</p><p>Soporte correctivo y preventivo en electricidad, plomería y sistemas HVAC. Flexibilidad de horarios para no afectar su operación principal.</p>"
       }
     };
 
