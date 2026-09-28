@@ -80,9 +80,11 @@
     .btn-ghost { color: var(--color-silver); font-size: 14px; font-weight: 500; text-decoration: none; transition: color 0.2s; }
     .btn-ghost:hover { color: var(--color-white); }
 
-    /* LAYOUT */
+    /* LAYOUT BASE (PC Default) */
     .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
     .section-gap { padding: 120px 0; }
+    .responsive-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .hero-buttons { display: flex; gap: 16px; justify-content: center; }
     
     /* NAV */
     .nav-bar {
@@ -106,7 +108,7 @@
     }
     .prompt-text { font-family: 'JetBrains Mono', monospace; color: var(--color-steel); font-size: 13px; border: none; background: transparent; outline: none; width: 100%; }
     .prompt-submit {
-      width: 36px; height: 36px; border-radius: var(--radius-pill);
+      width: 36px; height: 36px; border-radius: var(--radius-pill); flex-shrink: 0;
       background: var(--color-signal-orange); display: flex; align-items: center; justify-content: center;
       cursor: pointer; border: none; box-shadow: 0 0 10px rgba(255, 217, 0, 0.4);
     }
@@ -118,7 +120,7 @@
     .trust-logo { color: var(--color-graphite); font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 500; letter-spacing: -0.5px; transition: color 0.3s; }
     .trust-logo:hover { color: var(--color-silver); }
 
-    /* CODE SNIPPET (Developer Tool UI) */
+    /* CODE SNIPPET */
     .code-window {
       background: var(--color-near-black);
       border: 1px solid rgba(255,255,255,0.1);
@@ -126,7 +128,7 @@
       padding: 24px; text-align: left;
       font-family: 'JetBrains Mono', monospace; font-size: 13px; line-height: 1.6;
       box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
-      position: relative; overflow: hidden;
+      position: relative; overflow-x: auto;
     }
     .code-window::before {
       content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
@@ -145,7 +147,7 @@
     .comparison-table td:nth-child(2) { color: var(--color-ash); } 
     .comparison-table td:nth-child(3) { color: var(--color-white); background: rgba(255,255,255,0.03); border-left: 1px solid rgba(255,255,255,0.1); border-right: 1px solid rgba(255,255,255,0.1); } 
 
-    /* PRODUCT DEMO PANELS (Activities) */
+    /* PRODUCT DEMO PANELS */
     .panel-grid { display: grid; grid-template-columns: 1fr; gap: 40px; margin-top: 64px; }
     .demo-panel {
       background: rgba(255, 255, 255, 0.03);
@@ -157,7 +159,7 @@
     .demo-panel:hover { background: rgba(255, 255, 255, 0.06); border-color: rgba(255, 255, 255, 0.2); }
     .demo-content h3 { font-size: 34px; margin-bottom: 16px; letter-spacing: -0.34px; }
     
-    /* MODAL LINEARITY STYLE */
+    /* MODAL */
     .void-modal {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(10px);
@@ -174,11 +176,38 @@
     .modal-close { position: absolute; top: 24px; right: 24px; background: transparent; border: none; color: var(--color-ash); font-size: 24px; cursor: pointer; }
     .modal-close:hover { color: var(--color-white); }
 
+    /* ========================================================
+       MEDIA QUERIES (Optimización exclusiva para Móvil/Tablet)
+       ======================================================== */
     @media (max-width: 992px) {
-      .nav-links { display: none; }
-      .demo-panel { grid-template-columns: 1fr; padding: 32px; }
-      .trust-track { flex-direction: column; gap: 24px; }
-      .comparison-table { display: block; overflow-x: auto; }
+      .container { padding: 0 20px; } /* Reduce padding lateral */
+      .section-gap { padding: 80px 0; } /* Reduce espacio vertical entre secciones */
+      
+      .nav-bar { padding: 16px 20px; }
+      .nav-links { display: none; } /* Oculta links secundarios para mantener el header limpio */
+      .brand-logo { height: 45px; } /* Achica un poco el logo en móviles */
+      
+      /* Convierte las 2 columnas a 1 columna apilada */
+      .responsive-grid { grid-template-columns: 1fr; gap: 40px; }
+      .demo-panel { grid-template-columns: 1fr; padding: 32px 24px; gap: 32px; }
+      
+      /* Ajuste de Botones Hero */
+      .hero-buttons { flex-direction: column; width: 100%; max-width: 320px; }
+      .btn-orange-pill, .btn-dark-pill { width: 100%; text-align: center; }
+      
+      /* Ajuste de Logos de Integración */
+      .trust-track { flex-wrap: wrap; gap: 24px 40px; justify-content: center; }
+      .trust-logo { font-size: 18px; }
+      
+      /* Composición Prompt responsive */
+      .prompt-composer { padding: 8px 8px 8px 16px; margin: 32px auto 24px; }
+      
+      /* Tabla scrollable en móvil */
+      .comparison-table { display: block; overflow-x: auto; white-space: nowrap; }
+      
+      /* Ajuste Modal en Móvil */
+      .modal-content { padding: 32px 24px; }
+      .void-modal { padding: 5vh 16px; }
     }
   </style>
 </head>
@@ -187,7 +216,7 @@
   <!-- NAVEGACIÓN -->
   <nav class="nav-bar">
     <a href="#" class="brand">
-      <img src="134241.png?v=8" alt="Escudo Logístico" class="brand-logo" />
+      <img src="134241.png?v=9" alt="Escudo Logístico" class="brand-logo" />
     </a>
     <div class="nav-links">
       <a href="#core" class="btn-ghost">Workspace</a>
@@ -212,7 +241,7 @@
       </button>
     </div>
 
-    <div style="display: flex; gap: 16px;">
+    <div class="hero-buttons">
       <a href="https://wa.me/542645619131" class="btn-orange-pill">Contáctanos</a>
       <a href="#core" class="btn-dark-pill">Ver Documentación</a>
     </div>
@@ -235,7 +264,8 @@
       <span class="micro-label">01 / Dev Tools & Security</span>
       <h2 class="section-display" style="margin: 16px 0 64px;">Construye con confianza.</h2>
       
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;">
+      <!-- Usando la clase responsive-grid -->
+      <div class="responsive-grid">
         <!-- Code Snippet -->
         <div class="code-window">
           <span class="code-comment">// Inicializar Escudo Zero Trust Auth</span><br><br>
@@ -252,8 +282,10 @@
         <div>
           <h3 class="sub-display" style="margin-bottom: 24px;">Plataforma SaaS B2B</h3>
           <p style="margin-bottom: 32px;">No dependas de soluciones fragmentadas. Nuestra API unifica la gestión de identidades (IAM), copias de seguridad aisladas para ransomware y registros inmutables.</p>
-          <a href="javascript:abrirModal('saas')" class="btn-dark-pill">Ver Arquitectura SaaS</a>
-          <a href="javascript:abrirModal('software')" class="btn-ghost" style="margin-left: 24px;">Desarrollo a Medida →</a>
+          <div class="hero-buttons" style="justify-content: flex-start;">
+            <a href="javascript:abrirModal('saas')" class="btn-dark-pill">Ver Arquitectura SaaS</a>
+            <a href="javascript:abrirModal('software')" class="btn-ghost">Desarrollo a Medida →</a>
+          </div>
         </div>
       </div>
 
@@ -325,7 +357,7 @@
   <!-- SECCIÓN 03: MEDIA & PUBLICIDAD -->
   <section id="media" class="section-gap" style="border-top: 1px solid rgba(255,255,255,0.05);">
     <div class="container">
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;">
+      <div class="responsive-grid">
         <div>
           <span class="micro-label">03 / Visibilidad & Media</span>
           <h2 class="section-display" style="margin: 16px 0 24px;">Impacto masivo.</h2>
@@ -343,9 +375,9 @@
   </section>
 
   <!-- FOOTER -->
-  <footer style="border-top: 1px solid rgba(255,255,255,0.1); padding: 80px 40px; text-align: center;">
+  <footer style="border-top: 1px solid rgba(255,255,255,0.1); padding: 80px 20px; text-align: center;">
     <h2 class="display-font" style="font-size: 24px; margin-bottom: 24px;">Escudo Logístico SAS</h2>
-    <div style="display: flex; justify-content: center; gap: 24px; margin-bottom: 40px;">
+    <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 24px; margin-bottom: 40px;">
       <a href="https://wa.me/542645619131" class="btn-ghost">Contacto</a>
       <a href="#" class="btn-ghost">Documentación</a>
       <a href="#" class="btn-ghost">Privacidad</a>
