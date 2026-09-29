@@ -106,11 +106,8 @@
       display: flex; justify-content: space-between; align-items: center;
       padding: 24px 40px; position: absolute; top: 0; left: 0; width: 100%; z-index: 100;
     }
-    
-    /* LOGO AUMENTADO */
     .brand-logo { height: 80px; transition: var(--transition-smooth); }
     .brand-logo:hover { transform: scale(1.02); filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.2)); }
-    
     .nav-links { display: flex; gap: 32px; align-items: center; }
 
     /* HERO & PROMPT COMPOSER */
@@ -197,7 +194,6 @@
 
     .panel-grid { display: grid; grid-template-columns: 1fr; gap: 40px; margin-top: 64px; }
     
-    /* PANEL BASE STYLE PARA CARDS INTERACTIVAS */
     .interactive-panel {
       background: rgba(255, 255, 255, 0.02);
       border: 1px solid rgba(255, 255, 255, 0.08);
@@ -244,10 +240,35 @@
     .comparison-table td:nth-child(3) { color: var(--color-white); background: rgba(255,255,255,0.03); border-left: 1px solid rgba(255,255,255,0.1); border-right: 1px solid rgba(255,255,255,0.1); } 
 
     /* ========================================================
-       SKELETON SCREENS (Estructura, Shimmer y Pulse)
+       ANIMACIONES FLUIDAS (Scroll Reveals & Enter States)
        ======================================================== */
-    .real-ui { opacity: 1; transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
-    .hidden-content { display: none !important; opacity: 0; }
+    
+    /* Reveal genérico para elementos que entran con scroll */
+    .scroll-reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .scroll-reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* Retrasos para generar el efecto en cascada (stagger) en el Hero */
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.2s; }
+    .delay-3 { transition-delay: 0.3s; }
+
+    /* ========================================================
+       SKELETON SCREENS (Estructura, Shimmer y Swap Suave)
+       ======================================================== */
+       
+    .hidden-content { display: none !important; }
+    
+    /* El contenido real empieza invisible y ligeramente abajo */
+    .real-ui { opacity: 0; transform: translateY(15px); transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+    /* Clase que aplica JS para mostrarlo suavemente */
+    .real-ui.show-content { opacity: 1; transform: translateY(0); }
     
     .skeleton-box {
       background-color: var(--color-carbon);
@@ -308,10 +329,7 @@
       .section-gap { padding: 80px 0; } 
       .nav-bar { padding: 16px 20px; }
       .nav-links { display: none; } 
-      
-      /* Ajuste LOGO en Móvil */
       .brand-logo { height: 55px; } 
-      
       .responsive-grid { grid-template-columns: 1fr; gap: 40px; }
       .interactive-panel { padding: 32px 24px; }
       .demo-panel { grid-template-columns: 1fr; gap: 32px; }
@@ -329,9 +347,9 @@
 <body>
 
   <!-- NAVEGACIÓN -->
-  <nav class="nav-bar">
+  <nav class="nav-bar scroll-reveal visible">
     <a href="javascript:void(0)" class="brand">
-      <img src="134241.png?v=19" alt="Escudo Logístico" class="brand-logo" />
+      <img src="134241.png?v=20" alt="Escudo Logístico" class="brand-logo" />
     </a>
     <div class="nav-links">
       <a href="#about" class="btn-ghost">Nosotros</a>
@@ -343,27 +361,27 @@
     </div>
   </nav>
 
-  <!-- HERO (Sin esqueleto para carga inmediata) -->
+  <!-- HERO (Animación en Cascada Fluida) -->
   <header class="hero container">
-    <span class="micro-label" style="margin-bottom: 16px;">V 3.0.0 — Production Ready</span>
-    <h1 class="hero-display">Ingeniería. Seguridad. Código.</h1>
-    <p style="margin-top: 16px; font-size: 16px;">Tecnología que protege y hace crecer su organización. Diseñamos soluciones a la medida de cada cliente, con foco en resultados medibles, continuidad operativa y protección de la información.</p>
+    <span class="micro-label hero-element scroll-reveal delay-1" style="margin-bottom: 16px;">V 3.0.0 — Production Ready</span>
+    <h1 class="hero-display hero-element scroll-reveal delay-1">Ingeniería. Seguridad. Código.</h1>
+    <p class="hero-element scroll-reveal delay-2" style="margin-top: 16px; font-size: 16px;">Tecnología que protege y hace crecer su organización. Diseñamos soluciones a la medida de cada cliente, con foco en resultados medibles, continuidad operativa y protección de la información.</p>
     
-    <div class="prompt-composer">
+    <div class="prompt-composer hero-element scroll-reveal delay-2">
       <input type="text" class="prompt-text" value="deploy --env production --shield active" readonly />
       <button class="prompt-submit" aria-label="Desplegar">
         <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
       </button>
     </div>
 
-    <div class="hero-buttons">
+    <div class="hero-buttons hero-element scroll-reveal delay-3">
       <a href="https://wa.me/542645619131" target="_blank" rel="noopener noreferrer" class="btn-orange-pill">Contáctanos</a>
       <a href="javascript:abrirModal('saas')" class="btn-dark-pill">Ver Documentación</a>
     </div>
   </header>
 
   <!-- TRUST STRIP -->
-  <div class="trust-strip">
+  <div class="trust-strip scroll-reveal">
     <div class="container trust-track">
       <span class="trust-logo">Microsoft Azure</span>
       <span class="trust-logo">Supabase</span>
@@ -373,7 +391,7 @@
     </div>
   </div>
 
-  <!-- SECCIÓN 00: SOBRE NOSOTROS (NUEVO) -->
+  <!-- SECCIÓN 00: SOBRE NOSOTROS -->
   <section id="about" class="section-gap" style="border-top: 1px solid rgba(255,255,255,0.05);">
     <div class="container">
       <div class="responsive-grid">
@@ -384,8 +402,8 @@
           <div class="skeleton-box sk-title" style="margin-bottom: 24px;"></div>
         </div>
 
-        <!-- REAL: ABOUT TITLE -->
-        <div class="real-ui hidden-content">
+        <!-- REAL: ABOUT TITLE (Entra suave con Scroll Reveal) -->
+        <div class="real-ui hidden-content scroll-reveal">
           <span class="micro-label">00 / Identidad Corporativa</span>
           <h2 class="section-display" style="margin: 16px 0 24px;">El escudo de su empresa.</h2>
         </div>
@@ -400,7 +418,7 @@
         </div>
 
         <!-- REAL: ABOUT TEXT -->
-        <div class="interactive-panel real-ui hidden-content" style="padding: 40px; display: block;">
+        <div class="interactive-panel real-ui hidden-content scroll-reveal delay-1" style="padding: 40px; display: block;">
           <h3 class="display-font" style="font-size: 24px; margin-bottom: 16px; color: var(--color-white);">Quiénes Somos</h3>
           <p style="margin-bottom: 16px;"><strong>Escudo Logístico SAS</strong> es una compañía radicada en San Juan, Argentina, nacida para resolver un problema crítico del sector corporativo: la fragmentación operativa.</p>
           <p style="margin-bottom: 0;">Integramos soluciones de ciberseguridad Zero Trust, desarrollo de software a medida y gestión integral de facilities. Protegemos el núcleo digital y físico de su negocio bajo un único estándar de excelencia, permitiéndole enfocarse exclusivamente en el crecimiento de su empresa.</p>
@@ -413,8 +431,11 @@
   <!-- SECCIÓN 01: TECNOLOGÍA & SEGURIDAD -->
   <section id="core" class="section-gap" style="border-top: 1px solid rgba(255,255,255,0.05);">
     <div class="container">
-      <span class="micro-label">01 / Desarrollo & Ciberseguridad</span>
-      <h2 class="section-display" style="margin: 16px 0 64px;">Tecnología & Seguridad.</h2>
+      <!-- Título de Sección con Scroll Reveal -->
+      <div class="scroll-reveal">
+        <span class="micro-label">01 / Desarrollo & Ciberseguridad</span>
+        <h2 class="section-display" style="margin: 16px 0 64px;">Tecnología & Seguridad.</h2>
+      </div>
       
       <div class="responsive-grid">
         
@@ -425,7 +446,7 @@
         </div>
 
         <!-- REAL: IMÁGENES TECH -->
-        <div class="real-ui hidden-content">
+        <div class="real-ui hidden-content scroll-reveal">
           <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80" alt="Equipo de Tecnología" class="ref-image">
           <img src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=800&q=80" alt="Monitoreo CCTV" class="ref-image" style="margin-bottom: 0;">
         </div>
@@ -445,7 +466,7 @@
         </div>
 
         <!-- REAL: TEXTOS TECH -->
-        <div class="real-ui hidden-content">
+        <div class="real-ui hidden-content scroll-reveal delay-1">
           <h3 class="sub-display" style="margin-bottom: 24px;">Una sola propuesta de valor.</h3>
           <p style="margin-bottom: 16px;">Escudo Logístico SAS integra desarrollo de software, inteligencia artificial y seguridad electrónica en una sola propuesta de valor.</p>
           <p style="margin-bottom: 32px;">Trabajamos con metodologías ágiles y buenas prácticas reconocidas a nivel internacional, garantizando confidencialidad, trazabilidad y soporte durante todo el ciclo de vida de cada proyecto.</p>
@@ -464,14 +485,14 @@
   <!-- SECCIÓN 02: FACILITIES -->
   <section id="facilities" class="section-gap" style="border-top: 1px solid rgba(255,255,255,0.05);">
     <div class="container">
-      <span class="micro-label">02 / Operaciones Físicas</span>
-      <h2 class="section-display" style="margin: 16px 0 64px;">Limpieza & Mantenimiento.</h2>
+      <div class="scroll-reveal">
+        <span class="micro-label">02 / Operaciones Físicas</span>
+        <h2 class="section-display" style="margin: 16px 0 64px;">Limpieza & Mantenimiento.</h2>
+      </div>
 
       <div class="panel-grid">
-        
         <!-- PANEL 1: Limpieza -->
         <div class="interactive-panel demo-panel">
-          <!-- SKELETON: Texto Panel 1 -->
           <div class="skeleton-ui" style="width: 100%;">
             <div class="skeleton-box sk-title" style="height: 68px; width: 100%;"></div>
             <div class="skeleton-box sk-text"></div>
@@ -479,26 +500,24 @@
             <div class="skeleton-box sk-text-short" style="margin-bottom: 32px;"></div>
             <div class="skeleton-box sk-btn" style="width: 180px;"></div>
           </div>
-          <!-- REAL: Texto Panel 1 -->
-          <div class="demo-content real-ui hidden-content">
+          
+          <div class="demo-content real-ui hidden-content scroll-reveal">
             <h3>Espacios impecables, seguros y siempre operativos.</h3>
             <p style="margin-bottom: 32px;">Escudo Logístico SAS brinda servicios de limpieza y mantenimiento integral para empresas, instituciones de salud, edificios corporativos, comercios e industrias. Nuestro compromiso es simple: que su organización funcione y luzca de manera impecable, todos los días.</p>
             <button onclick="abrirModal('limpieza')" class="btn-dark-pill">Ver Protocolos de Limpieza</button>
           </div>
           
-          <!-- SKELETON: Imagen Panel 1 -->
           <div class="skeleton-ui" style="height: 100%;">
              <div class="skeleton-box sk-square-full"></div>
           </div>
-          <!-- REAL: Imagen Panel 1 -->
-          <div class="real-ui hidden-content" style="height: 100%;">
-            <img src="138083.jpg?v=19" alt="Limpieza Institucional" class="ref-image" style="height: 100%; margin: 0; object-fit: cover; image-rendering: high-quality;">
+          
+          <div class="real-ui hidden-content scroll-reveal delay-1" style="height: 100%;">
+            <img src="138083.jpg?v=20" alt="Limpieza Institucional" class="ref-image" style="height: 100%; margin: 0; object-fit: cover; image-rendering: high-quality;">
           </div>
         </div>
 
         <!-- PANEL 2: Mantenimiento -->
         <div class="interactive-panel demo-panel">
-          <!-- SKELETON: Texto Panel 2 -->
           <div class="skeleton-ui" style="width: 100%;">
             <div class="skeleton-box sk-title"></div>
             <div class="skeleton-box sk-text"></div>
@@ -506,19 +525,18 @@
             <div class="skeleton-box sk-text-short" style="margin-bottom: 32px;"></div>
             <div class="skeleton-box sk-btn" style="width: 180px;"></div>
           </div>
-          <!-- REAL: Texto Panel 2 -->
-          <div class="demo-content real-ui hidden-content">
+          
+          <div class="demo-content real-ui hidden-content scroll-reveal">
             <h3>Mantenimiento General</h3>
             <p style="margin-bottom: 32px;">Contamos con personal seleccionado y capacitado, protocolos de higiene y bioseguridad, insumos de calidad y una supervisión cercana que asegura resultados constantes y una relación de confianza a largo plazo.</p>
             <button onclick="abrirModal('mantenimiento')" class="btn-dark-pill">Solicitar Soporte Técnico</button>
           </div>
           
-          <!-- SKELETON: Imagen Panel 2 -->
           <div class="skeleton-ui" style="height: 100%;">
              <div class="skeleton-box sk-square-full"></div>
           </div>
-          <!-- REAL: Imagen Panel 2 -->
-          <div class="real-ui hidden-content" style="height: 100%;">
+          
+          <div class="real-ui hidden-content scroll-reveal delay-1" style="height: 100%;">
             <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80" alt="Mantenimiento de Infraestructura" class="ref-image" style="height: 100%; margin: 0; object-fit: cover;">
           </div>
         </div>
@@ -532,7 +550,6 @@
     <div class="container">
       <div class="responsive-grid">
         
-        <!-- SKELETON: TEXTO MEDIA -->
         <div class="skeleton-ui" style="width: 100%;">
           <div class="skeleton-box sk-title" style="width: 40%;"></div>
           <div class="skeleton-box sk-title" style="margin-bottom: 24px;"></div>
@@ -541,21 +558,18 @@
           <div class="skeleton-box sk-btn"></div>
         </div>
 
-        <!-- REAL: TEXTO MEDIA -->
-        <div class="real-ui hidden-content">
+        <div class="real-ui hidden-content scroll-reveal">
           <span class="micro-label">03 / Visibilidad & Media</span>
           <h2 class="section-display" style="margin: 16px 0 24px;">Impacto masivo.</h2>
           <p style="margin-bottom: 40px;">No basta con construir la mejor herramienta, su mercado debe verla. Nuestra plataforma mediática conecta su marca con conversiones reales.</p>
           <a href="https://quepasaensanjuan.com/" target="_blank" rel="noopener noreferrer" class="btn-orange-pill">Visitar Portal →</a>
         </div>
 
-        <!-- SKELETON: CAMPAIGN TILE -->
         <div class="skeleton-ui" style="width: 100%;">
            <div class="skeleton-box sk-square" style="height: 180px; margin-bottom: 0;"></div>
         </div>
 
-        <!-- REAL: CAMPAIGN TILE -->
-        <div class="campaign-tile real-ui hidden-content">
+        <div class="campaign-tile real-ui hidden-content scroll-reveal delay-1">
           <h3 class="display-font" style="font-size: 28px; margin-bottom: 16px; color: var(--color-white);">Qué pasa en San Juan ??</h3>
           <p style="margin: 0 auto; font-size: 13px;">Estrategia digital y vitrina publicitaria líder en Cuyo. Alcance masivo hiper-segmentado.</p>
         </div>
@@ -564,7 +578,7 @@
   </section>
 
   <!-- FOOTER CON LEGALES -->
-  <footer style="border-top: 1px solid rgba(255,255,255,0.1); padding: 80px 20px; text-align: center;">
+  <footer class="scroll-reveal" style="border-top: 1px solid rgba(255,255,255,0.1); padding: 80px 20px; text-align: center;">
     <h2 class="display-font" style="font-size: 24px; margin-bottom: 24px;">Escudo Logístico SAS</h2>
     
     <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 24px; margin-bottom: 40px;">
@@ -592,19 +606,58 @@
   </div>
 
   <script>
-    /* LÓGICA DE SKELETON SCREENS */
+    /* LÓGICA DE ANIMACIONES FLUIDAS (Scroll Reveal & Skeletons) */
     document.addEventListener("DOMContentLoaded", () => {
+      
+      // 1. Animación Inmediata del Hero (Cascada / Staggering)
       setTimeout(() => {
-        // Ocultar Esqueletos
+        document.querySelectorAll('.hero-element').forEach(el => {
+          el.classList.add('visible');
+        });
+      }, 100);
+
+      // 2. Motor de Animaciones por Scroll (Intersection Observer)
+      const observerOptions = {
+        root: null,
+        rootMargin: "0px 0px -50px 0px", // Activa la animación un poquito antes de que toque el fondo de la pantalla
+        threshold: 0.1
+      };
+      const scrollObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target); // Solo se anima una vez
+          }
+        });
+      }, observerOptions);
+
+      // 3. Gestión de Esqueletos a Contenido Real (Transición Suave)
+      setTimeout(() => {
+        // Ocultar Skeletons de golpe
         const skeletons = document.querySelectorAll('.skeleton-ui');
         skeletons.forEach(el => el.style.display = 'none');
         
-        // Mostrar Contenido Real con Transición Natural
+        // Revelar la UI Real
         const reals = document.querySelectorAll('.real-ui');
-        reals.forEach(el => {
+        reals.forEach((el, index) => {
           el.classList.remove('hidden-content');
-          setTimeout(() => el.style.opacity = '1', 50);
+          
+          // Activamos la clase show-content de forma progresiva
+          setTimeout(() => {
+            el.classList.add('show-content');
+          }, index * 80); // 80ms de retraso entre cada bloque para un efecto fluido
+          
+          // Si el elemento también tiene scroll-reveal, lo mandamos al observer
+          if (el.classList.contains('scroll-reveal')) {
+             scrollObserver.observe(el);
+          }
         });
+
+        // Aplicamos el Observer también a los elementos que no estaban en Skeletons
+        document.querySelectorAll('.scroll-reveal:not(.real-ui)').forEach(el => {
+          scrollObserver.observe(el);
+        });
+
       }, 2000); 
     });
 
@@ -631,7 +684,7 @@
       cctv: {
         label: "PKG: SURVEILLANCE",
         title: "CCTV y Drones",
-        desc: "<ul><li><strong>CCTV y monitoreo:</strong> Diseño e instalación de cámaras IP, analítica de video, control de accesos y centros de monitoreo 24/7 con alertas en tiempo real.</li><li><strong>Drones y monitoreo aéreo:</strong> Vigilancia perimetral, inspección de instalaciones, grandes predios y eventos, con registro documentado y operation responsable.</li></ul>",
+        desc: "<ul><li><strong>CCTV y monitoreo:</strong> Diseño e instalación de cámaras IP, analítica de video, control de accesos y centros de monitoreo 24/7 con alertas en tiempo real.</li><li><strong>Drones y monitoreo aéreo:</strong> Vigilancia perimetral, inspección de instalaciones, grandes predios y eventos, con registro documentado y operación responsable.</li></ul>",
         hideCta: false
       },
       limpieza: {
