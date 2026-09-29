@@ -9,8 +9,8 @@
   <meta name="description" content="Escudo Logístico SAS integra soluciones de ciberseguridad Zero Trust, desarrollo de software a medida y gestión integral de facilities en San Juan, Argentina." />
   <link rel="canonical" href="https://escudologisticosas.com/" />
   
-  <!-- SECURITY HEADERS -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: images.unsplash.com; connect-src 'self'; base-uri 'self'; form-action 'self';">
+  <!-- SECURITY HEADERS (Actualizado para permitir Google Analytics y Meta Pixel) -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://connect.facebook.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: images.unsplash.com https://www.facebook.com https://www.google-analytics.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net; base-uri 'self'; form-action 'self';">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
 
@@ -318,7 +318,6 @@
       background: var(--color-near-black); border-radius: var(--radius-panel);
       border: 1px solid rgba(255,255,255,0.15); padding: 48px;
       box-shadow: 0 40px 100px rgba(0,0,0,0.8);
-      /* Efecto Zoom/Flote fluido */
       transform: translateY(30px) scale(0.95); 
       transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
@@ -332,6 +331,20 @@
     .legal-text h4 { font-family: 'Inter', sans-serif; font-weight: 600; color: var(--color-white); margin: 24px 0 8px; font-size: 16px; }
     .legal-text p, .legal-text ul { margin-bottom: 16px; }
     .legal-text ul { padding-left: 20px; }
+
+    /* COOKIE BANNER */
+    .cookie-banner {
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px);
+      background: var(--color-carbon); border: 1px solid rgba(255,255,255,0.15);
+      border-radius: var(--radius-card); padding: 24px;
+      display: flex; gap: 24px; align-items: center; justify-content: space-between;
+      max-width: 800px; width: calc(100% - 48px); z-index: 1000;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+      opacity: 0; visibility: hidden; transition: var(--transition-smooth);
+    }
+    .cookie-banner.show { transform: translateX(-50%) translateY(0); opacity: 1; visibility: visible; }
+    .cookie-banner p { margin: 0; font-size: 13px; color: var(--color-silver); }
+    .cookie-buttons { display: flex; gap: 12px; flex-shrink: 0; }
 
     /* MEDIA QUERIES */
     @media (max-width: 992px) {
@@ -351,6 +364,9 @@
       .comparison-table { display: block; overflow-x: auto; white-space: nowrap; }
       .modal-content { padding: 32px 24px; }
       .void-modal { padding: 5vh 16px; }
+      .cookie-banner { flex-direction: column; text-align: center; }
+      .cookie-buttons { width: 100%; }
+      .cookie-buttons button { flex: 1; }
     }
   </style>
 </head>
@@ -371,7 +387,7 @@
     </div>
   </nav>
 
-  <!-- HERO (Animación en Cascada Fluida) -->
+  <!-- HERO -->
   <header class="hero container">
     <span class="micro-label hero-element scroll-reveal delay-1" style="margin-bottom: 16px;">V 3.0.0 — Production Ready</span>
     <h1 class="hero-display hero-element scroll-reveal delay-1">Ingeniería. Seguridad. Código.</h1>
@@ -605,6 +621,15 @@
     </div>
   </div>
 
+  <!-- COOKIE BANNER -->
+  <div class="cookie-banner" id="cookieBanner">
+    <p>Utilizamos cookies propias y de terceros para fines analíticos y para mostrarte publicidad personalizada en base a un perfil elaborado a partir de tus hábitos de navegación. <a href="#" data-modal-target="cookies" style="color: var(--color-signal-orange); text-decoration: none;">Ver política de cookies.</a></p>
+    <div class="cookie-buttons">
+      <button id="declineCookies" class="btn-dark-pill">Rechazar</button>
+      <button id="acceptCookies" class="btn-orange-pill">Aceptar Todo</button>
+    </div>
+  </div>
+
   <script>
     /* DATOS DEL MODAL */
     const dataPaneles = {
@@ -670,9 +695,59 @@
       }
     };
 
+    /* FUNCIONES DE SEGUIMIENTO (Analytics & Pixel) */
+    function initTracking() {
+      // GOOGLE ANALYTICS (Reemplaza G-XXXXXXXXXX con tu ID)
+      const gaScript = document.createElement('script');
+      gaScript.src = "https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX";
+      gaScript.async = true;
+      document.head.appendChild(gaScript);
+      
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+
+      // META PIXEL (Reemplaza XXXXXXXXXXXXXXX con tu ID)
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', 'XXXXXXXXXXXXXXX');
+      fbq('track', 'PageView');
+    }
+
     /* LÓGICA DE EVENTOS Y ANIMACIONES FLUIDAS */
     document.addEventListener("DOMContentLoaded", () => {
       
+      // GESTIÓN DE COOKIES
+      const cookieBanner = document.getElementById('cookieBanner');
+      const acceptCookiesBtn = document.getElementById('acceptCookies');
+      const declineCookiesBtn = document.getElementById('declineCookies');
+
+      if (!localStorage.getItem('cookieConsent')) {
+        setTimeout(() => {
+          cookieBanner.classList.add('show');
+        }, 1500); // Mostrar banner un poco después de cargar
+      } else if (localStorage.getItem('cookieConsent') === 'accepted') {
+        initTracking();
+      }
+
+      acceptCookiesBtn.addEventListener('click', () => {
+        localStorage.setItem('cookieConsent', 'accepted');
+        cookieBanner.classList.remove('show');
+        initTracking();
+      });
+
+      declineCookiesBtn.addEventListener('click', () => {
+        localStorage.setItem('cookieConsent', 'declined');
+        cookieBanner.classList.remove('show');
+      });
+
       // 1. Mostrar elementos iniciales del Hero
       setTimeout(() => {
         document.querySelectorAll('.hero-element').forEach(el => {
@@ -695,7 +770,7 @@
         });
       }, observerOptions);
 
-      // 3. Manejo de Esqueletos (Skeletons) optimizado a 400ms para mantener UX sin sacrificar LCP
+      // 3. Manejo de Esqueletos (Skeletons) optimizado
       setTimeout(() => {
         const skeletons = document.querySelectorAll('.skeleton-ui');
         skeletons.forEach(el => el.style.display = 'none');
@@ -734,6 +809,11 @@
       document.body.addEventListener('click', (e) => {
         const triggerBtn = e.target.closest('[data-modal-target]');
         if (!triggerBtn) return;
+
+        // Prevenir comportamiento por defecto si es un enlace (ej. en el cookie banner)
+        if (triggerBtn.tagName.toLowerCase() === 'a') {
+            e.preventDefault();
+        }
 
         const modalId = triggerBtn.getAttribute('data-modal-target');
         const info = dataPaneles[modalId];
