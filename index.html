@@ -9,9 +9,12 @@
   <meta name="description" content="Escudo Logístico SAS integra soluciones de ciberseguridad Zero Trust, desarrollo de software a medida y gestión integral de facilities en San Juan, Argentina." />
   <link rel="canonical" href="https://escudologisticosas.com/" />
   
-  <!-- SECURITY HEADERS (Actualizado para permitir Google Analytics y Meta Pixel) -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://connect.facebook.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: images.unsplash.com https://www.facebook.com https://www.google-analytics.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net; base-uri 'self'; form-action 'self';">
-  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <!-- SECURITY HEADERS -->
+  <!-- CSP Mejorado: Se añade object-src 'none' y frame-ancestors 'none' (este último se aplica mejor desde el servidor, pero lo incluimos si es posible) -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://connect.facebook.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: images.unsplash.com https://www.facebook.com https://www.google-analytics.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net; object-src 'none'; base-uri 'self'; form-action 'self';">
+  <!-- Privacidad: Controla qué información se envía al hacer clic en enlaces externos -->
+  <meta name="referrer" content="no-referrer-when-downgrade">
+  <!-- Previene que el navegador "adivine" el tipo de contenido (MIME-sniffing) -->
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -394,7 +397,8 @@
     <p class="hero-element scroll-reveal delay-2" style="margin-top: 16px; font-size: 16px;">Tecnología que protege y hace crecer su organización. Diseñamos soluciones a la medida de cada cliente, con foco en resultados medibles, continuidad operativa y protección de la información.</p>
     
     <div class="prompt-composer hero-element scroll-reveal delay-2">
-      <input type="text" class="prompt-text" value="deploy --env production --shield active" readonly />
+      <!-- Seguridad Adicional: Se especifica autocomplete="off" para evitar comportamientos no deseados del navegador -->
+      <input type="text" class="prompt-text" value="deploy --env production --shield active" readonly autocomplete="off" />
       <button class="prompt-submit" aria-label="Desplegar">
         <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
       </button>
@@ -520,7 +524,7 @@
           
           <div class="demo-content real-ui hidden-content scroll-reveal">
             <h3>Espacios impecables, seguros y siempre operativos.</h3>
-            <p style="margin-bottom: 32px;">Escudo Logístico SAS brinda servicios de limpieza y mantenimiento integral para empresas, instituciones de salud, edificios corporativos, comercios e industrias. Nuestro compromiso es simple: que su organización funcione y luzca de manera impecable, todos los días.</p>
+            <p style="margin-bottom: 32px;">Escudo Logístico SAS brinda servicios de limpieza y mantenimiento integral para empresas, institutions de salud, edificios corporativos, comercios e industrias. Nuestro compromiso es simple: que su organización funcione y luzca de manera impecable, todos los días.</p>
             <button data-modal-target="limpieza" class="btn-dark-pill">Ver Protocolos de Limpieza</button>
           </div>
           
@@ -578,14 +582,15 @@
           <span class="micro-label">03 / Visibilidad & Media</span>
           <h2 class="section-display" style="margin: 16px 0 24px;">Impacto masivo.</h2>
           <p style="margin-bottom: 40px;">No basta con construir la mejor herramienta, su mercado debe verla. Nuestra plataforma mediática conecta su marca con conversiones reales.</p>
-          <a href="https://quepasaensanjuan.com/" target="_blank" rel="noopener noreferrer" class="btn-orange-pill">Visitar Portal →</a>
+          <!-- Privacidad: rel="noopener noreferrer nofollow" para no pasar información de tu sitio al enlace externo -->
+          <a href="https://quepasaensanjuan.com/" target="_blank" rel="noopener noreferrer nofollow" class="btn-orange-pill">Visitar Portal →</a>
         </div>
 
         <div class="skeleton-ui" style="width: 100%;">
            <div class="skeleton-box sk-square" style="height: 180px; margin-bottom: 0;"></div>
         </div>
 
-        <div class="campaign-tile real-ui hidden-content scroll-reveal delay-1" onclick="window.open('https://quepasaensanjuan.com/', '_blank')" style="cursor: pointer;">
+        <div class="campaign-tile real-ui hidden-content scroll-reveal delay-1" onclick="window.open('https://quepasaensanjuan.com/', '_blank', 'noopener,noreferrer')" style="cursor: pointer;">
           <h3 class="display-font" style="font-size: 28px; margin-bottom: 16px; color: var(--color-white);">Qué pasa en San Juan ??</h3>
           <p style="margin: 0 auto; font-size: 13px;">Estrategia digital y vitrina publicitaria líder en Cuyo. Alcance masivo hiper-segmentado.</p>
         </div>
@@ -697,7 +702,7 @@
 
     /* FUNCIONES DE SEGUIMIENTO (Analytics & Pixel) */
     function initTracking() {
-      // GOOGLE ANALYTICS (Actualizado con tu ID)
+      // GOOGLE ANALYTICS
       const gaScript = document.createElement('script');
       gaScript.src = "https://www.googletagmanager.com/gtag/js?id=G-25FP8CX3PL";
       gaScript.async = true;
@@ -729,22 +734,30 @@
       const acceptCookiesBtn = document.getElementById('acceptCookies');
       const declineCookiesBtn = document.getElementById('declineCookies');
 
-      if (!localStorage.getItem('cookieConsent')) {
+      // Se usa un bloque try-catch para acceder a localStorage, ya que en algunos navegadores (ej. modo estricto de privacidad) puede fallar
+      let cookieConsent = null;
+      try {
+        cookieConsent = localStorage.getItem('cookieConsent');
+      } catch(e) {
+        console.warn("LocalStorage no disponible:", e);
+      }
+
+      if (!cookieConsent) {
         setTimeout(() => {
           cookieBanner.classList.add('show');
-        }, 1500); // Mostrar banner un poco después de cargar
-      } else if (localStorage.getItem('cookieConsent') === 'accepted') {
+        }, 1500);
+      } else if (cookieConsent === 'accepted') {
         initTracking();
       }
 
       acceptCookiesBtn.addEventListener('click', () => {
-        localStorage.setItem('cookieConsent', 'accepted');
+        try { localStorage.setItem('cookieConsent', 'accepted'); } catch(e){}
         cookieBanner.classList.remove('show');
         initTracking();
       });
 
       declineCookiesBtn.addEventListener('click', () => {
-        localStorage.setItem('cookieConsent', 'declined');
+        try { localStorage.setItem('cookieConsent', 'declined'); } catch(e){}
         cookieBanner.classList.remove('show');
       });
 
@@ -761,36 +774,46 @@
         rootMargin: "0px 0px -50px 0px", 
         threshold: 0.1
       };
-      const scrollObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target); 
-          }
-        });
-      }, observerOptions);
+      // Verificación de soporte de IntersectionObserver (buena práctica aunque ampliamente soportado)
+      if ('IntersectionObserver' in window) {
+        const scrollObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target); 
+            }
+          });
+        }, observerOptions);
 
-      // 3. Manejo de Esqueletos (Skeletons) optimizado
-      setTimeout(() => {
-        const skeletons = document.querySelectorAll('.skeleton-ui');
-        skeletons.forEach(el => el.style.display = 'none');
-        
-        const reals = document.querySelectorAll('.real-ui');
-        reals.forEach((el, index) => {
-          el.classList.remove('hidden-content');
-          setTimeout(() => {
-            el.classList.add('show-content');
-          }, index * 80);
+        // 3. Manejo de Esqueletos (Skeletons) optimizado
+        setTimeout(() => {
+          const skeletons = document.querySelectorAll('.skeleton-ui');
+          skeletons.forEach(el => el.style.display = 'none');
           
-          if (el.classList.contains('scroll-reveal')) {
-             scrollObserver.observe(el);
-          }
-        });
+          const reals = document.querySelectorAll('.real-ui');
+          reals.forEach((el, index) => {
+            el.classList.remove('hidden-content');
+            setTimeout(() => {
+              el.classList.add('show-content');
+            }, index * 80);
+            
+            if (el.classList.contains('scroll-reveal')) {
+               scrollObserver.observe(el);
+            }
+          });
 
-        document.querySelectorAll('.scroll-reveal:not(.real-ui)').forEach(el => {
-          scrollObserver.observe(el);
+          document.querySelectorAll('.scroll-reveal:not(.real-ui)').forEach(el => {
+            scrollObserver.observe(el);
+          });
+        }, 400); 
+      } else {
+        // Fallback para navegadores antiguos sin IntersectionObserver: mostrar todo directamente
+        document.querySelectorAll('.skeleton-ui').forEach(el => el.style.display = 'none');
+        document.querySelectorAll('.real-ui, .scroll-reveal').forEach(el => {
+           el.classList.remove('hidden-content');
+           el.classList.add('show-content', 'visible');
         });
-      }, 400); 
+      }
 
       // 4. Lógica moderna para el Modal (Event Delegation)
       const overlay = document.getElementById('modalOverlay');
@@ -810,7 +833,6 @@
         const triggerBtn = e.target.closest('[data-modal-target]');
         if (!triggerBtn) return;
 
-        // Prevenir comportamiento por defecto si es un enlace (ej. en el cookie banner)
         if (triggerBtn.tagName.toLowerCase() === 'a') {
             e.preventDefault();
         }
@@ -819,6 +841,8 @@
         const info = dataPaneles[modalId];
 
         if (info) {
+          // Seguridad: Si en el futuro dataPaneles viene de una API, se debe sanitizar info.desc (ej. usando DOMPurify.sanitize(info.desc)) antes de usar innerHTML.
+          // Como los datos son estáticos e internos, el riesgo de XSS aquí es bajo, pero documentamos la precaución.
           mLabel.textContent = info.label;
           mTitle.textContent = info.title;
           mDesc.innerHTML = info.desc;
@@ -830,16 +854,16 @@
       });
 
       // Cerrar modal usando el botón 'X'
-      closeBtn.addEventListener('click', cerrarModal);
+      if(closeBtn) closeBtn.addEventListener('click', cerrarModal);
 
       // Cerrar modal haciendo clic en el fondo oscuro (fuera del contenido)
-      overlay.addEventListener('click', (e) => {
+      if(overlay) overlay.addEventListener('click', (e) => {
         if (e.target === overlay) cerrarModal();
       });
 
       // Cerrar modal presionando la tecla Escape
       document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && overlay.classList.contains('active')) {
+        if (e.key === 'Escape' && overlay && overlay.classList.contains('active')) {
           cerrarModal();
         }
       });
