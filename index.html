@@ -125,34 +125,20 @@
     .trust-logo { color: var(--color-graphite); font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 500; letter-spacing: -0.5px; transition: color 0.3s; }
     .trust-logo:hover { color: var(--color-silver); }
 
-    /* CODE SNIPPET */
-    .code-window {
-      background: var(--color-near-black);
-      border: 1px solid rgba(255,255,255,0.1);
+    /* IMAGES & PANELS */
+    .ref-image {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
       border-radius: var(--radius-card);
-      padding: 24px; text-align: left;
-      font-family: 'JetBrains Mono', monospace; font-size: 13px; line-height: 1.6;
+      border: 1px solid rgba(255,255,255,0.1);
       box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
-      position: relative; overflow-x: auto;
+      margin-bottom: 24px;
+      opacity: 0.8;
+      transition: opacity 0.3s;
     }
-    .code-window::before {
-      content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
-      background: var(--color-vector-purple);
-    }
-    .code-keyword { color: var(--color-vector-green); }
-    .code-string { color: var(--color-signal-orange); }
-    .code-comment { color: var(--color-ash); }
-    .code-function { color: var(--color-electric-yellow); }
+    .ref-image:hover { opacity: 1; }
 
-    /* COMPARISON TABLE */
-    .comparison-table { width: 100%; border-collapse: collapse; margin-top: 40px; }
-    .comparison-table th, .comparison-table td { padding: 16px 24px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.05); }
-    .comparison-table th { font-family: 'Space Grotesk', sans-serif; font-weight: 400; color: var(--color-silver); font-size: 16px; }
-    .comparison-table tr:last-child td { border-bottom: none; }
-    .comparison-table td:nth-child(2) { color: var(--color-ash); } 
-    .comparison-table td:nth-child(3) { color: var(--color-white); background: rgba(255,255,255,0.03); border-left: 1px solid rgba(255,255,255,0.1); border-right: 1px solid rgba(255,255,255,0.1); } 
-
-    /* PRODUCT DEMO PANELS */
     .panel-grid { display: grid; grid-template-columns: 1fr; gap: 40px; margin-top: 64px; }
     .demo-panel {
       background: rgba(255, 255, 255, 0.03);
@@ -186,7 +172,6 @@
       animation: skeleton-shimmer 2s infinite linear;
     }
     
-    /* Transición suave de opacidad 0.6 a 1 */
     @keyframes skeleton-pulse {
       0% { opacity: 0.6; }
       50% { opacity: 1; }
@@ -196,13 +181,13 @@
       100% { left: 100%; }
     }
 
-    /* Clases de formas exactas para el esqueleto */
+    /* Formas exactas para el esqueleto */
     .sk-title { height: 34px; width: 60%; margin-bottom: 16px; border-radius: 8px; }
     .sk-text { height: 14px; width: 100%; margin-bottom: 10px; border-radius: 4px; }
     .sk-text-short { height: 14px; width: 80%; margin-bottom: 10px; border-radius: 4px; }
     .sk-btn { height: 40px; width: 160px; border-radius: var(--radius-pill); }
-    .sk-code { height: 260px; width: 100%; border-radius: var(--radius-card); }
-    .sk-square { height: 200px; width: 100%; border-radius: 12px; }
+    .sk-square { height: 250px; width: 100%; border-radius: var(--radius-card); margin-bottom: 24px; }
+    .sk-square-full { height: 100%; width: 100%; min-height: 250px; border-radius: var(--radius-card); }
     
     /* MODAL */
     .void-modal {
@@ -239,7 +224,6 @@
       .trust-track { flex-wrap: wrap; gap: 24px 40px; justify-content: center; }
       .trust-logo { font-size: 18px; }
       .prompt-composer { padding: 8px 8px 8px 16px; margin: 32px auto 24px; }
-      .comparison-table { display: block; overflow-x: auto; white-space: nowrap; }
       .modal-content { padding: 32px 24px; }
       .void-modal { padding: 5vh 16px; }
     }
@@ -250,7 +234,7 @@
   <!-- NAVEGACIÓN -->
   <nav class="nav-bar">
     <a href="javascript:void(0)" class="brand">
-      <img src="134241.png?v=15" alt="Escudo Logístico" class="brand-logo" />
+      <img src="134241.png?v=16" alt="Escudo Logístico" class="brand-logo" />
     </a>
     <div class="nav-links">
       <a href="#core" class="btn-ghost">Tecnología</a>
@@ -261,7 +245,7 @@
     </div>
   </nav>
 
-  <!-- HERO (Carga Inmediata, sin esqueleto) -->
+  <!-- HERO (Sin esqueleto para carga inmediata) -->
   <header class="hero container">
     <span class="micro-label" style="margin-bottom: 16px;">V 3.0.0 — Production Ready</span>
     <h1 class="hero-display">Ingeniería. Seguridad. Código.</h1>
@@ -295,47 +279,47 @@
   <section id="core" class="section-gap" style="border-top: 1px solid rgba(255,255,255,0.05);">
     <div class="container">
       <span class="micro-label">01 / Desarrollo & Ciberseguridad</span>
-      <h2 class="section-display" style="margin: 16px 0 64px;">Construye con confianza.</h2>
+      <h2 class="section-display" style="margin: 16px 0 64px;">Tecnología & Seguridad.</h2>
       
       <div class="responsive-grid">
         
-        <!-- SKELETON: CODE WINDOW -->
+        <!-- SKELETON: IMÁGENES TECH -->
         <div class="skeleton-ui" style="width: 100%;">
-          <div class="skeleton-box sk-code"></div>
-        </div>
-        
-        <!-- CONTENIDO REAL: CODE WINDOW -->
-        <div class="code-window real-ui hidden-content">
-          <span class="code-comment">// Inicializar Escudo Zero Trust Auth</span><br><br>
-          <span class="code-keyword">import</span> { <span class="code-function">EscudoAuth</span> } <span class="code-keyword">from</span> <span class="code-string">'@escudo/saas'</span>;<br><br>
-          <span class="code-keyword">const</span> shield = <span class="code-keyword">new</span> <span class="code-function">EscudoAuth</span>({<br>
-          &nbsp;&nbsp;apiKey: <span class="code-string">process.env.ESCUDO_API_KEY</span>,<br>
-          &nbsp;&nbsp;region: <span class="code-string">'sa-east-1'</span>,<br>
-          &nbsp;&nbsp;mfaEnforced: <span class="code-keyword">true</span><br>
-          });<br><br>
-          <span class="code-keyword">await</span> shield.<span class="code-function">verifyAccess</span>(userRequest);<br>
-          <span class="code-comment">// Access granted. Logs securely stored.</span>
+          <div class="skeleton-box sk-square"></div>
+          <div class="skeleton-box sk-square" style="margin-bottom: 0;"></div>
         </div>
 
-        <!-- SKELETON: TEXTO -->
+        <!-- REAL: IMÁGENES TECH -->
+        <div class="real-ui hidden-content">
+          <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80" alt="Equipo de Tecnología" class="ref-image">
+          <img src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=800&q=80" alt="Monitoreo CCTV" class="ref-image" style="margin-bottom: 0;">
+        </div>
+
+        <!-- SKELETON: TEXTOS TECH -->
         <div class="skeleton-ui" style="width: 100%;">
           <div class="skeleton-box sk-title"></div>
           <div class="skeleton-box sk-text"></div>
           <div class="skeleton-box sk-text"></div>
           <div class="skeleton-box sk-text-short" style="margin-bottom: 32px;"></div>
-          <div style="display: flex; gap: 16px;">
-             <div class="skeleton-box sk-btn"></div>
-             <div class="skeleton-box sk-btn" style="background: transparent; border: 1px solid var(--color-graphite);"></div>
+          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+             <div class="skeleton-box sk-btn" style="width: 140px; height: 42px;"></div>
+             <div class="skeleton-box sk-btn" style="width: 140px; height: 42px;"></div>
+             <div class="skeleton-box sk-btn" style="width: 140px; height: 42px;"></div>
+             <div class="skeleton-box sk-btn" style="width: 140px; height: 42px;"></div>
           </div>
         </div>
 
-        <!-- CONTENIDO REAL: TEXTO -->
+        <!-- REAL: TEXTOS TECH -->
         <div class="real-ui hidden-content">
-          <h3 class="sub-display" style="margin-bottom: 24px;">Plataforma SaaS B2B</h3>
-          <p style="margin-bottom: 32px;">No dependas de soluciones fragmentadas. Nuestra API unifica la gestión de identidades (IAM), copias de seguridad aisladas para ransomware y registros inmutables.</p>
-          <div class="hero-buttons" style="justify-content: flex-start; flex-wrap: wrap;">
-            <button onclick="abrirModal('saas')" class="btn-dark-pill">Ver Arquitectura SaaS</button>
-            <button onclick="abrirModal('software')" class="btn-ghost">Desarrollo a Medida →</button>
+          <h3 class="sub-display" style="margin-bottom: 24px;">Una sola propuesta de valor.</h3>
+          <p style="margin-bottom: 16px;">Escudo Logístico SAS integra desarrollo de software, inteligencia artificial y seguridad electrónica en una sola propuesta de valor.</p>
+          <p style="margin-bottom: 32px;">Trabajamos con metodologías ágiles y buenas prácticas reconocidas a nivel internacional, garantizando confidencialidad, trazabilidad y soporte durante todo el ciclo de vida de cada proyecto.</p>
+          
+          <div class="hero-buttons" style="justify-content: flex-start; flex-wrap: wrap; gap: 12px;">
+            <button onclick="abrirModal('software')" class="btn-dark-pill">Desarrollo a Medida</button>
+            <button onclick="abrirModal('ia')" class="btn-dark-pill">Inteligencia Artificial</button>
+            <button onclick="abrirModal('saas')" class="btn-dark-pill">Ciberseguridad</button>
+            <button onclick="abrirModal('cctv')" class="btn-dark-pill">CCTV & Drones</button>
           </div>
         </div>
       </div>
@@ -346,51 +330,61 @@
   <section id="facilities" class="section-gap" style="border-top: 1px solid rgba(255,255,255,0.05);">
     <div class="container">
       <span class="micro-label">02 / Operaciones Físicas</span>
-      <h2 class="section-display" style="margin: 16px 0 64px;">El hardware también importa.</h2>
+      <h2 class="section-display" style="margin: 16px 0 64px;">Limpieza & Mantenimiento.</h2>
 
       <div class="panel-grid">
         
-        <!-- PANEL 1 -->
+        <!-- PANEL 1: Limpieza -->
         <div class="demo-panel">
-          <!-- SKELETON PANEL 1 -->
+          <!-- SKELETON: Texto Panel 1 -->
           <div class="skeleton-ui" style="width: 100%;">
-            <div class="skeleton-box sk-title"></div>
+            <div class="skeleton-box sk-title" style="height: 68px; width: 100%;"></div>
+            <div class="skeleton-box sk-text"></div>
             <div class="skeleton-box sk-text"></div>
             <div class="skeleton-box sk-text-short" style="margin-bottom: 32px;"></div>
-            <div class="skeleton-box sk-btn"></div>
+            <div class="skeleton-box sk-btn" style="width: 180px;"></div>
           </div>
-          
-          <!-- REAL PANEL 1 -->
+          <!-- REAL: Texto Panel 1 -->
           <div class="demo-content real-ui hidden-content">
-            <h3>Limpieza Institucional</h3>
-            <p style="margin-bottom: 32px;">La bioseguridad es el primer anillo de defensa físico. Protocolos estrictos para oficinas, clínicas e industrias pesadas.</p>
-            <button onclick="abrirModal('limpieza')" class="btn-dark-pill">Ver Protocolos</button>
+            <h3>Espacios impecables, seguros y siempre operativos.</h3>
+            <p style="margin-bottom: 32px;">Escudo Logístico SAS brinda servicios de limpieza y mantenimiento integral para empresas, instituciones de salud, edificios corporativos, comercios e industrias. Nuestro compromiso es simple: que su organización funcione y luzca de manera impecable, todos los días.</p>
+            <button onclick="abrirModal('limpieza')" class="btn-dark-pill">Ver Protocolos de Limpieza</button>
           </div>
           
-          <!-- Abstract representation inside panel -->
-          <div class="real-ui hidden-content" style="background: var(--color-carbon); height: 200px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center;">
-            <span class="micro-label">Facility.Status = "Clean"</span>
+          <!-- SKELETON: Imagen Panel 1 -->
+          <div class="skeleton-ui" style="height: 100%;">
+             <div class="skeleton-box sk-square-full"></div>
+          </div>
+          <!-- REAL: Imagen Panel 1 -->
+          <div class="real-ui hidden-content" style="height: 100%;">
+            <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80" alt="Limpieza Institucional" class="ref-image" style="height: 100%; margin: 0; object-fit: cover;">
           </div>
         </div>
 
-        <!-- PANEL 2 -->
+        <!-- PANEL 2: Mantenimiento -->
         <div class="demo-panel">
-          <!-- SKELETON PANEL 2 -->
+          <!-- SKELETON: Texto Panel 2 -->
           <div class="skeleton-ui" style="width: 100%;">
             <div class="skeleton-box sk-title"></div>
             <div class="skeleton-box sk-text"></div>
+            <div class="skeleton-box sk-text"></div>
             <div class="skeleton-box sk-text-short" style="margin-bottom: 32px;"></div>
-            <div class="skeleton-box sk-btn"></div>
+            <div class="skeleton-box sk-btn" style="width: 180px;"></div>
           </div>
-
-          <!-- REAL PANEL 2 -->
+          <!-- REAL: Texto Panel 2 -->
           <div class="demo-content real-ui hidden-content">
             <h3>Mantenimiento General</h3>
-            <p style="margin-bottom: 32px;">Infraestructura ininterrumpida. Soporte eléctrico, plomería y climatización (HVAC) con respuesta inmediata.</p>
-            <button onclick="abrirModal('mantenimiento')" class="btn-dark-pill">Solicitar Soporte</button>
+            <p style="margin-bottom: 32px;">Contamos con personal seleccionado y capacitado, protocolos de higiene y bioseguridad, insumos de calidad y una supervisión cercana que asegura resultados constantes y una relación de confianza a largo plazo.</p>
+            <button onclick="abrirModal('mantenimiento')" class="btn-dark-pill">Solicitar Soporte Técnico</button>
           </div>
-          <div class="real-ui hidden-content" style="background: var(--color-carbon); height: 200px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center;">
-            <span class="micro-label">Hardware.Uptime = "99.9%"</span>
+          
+          <!-- SKELETON: Imagen Panel 2 -->
+          <div class="skeleton-ui" style="height: 100%;">
+             <div class="skeleton-box sk-square-full"></div>
+          </div>
+          <!-- REAL: Imagen Panel 2 -->
+          <div class="real-ui hidden-content" style="height: 100%;">
+            <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80" alt="Mantenimiento de Infraestructura" class="ref-image" style="height: 100%; margin: 0; object-fit: cover;">
           </div>
         </div>
 
@@ -403,7 +397,7 @@
     <div class="container">
       <div class="responsive-grid">
         
-        <!-- SKELETON: MEDIA TEXT -->
+        <!-- SKELETON: TEXTO MEDIA -->
         <div class="skeleton-ui" style="width: 100%;">
           <div class="skeleton-box sk-title" style="width: 40%;"></div>
           <div class="skeleton-box sk-title" style="margin-bottom: 24px;"></div>
@@ -412,7 +406,7 @@
           <div class="skeleton-box sk-btn"></div>
         </div>
 
-        <!-- REAL: MEDIA TEXT -->
+        <!-- REAL: TEXTO MEDIA -->
         <div class="real-ui hidden-content">
           <span class="micro-label">03 / Visibilidad & Media</span>
           <h2 class="section-display" style="margin: 16px 0 24px;">Impacto masivo.</h2>
@@ -422,7 +416,7 @@
 
         <!-- SKELETON: CAMPAIGN TILE -->
         <div class="skeleton-ui" style="width: 100%;">
-           <div class="skeleton-box sk-square"></div>
+           <div class="skeleton-box sk-square" style="height: 180px; margin-bottom: 0;"></div>
         </div>
 
         <!-- REAL: CAMPAIGN TILE -->
@@ -474,10 +468,9 @@
         const reals = document.querySelectorAll('.real-ui');
         reals.forEach(el => {
           el.classList.remove('hidden-content');
-          // Pequeño delay para asegurar que el navegador procese el block antes de la opacidad
           setTimeout(() => el.style.opacity = '1', 50);
         });
-      }, 2000); // 2 segundos de loading simulado
+      }, 2000); 
     });
 
     /* DATOS DEL MODAL */
