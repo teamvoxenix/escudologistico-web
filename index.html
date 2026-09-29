@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Escudo Logístico SAS | Workspace & Security</title>
   
+  <!-- SEO & ACCESSIBILITY -->
+  <meta name="description" content="Escudo Logístico SAS integra soluciones de ciberseguridad Zero Trust, desarrollo de software a medida y gestión integral de facilities en San Juan, Argentina." />
+  
   <!-- SECURITY HEADERS -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: images.unsplash.com; connect-src 'self'; base-uri 'self'; form-action 'self';">
   <meta name="referrer" content="strict-origin-when-cross-origin">
@@ -92,7 +95,7 @@
       box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
     }
 
-    .btn-ghost { color: var(--color-silver); font-size: 14px; font-weight: 500; text-decoration: none; transition: var(--transition-smooth); cursor: pointer; background: none; border: none; }
+    .btn-ghost { color: var(--color-silver); font-size: 14px; font-weight: 500; text-decoration: none; transition: var(--transition-smooth); cursor: pointer; background: none; border: none; font-family: 'Inter', sans-serif;}
     .btn-ghost:hover { color: var(--color-white); transform: translateY(-1px); }
 
     /* LAYOUT BASE */
@@ -301,7 +304,7 @@
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(10px);
       z-index: 2000; overflow-y: auto;
-      visibility: hidden; pointer-events: none; /* Reemplaza display: none para permitir transición */
+      visibility: hidden; pointer-events: none; 
       opacity: 0; transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s; 
       padding: 10vh 24px;
     }
@@ -353,16 +356,16 @@
 <body>
 
   <!-- NAVEGACIÓN -->
-  <nav class="nav-bar scroll-reveal visible">
-    <a href="javascript:void(0)" class="brand">
-      <img src="134241.png?v=22" alt="Escudo Logístico" class="brand-logo" />
+  <nav class="nav-bar scroll-reveal visible" aria-label="Navegación principal">
+    <a href="/" class="brand" aria-label="Inicio">
+      <img src="134241.png?v=22" alt="Escudo Logístico SAS" class="brand-logo" />
     </a>
     <div class="nav-links">
       <a href="#about" class="btn-ghost">Nosotros</a>
       <a href="#core" class="btn-ghost">Tecnología</a>
       <a href="#facilities" class="btn-ghost">Facilities</a>
       <a href="#media" class="btn-ghost">Media</a>
-      <a href="javascript:abrirModal('saas')" class="btn-ghost">Docs</a>
+      <button data-modal-target="saas" class="btn-ghost">Docs</button>
       <a href="https://wa.me/542645619131" target="_blank" rel="noopener noreferrer" class="btn-dark-pill">Contáctanos</a>
     </div>
   </nav>
@@ -382,7 +385,7 @@
 
     <div class="hero-buttons hero-element scroll-reveal delay-3">
       <a href="https://wa.me/542645619131" target="_blank" rel="noopener noreferrer" class="btn-orange-pill">Contáctanos</a>
-      <a href="javascript:abrirModal('saas')" class="btn-dark-pill">Ver Documentación</a>
+      <button data-modal-target="saas" class="btn-dark-pill">Ver Documentación</button>
     </div>
   </header>
 
@@ -446,8 +449,8 @@
         </div>
 
         <div class="real-ui hidden-content scroll-reveal">
-          <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80" alt="Equipo de Tecnología" class="ref-image">
-          <img src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=800&q=80" alt="Monitoreo CCTV" class="ref-image" style="margin-bottom: 0;">
+          <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80" alt="Equipo de Tecnología" class="ref-image" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=800&q=80" alt="Monitoreo CCTV" class="ref-image" style="margin-bottom: 0;" loading="lazy">
         </div>
 
         <div class="skeleton-ui" style="width: 100%;">
@@ -469,10 +472,10 @@
           <p style="margin-bottom: 32px;">Trabajamos con metodologías ágiles y buenas prácticas reconocidas a nivel internacional, garantizando confidencialidad, trazabilidad y soporte durante todo el ciclo de vida de cada proyecto.</p>
           
           <div class="hero-buttons" style="justify-content: flex-start; flex-wrap: wrap; gap: 12px;">
-            <button onclick="abrirModal('software')" class="btn-dark-pill">Desarrollo a Medida</button>
-            <button onclick="abrirModal('ia')" class="btn-dark-pill">Inteligencia Artificial</button>
-            <button onclick="abrirModal('saas')" class="btn-dark-pill">Ciberseguridad</button>
-            <button onclick="abrirModal('cctv')" class="btn-dark-pill">CCTV & Drones</button>
+            <button data-modal-target="software" class="btn-dark-pill">Desarrollo a Medida</button>
+            <button data-modal-target="ia" class="btn-dark-pill">Inteligencia Artificial</button>
+            <button data-modal-target="saas" class="btn-dark-pill">Ciberseguridad</button>
+            <button data-modal-target="cctv" class="btn-dark-pill">CCTV & Drones</button>
           </div>
         </div>
       </div>
@@ -501,7 +504,7 @@
           <div class="demo-content real-ui hidden-content scroll-reveal">
             <h3>Espacios impecables, seguros y siempre operativos.</h3>
             <p style="margin-bottom: 32px;">Escudo Logístico SAS brinda servicios de limpieza y mantenimiento integral para empresas, instituciones de salud, edificios corporativos, comercios e industrias. Nuestro compromiso es simple: que su organización funcione y luzca de manera impecable, todos los días.</p>
-            <button onclick="abrirModal('limpieza')" class="btn-dark-pill">Ver Protocolos de Limpieza</button>
+            <button data-modal-target="limpieza" class="btn-dark-pill">Ver Protocolos de Limpieza</button>
           </div>
           
           <div class="skeleton-ui" style="height: 100%;">
@@ -509,7 +512,7 @@
           </div>
           
           <div class="real-ui hidden-content scroll-reveal delay-1" style="height: 100%;">
-            <img src="138083.jpg?v=22" alt="Limpieza Institucional" class="ref-image" style="height: 100%; margin: 0; object-fit: cover; image-rendering: high-quality;">
+            <img src="138083.jpg?v=22" alt="Limpieza Institucional" class="ref-image" loading="lazy" style="height: 100%; margin: 0; object-fit: cover; image-rendering: high-quality;">
           </div>
         </div>
 
@@ -525,7 +528,7 @@
           <div class="demo-content real-ui hidden-content scroll-reveal">
             <h3>Mantenimiento General</h3>
             <p style="margin-bottom: 32px;">Contamos con personal seleccionado y capacitado, protocolos de higiene y bioseguridad, insumos de calidad y una supervisión cercana que asegura resultados constantes y una relación de confianza a largo plazo.</p>
-            <button onclick="abrirModal('mantenimiento')" class="btn-dark-pill">Solicitar Soporte Técnico</button>
+            <button data-modal-target="mantenimiento" class="btn-dark-pill">Solicitar Soporte Técnico</button>
           </div>
           
           <div class="skeleton-ui" style="height: 100%;">
@@ -533,7 +536,7 @@
           </div>
           
           <div class="real-ui hidden-content scroll-reveal delay-1" style="height: 100%;">
-            <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80" alt="Mantenimiento de Infraestructura" class="ref-image" style="height: 100%; margin: 0; object-fit: cover;">
+            <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80" alt="Mantenimiento de Infraestructura" class="ref-image" loading="lazy" style="height: 100%; margin: 0; object-fit: cover;">
           </div>
         </div>
 
@@ -578,19 +581,19 @@
     <h2 class="display-font" style="font-size: 24px; margin-bottom: 24px;">Escudo Logístico SAS</h2>
     
     <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 24px; margin-bottom: 40px;">
-      <button onclick="abrirModal('privacidad')" class="btn-ghost">Políticas de Privacidad</button>
-      <button onclick="abrirModal('cookies')" class="btn-ghost">Políticas de Cookies</button>
-      <button onclick="abrirModal('terminos')" class="btn-ghost">Términos y Condiciones</button>
-      <button onclick="abrirModal('legales')" class="btn-ghost">Notas Adicionales</button>
+      <button data-modal-target="privacidad" class="btn-ghost">Políticas de Privacidad</button>
+      <button data-modal-target="cookies" class="btn-ghost">Políticas de Cookies</button>
+      <button data-modal-target="terminos" class="btn-ghost">Términos y Condiciones</button>
+      <button data-modal-target="legales" class="btn-ghost">Notas Adicionales</button>
     </div>
     
     <span class="micro-label">© 2026 Escudo Logístico SAS. CUIT/Registro corporativo en trámite. San Juan, Argentina.</span>
   </footer>
 
-  <!-- MODAL CON TRANSICIÓN FLUIDA CORREGIDA -->
+  <!-- MODAL -->
   <div class="void-modal" id="modalOverlay">
     <div class="modal-content">
-      <button class="modal-close" onclick="cerrarModal()" aria-label="Cerrar">×</button>
+      <button class="modal-close" aria-label="Cerrar modal">×</button>
       <span class="micro-label" id="modalLabel" style="margin-bottom: 16px;">SYS.INFO</span>
       <h2 class="sub-display" id="modalTitle" style="margin-bottom: 24px;">Título</h2>
       <div id="modalDesc" style="color: var(--color-fog); font-size: 14px; line-height: 1.6;" class="legal-text">Descripción...</div>
@@ -602,52 +605,6 @@
   </div>
 
   <script>
-    /* LÓGICA DE ANIMACIONES FLUIDAS (Scroll Reveal & Skeletons) */
-    document.addEventListener("DOMContentLoaded", () => {
-      
-      setTimeout(() => {
-        document.querySelectorAll('.hero-element').forEach(el => {
-          el.classList.add('visible');
-        });
-      }, 100);
-
-      const observerOptions = {
-        root: null,
-        rootMargin: "0px 0px -50px 0px", 
-        threshold: 0.1
-      };
-      const scrollObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target); 
-          }
-        });
-      }, observerOptions);
-
-      setTimeout(() => {
-        const skeletons = document.querySelectorAll('.skeleton-ui');
-        skeletons.forEach(el => el.style.display = 'none');
-        
-        const reals = document.querySelectorAll('.real-ui');
-        reals.forEach((el, index) => {
-          el.classList.remove('hidden-content');
-          setTimeout(() => {
-            el.classList.add('show-content');
-          }, index * 80);
-          
-          if (el.classList.contains('scroll-reveal')) {
-             scrollObserver.observe(el);
-          }
-        });
-
-        document.querySelectorAll('.scroll-reveal:not(.real-ui)').forEach(el => {
-          scrollObserver.observe(el);
-        });
-
-      }, 2000); 
-    });
-
     /* DATOS DEL MODAL */
     const dataPaneles = {
       software: {
@@ -712,34 +669,101 @@
       }
     };
 
-    const overlay = document.getElementById('modalOverlay');
-    const mLabel = document.getElementById('modalLabel');
-    const mTitle = document.getElementById('modalTitle');
-    const mDesc = document.getElementById('modalDesc');
-    const mCtaWrapper = document.getElementById('modalCtaWrapper');
+    /* LÓGICA DE EVENTOS Y ANIMACIONES FLUIDAS */
+    document.addEventListener("DOMContentLoaded", () => {
+      
+      // 1. Mostrar elementos iniciales del Hero
+      setTimeout(() => {
+        document.querySelectorAll('.hero-element').forEach(el => {
+          el.classList.add('visible');
+        });
+      }, 100);
 
-    function abrirModal(id) {
-      const info = dataPaneles[id];
-      if(info) {
-        mLabel.textContent = info.label;
-        mTitle.textContent = info.title;
-        mDesc.innerHTML = info.desc;
+      // 2. Observer para animar elementos on-scroll
+      const observerOptions = {
+        root: null,
+        rootMargin: "0px 0px -50px 0px", 
+        threshold: 0.1
+      };
+      const scrollObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target); 
+          }
+        });
+      }, observerOptions);
+
+      // 3. Manejo de Esqueletos (Skeletons) optimizado a 400ms para mantener UX sin sacrificar LCP
+      setTimeout(() => {
+        const skeletons = document.querySelectorAll('.skeleton-ui');
+        skeletons.forEach(el => el.style.display = 'none');
         
-        if(info.hideCta) {
-          mCtaWrapper.style.display = 'none';
-        } else {
-          mCtaWrapper.style.display = 'block';
+        const reals = document.querySelectorAll('.real-ui');
+        reals.forEach((el, index) => {
+          el.classList.remove('hidden-content');
+          setTimeout(() => {
+            el.classList.add('show-content');
+          }, index * 80);
+          
+          if (el.classList.contains('scroll-reveal')) {
+             scrollObserver.observe(el);
+          }
+        });
+
+        document.querySelectorAll('.scroll-reveal:not(.real-ui)').forEach(el => {
+          scrollObserver.observe(el);
+        });
+      }, 400); 
+
+      // 4. Lógica moderna para el Modal (Event Delegation)
+      const overlay = document.getElementById('modalOverlay');
+      const mLabel = document.getElementById('modalLabel');
+      const mTitle = document.getElementById('modalTitle');
+      const mDesc = document.getElementById('modalDesc');
+      const mCtaWrapper = document.getElementById('modalCtaWrapper');
+      const closeBtn = document.querySelector('.modal-close');
+
+      const cerrarModal = () => {
+        overlay.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      };
+
+      // Abrir modal capturando clics en botones con data-modal-target
+      document.body.addEventListener('click', (e) => {
+        const triggerBtn = e.target.closest('[data-modal-target]');
+        if (!triggerBtn) return;
+
+        const modalId = triggerBtn.getAttribute('data-modal-target');
+        const info = dataPaneles[modalId];
+
+        if (info) {
+          mLabel.textContent = info.label;
+          mTitle.textContent = info.title;
+          mDesc.innerHTML = info.desc;
+          mCtaWrapper.style.display = info.hideCta ? 'none' : 'block';
+          
+          overlay.classList.add('active');
+          document.body.style.overflow = 'hidden';
         }
-        
-        overlay.classList.add('active');
-        document.body.style.overflow = 'hidden';
-      }
-    }
+      });
 
-    function cerrarModal() {
-      overlay.classList.remove('active');
-      document.body.style.overflow = 'auto';
-    }
+      // Cerrar modal usando el botón 'X'
+      closeBtn.addEventListener('click', cerrarModal);
+
+      // Cerrar modal haciendo clic en el fondo oscuro (fuera del contenido)
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) cerrarModal();
+      });
+
+      // Cerrar modal presionando la tecla Escape
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && overlay.classList.contains('active')) {
+          cerrarModal();
+        }
+      });
+
+    });
   </script>
 </body>
 </html>
