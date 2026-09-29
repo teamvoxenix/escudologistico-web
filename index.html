@@ -222,6 +222,7 @@
       border: 1px solid rgba(255, 94, 35, 0.4); 
       text-align: center;
       transition: var(--transition-smooth);
+      cursor: pointer; /* Agregado para indicar que toda la tarjeta es clickeable */
     }
     .campaign-tile:hover {
       border-color: rgba(255, 94, 35, 0.8);
@@ -243,7 +244,6 @@
        ANIMACIONES FLUIDAS (Scroll Reveals & Enter States)
        ======================================================== */
     
-    /* Reveal genérico para elementos que entran con scroll */
     .scroll-reveal {
       opacity: 0;
       transform: translateY(30px);
@@ -254,7 +254,6 @@
       transform: translateY(0);
     }
     
-    /* Retrasos para generar el efecto en cascada (stagger) en el Hero */
     .delay-1 { transition-delay: 0.1s; }
     .delay-2 { transition-delay: 0.2s; }
     .delay-3 { transition-delay: 0.3s; }
@@ -265,9 +264,7 @@
        
     .hidden-content { display: none !important; }
     
-    /* El contenido real empieza invisible y ligeramente abajo */
     .real-ui { opacity: 0; transform: translateY(15px); transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
-    /* Clase que aplica JS para mostrarlo suavemente */
     .real-ui.show-content { opacity: 1; transform: translateY(0); }
     
     .skeleton-box {
@@ -349,7 +346,7 @@
   <!-- NAVEGACIÓN -->
   <nav class="nav-bar scroll-reveal visible">
     <a href="javascript:void(0)" class="brand">
-      <img src="134241.png?v=20" alt="Escudo Logístico" class="brand-logo" />
+      <img src="134241.png?v=21" alt="Escudo Logístico" class="brand-logo" />
     </a>
     <div class="nav-links">
       <a href="#about" class="btn-ghost">Nosotros</a>
@@ -361,7 +358,7 @@
     </div>
   </nav>
 
-  <!-- HERO (Animación en Cascada Fluida) -->
+  <!-- HERO -->
   <header class="hero container">
     <span class="micro-label hero-element scroll-reveal delay-1" style="margin-bottom: 16px;">V 3.0.0 — Production Ready</span>
     <h1 class="hero-display hero-element scroll-reveal delay-1">Ingeniería. Seguridad. Código.</h1>
@@ -396,19 +393,16 @@
     <div class="container">
       <div class="responsive-grid">
         
-        <!-- SKELETON: ABOUT TITLE -->
         <div class="skeleton-ui" style="width: 100%;">
           <div class="skeleton-box sk-title" style="width: 50%;"></div>
           <div class="skeleton-box sk-title" style="margin-bottom: 24px;"></div>
         </div>
 
-        <!-- REAL: ABOUT TITLE (Entra suave con Scroll Reveal) -->
         <div class="real-ui hidden-content scroll-reveal">
           <span class="micro-label">00 / Identidad Corporativa</span>
           <h2 class="section-display" style="margin: 16px 0 24px;">El escudo de su empresa.</h2>
         </div>
 
-        <!-- SKELETON: ABOUT TEXT -->
         <div class="skeleton-ui interactive-panel" style="width: 100%; padding: 40px; display: block;">
            <div class="skeleton-box sk-title" style="margin-bottom: 24px;"></div>
            <div class="skeleton-box sk-text"></div>
@@ -417,7 +411,6 @@
            <div class="skeleton-box sk-text-short"></div>
         </div>
 
-        <!-- REAL: ABOUT TEXT -->
         <div class="interactive-panel real-ui hidden-content scroll-reveal delay-1" style="padding: 40px; display: block;">
           <h3 class="display-font" style="font-size: 24px; margin-bottom: 16px; color: var(--color-white);">Quiénes Somos</h3>
           <p style="margin-bottom: 16px;"><strong>Escudo Logístico SAS</strong> es una compañía radicada en San Juan, Argentina, nacida para resolver un problema crítico del sector corporativo: la fragmentación operativa.</p>
@@ -431,7 +424,6 @@
   <!-- SECCIÓN 01: TECNOLOGÍA & SEGURIDAD -->
   <section id="core" class="section-gap" style="border-top: 1px solid rgba(255,255,255,0.05);">
     <div class="container">
-      <!-- Título de Sección con Scroll Reveal -->
       <div class="scroll-reveal">
         <span class="micro-label">01 / Desarrollo & Ciberseguridad</span>
         <h2 class="section-display" style="margin: 16px 0 64px;">Tecnología & Seguridad.</h2>
@@ -439,19 +431,16 @@
       
       <div class="responsive-grid">
         
-        <!-- SKELETON: IMÁGENES TECH -->
         <div class="skeleton-ui" style="width: 100%;">
           <div class="skeleton-box sk-square"></div>
           <div class="skeleton-box sk-square" style="margin-bottom: 0;"></div>
         </div>
 
-        <!-- REAL: IMÁGENES TECH -->
         <div class="real-ui hidden-content scroll-reveal">
           <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80" alt="Equipo de Tecnología" class="ref-image">
           <img src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=800&q=80" alt="Monitoreo CCTV" class="ref-image" style="margin-bottom: 0;">
         </div>
 
-        <!-- SKELETON: TEXTOS TECH -->
         <div class="skeleton-ui" style="width: 100%;">
           <div class="skeleton-box sk-title"></div>
           <div class="skeleton-box sk-text"></div>
@@ -465,7 +454,6 @@
           </div>
         </div>
 
-        <!-- REAL: TEXTOS TECH -->
         <div class="real-ui hidden-content scroll-reveal delay-1">
           <h3 class="sub-display" style="margin-bottom: 24px;">Una sola propuesta de valor.</h3>
           <p style="margin-bottom: 16px;">Escudo Logístico SAS integra desarrollo de software, inteligencia artificial y seguridad electrónica en una sola propuesta de valor.</p>
@@ -491,7 +479,7 @@
       </div>
 
       <div class="panel-grid">
-        <!-- PANEL 1: Limpieza -->
+        
         <div class="interactive-panel demo-panel">
           <div class="skeleton-ui" style="width: 100%;">
             <div class="skeleton-box sk-title" style="height: 68px; width: 100%;"></div>
@@ -512,11 +500,10 @@
           </div>
           
           <div class="real-ui hidden-content scroll-reveal delay-1" style="height: 100%;">
-            <img src="138083.jpg?v=20" alt="Limpieza Institucional" class="ref-image" style="height: 100%; margin: 0; object-fit: cover; image-rendering: high-quality;">
+            <img src="138083.jpg?v=21" alt="Limpieza Institucional" class="ref-image" style="height: 100%; margin: 0; object-fit: cover; image-rendering: high-quality;">
           </div>
         </div>
 
-        <!-- PANEL 2: Mantenimiento -->
         <div class="interactive-panel demo-panel">
           <div class="skeleton-ui" style="width: 100%;">
             <div class="skeleton-box sk-title"></div>
@@ -569,7 +556,8 @@
            <div class="skeleton-box sk-square" style="height: 180px; margin-bottom: 0;"></div>
         </div>
 
-        <div class="campaign-tile real-ui hidden-content scroll-reveal delay-1">
+        <!-- TARJETA CAMPAIGN CON ENLACE DIRECTO (LIMPIO Y SIN TRACKERS) -->
+        <div class="campaign-tile real-ui hidden-content scroll-reveal delay-1" onclick="window.open('https://quepasaensanjuan.com/', '_blank')" style="cursor: pointer;">
           <h3 class="display-font" style="font-size: 28px; margin-bottom: 16px; color: var(--color-white);">Qué pasa en San Juan ??</h3>
           <p style="margin: 0 auto; font-size: 13px;">Estrategia digital y vitrina publicitaria líder en Cuyo. Alcance masivo hiper-segmentado.</p>
         </div>
@@ -606,54 +594,45 @@
   </div>
 
   <script>
-    /* LÓGICA DE ANIMACIONES FLUIDAS (Scroll Reveal & Skeletons) */
+    /* LÓGICA DE ANIMACIONES FLUIDAS */
     document.addEventListener("DOMContentLoaded", () => {
       
-      // 1. Animación Inmediata del Hero (Cascada / Staggering)
       setTimeout(() => {
         document.querySelectorAll('.hero-element').forEach(el => {
           el.classList.add('visible');
         });
       }, 100);
 
-      // 2. Motor de Animaciones por Scroll (Intersection Observer)
       const observerOptions = {
         root: null,
-        rootMargin: "0px 0px -50px 0px", // Activa la animación un poquito antes de que toque el fondo de la pantalla
+        rootMargin: "0px 0px -50px 0px", 
         threshold: 0.1
       };
       const scrollObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('visible');
-            observer.unobserve(entry.target); // Solo se anima una vez
+            observer.unobserve(entry.target); 
           }
         });
       }, observerOptions);
 
-      // 3. Gestión de Esqueletos a Contenido Real (Transición Suave)
       setTimeout(() => {
-        // Ocultar Skeletons de golpe
         const skeletons = document.querySelectorAll('.skeleton-ui');
         skeletons.forEach(el => el.style.display = 'none');
         
-        // Revelar la UI Real
         const reals = document.querySelectorAll('.real-ui');
         reals.forEach((el, index) => {
           el.classList.remove('hidden-content');
-          
-          // Activamos la clase show-content de forma progresiva
           setTimeout(() => {
             el.classList.add('show-content');
-          }, index * 80); // 80ms de retraso entre cada bloque para un efecto fluido
+          }, index * 80);
           
-          // Si el elemento también tiene scroll-reveal, lo mandamos al observer
           if (el.classList.contains('scroll-reveal')) {
              scrollObserver.observe(el);
           }
         });
 
-        // Aplicamos el Observer también a los elementos que no estaban en Skeletons
         document.querySelectorAll('.scroll-reveal:not(.real-ui)').forEach(el => {
           scrollObserver.observe(el);
         });
