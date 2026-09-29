@@ -222,7 +222,7 @@
       border: 1px solid rgba(255, 94, 35, 0.4); 
       text-align: center;
       transition: var(--transition-smooth);
-      cursor: pointer; /* Agregado para indicar que toda la tarjeta es clickeable */
+      cursor: pointer;
     }
     .campaign-tile:hover {
       border-color: rgba(255, 94, 35, 0.8);
@@ -296,22 +296,31 @@
     .sk-square { height: 250px; width: 100%; border-radius: var(--radius-card); margin-bottom: 24px; }
     .sk-square-full { height: 100%; width: 100%; min-height: 250px; border-radius: var(--radius-card); }
     
-    /* MODAL */
+    /* MODAL (ANIMACIÓN FLUIDA APLICADA AQUÍ) */
     .void-modal {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(10px);
       z-index: 2000; overflow-y: auto;
-      display: none; opacity: 0; transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1); padding: 10vh 24px;
+      visibility: hidden; pointer-events: none; /* Reemplaza display: none para permitir transición */
+      opacity: 0; transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.4s; 
+      padding: 10vh 24px;
     }
-    .void-modal.active { display: block; opacity: 1; }
+    .void-modal.active { 
+      visibility: visible; pointer-events: auto; 
+      opacity: 1; 
+    }
     .modal-content { 
       max-width: 680px; margin: 0 auto; position: relative;
       background: var(--color-near-black); border-radius: var(--radius-panel);
       border: 1px solid rgba(255,255,255,0.15); padding: 48px;
       box-shadow: 0 40px 100px rgba(0,0,0,0.8);
-      transform: translateY(20px); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      /* Efecto Zoom/Flote fluido */
+      transform: translateY(30px) scale(0.95); 
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .void-modal.active .modal-content { transform: translateY(0); }
+    .void-modal.active .modal-content { 
+      transform: translateY(0) scale(1); 
+    }
     
     .modal-close { position: absolute; top: 24px; right: 24px; background: transparent; border: none; color: var(--color-ash); font-size: 24px; cursor: pointer; transition: var(--transition-smooth); }
     .modal-close:hover { color: var(--color-white); transform: scale(1.1) rotate(90deg); }
@@ -346,7 +355,7 @@
   <!-- NAVEGACIÓN -->
   <nav class="nav-bar scroll-reveal visible">
     <a href="javascript:void(0)" class="brand">
-      <img src="134241.png?v=21" alt="Escudo Logístico" class="brand-logo" />
+      <img src="134241.png?v=22" alt="Escudo Logístico" class="brand-logo" />
     </a>
     <div class="nav-links">
       <a href="#about" class="btn-ghost">Nosotros</a>
@@ -358,7 +367,7 @@
     </div>
   </nav>
 
-  <!-- HERO -->
+  <!-- HERO (Animación en Cascada Fluida) -->
   <header class="hero container">
     <span class="micro-label hero-element scroll-reveal delay-1" style="margin-bottom: 16px;">V 3.0.0 — Production Ready</span>
     <h1 class="hero-display hero-element scroll-reveal delay-1">Ingeniería. Seguridad. Código.</h1>
@@ -500,7 +509,7 @@
           </div>
           
           <div class="real-ui hidden-content scroll-reveal delay-1" style="height: 100%;">
-            <img src="138083.jpg?v=21" alt="Limpieza Institucional" class="ref-image" style="height: 100%; margin: 0; object-fit: cover; image-rendering: high-quality;">
+            <img src="138083.jpg?v=22" alt="Limpieza Institucional" class="ref-image" style="height: 100%; margin: 0; object-fit: cover; image-rendering: high-quality;">
           </div>
         </div>
 
@@ -556,7 +565,6 @@
            <div class="skeleton-box sk-square" style="height: 180px; margin-bottom: 0;"></div>
         </div>
 
-        <!-- TARJETA CAMPAIGN CON ENLACE DIRECTO (LIMPIO Y SIN TRACKERS) -->
         <div class="campaign-tile real-ui hidden-content scroll-reveal delay-1" onclick="window.open('https://quepasaensanjuan.com/', '_blank')" style="cursor: pointer;">
           <h3 class="display-font" style="font-size: 28px; margin-bottom: 16px; color: var(--color-white);">Qué pasa en San Juan ??</h3>
           <p style="margin: 0 auto; font-size: 13px;">Estrategia digital y vitrina publicitaria líder en Cuyo. Alcance masivo hiper-segmentado.</p>
@@ -579,7 +587,7 @@
     <span class="micro-label">© 2026 Escudo Logístico SAS. CUIT/Registro corporativo en trámite. San Juan, Argentina.</span>
   </footer>
 
-  <!-- MODAL -->
+  <!-- MODAL CON TRANSICIÓN FLUIDA CORREGIDA -->
   <div class="void-modal" id="modalOverlay">
     <div class="modal-content">
       <button class="modal-close" onclick="cerrarModal()" aria-label="Cerrar">×</button>
@@ -594,7 +602,7 @@
   </div>
 
   <script>
-    /* LÓGICA DE ANIMACIONES FLUIDAS */
+    /* LÓGICA DE ANIMACIONES FLUIDAS (Scroll Reveal & Skeletons) */
     document.addEventListener("DOMContentLoaded", () => {
       
       setTimeout(() => {
