@@ -10,11 +10,8 @@
   <link rel="canonical" href="https://escudologisticosas.com/" />
   
   <!-- SECURITY HEADERS -->
-  <!-- CSP Mejorado: Se añade object-src 'none' y frame-ancestors 'none' (este último se aplica mejor desde el servidor, pero lo incluimos si es posible) -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://connect.facebook.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: images.unsplash.com https://www.facebook.com https://www.google-analytics.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net; object-src 'none'; base-uri 'self'; form-action 'self';">
-  <!-- Privacidad: Controla qué información se envía al hacer clic en enlaces externos -->
-  <meta name="referrer" content="no-referrer-when-downgrade">
-  <!-- Previene que el navegador "adivine" el tipo de contenido (MIME-sniffing) -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: images.unsplash.com; media-src 'self' blob:; connect-src 'self'; base-uri 'self'; form-action 'self';">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -153,7 +150,7 @@
     .trust-logo { color: var(--color-graphite); font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 500; letter-spacing: -0.5px; transition: var(--transition-smooth); cursor: default; }
     .trust-logo:hover { color: var(--color-silver); transform: translateY(-2px); }
 
-    /* IMAGES & PANELS */
+    /* IMAGES, MEDIA & PANELS */
     .ref-image {
       width: 100%;
       height: 250px;
@@ -175,29 +172,40 @@
       border-color: rgba(255,255,255,0.2);
     }
 
-    .code-window {
+    .cyber-video {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      display: block;
       background: var(--color-near-black);
-      border: 1px solid rgba(255,255,255,0.1);
       border-radius: var(--radius-card);
-      padding: 24px; text-align: left;
-      font-family: 'JetBrains Mono', monospace; font-size: 13px; line-height: 1.6;
+      border: 1px solid rgba(255,255,255,0.12);
       box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
-      position: relative; overflow-x: auto;
       transition: var(--transition-smooth);
+      object-fit: cover;
     }
-    .code-window:hover {
-      border-color: rgba(255,255,255,0.2);
-      transform: translateY(-2px);
-      box-shadow: 0 15px 30px rgba(0,0,0,0.6), inset 0 0 20px rgba(0,0,0,0.8);
+    .cyber-video:hover {
+      border-color: rgba(255,255,255,0.25);
+      transform: translateY(-3px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.7);
     }
-    .code-window::before {
-      content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
-      background: var(--color-vector-purple);
+
+    .cert-image {
+      width: 100%;
+      max-width: 440px;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      border-radius: var(--radius-card);
+      border: 1px solid rgba(255,255,255,0.14);
+      background: var(--color-white);
+      transition: var(--transition-smooth);
+      image-rendering: high-quality;
     }
-    .code-keyword { color: var(--color-vector-green); }
-    .code-string { color: var(--color-signal-orange); }
-    .code-comment { color: var(--color-ash); }
-    .code-function { color: var(--color-electric-yellow); }
+    .cert-image:hover {
+      transform: translateY(-4px) scale(1.01);
+      border-color: rgba(255,255,255,0.3);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.75);
+    }
 
     .panel-grid { display: grid; grid-template-columns: 1fr; gap: 40px; margin-top: 64px; }
     
@@ -221,6 +229,91 @@
     
     .demo-content h3 { font-size: 34px; margin-bottom: 16px; letter-spacing: -0.34px; }
 
+    /* CV FORM STYLES (Coherente con la estética del sitio) */
+    .cv-form-block {
+      margin-top: 28px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .cv-group-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 15px;
+      color: var(--color-silver);
+      margin: 18px 0 10px;
+    }
+    .cv-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .cv-input, .cv-select, .cv-textarea {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: var(--radius-card);
+      padding: 11px 14px;
+      color: var(--color-white);
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      outline: none;
+      transition: var(--transition-smooth);
+      margin-bottom: 12px;
+    }
+    .cv-row .cv-input, .cv-row .cv-select {
+      margin-bottom: 0;
+    }
+    .cv-select option {
+      background: var(--color-near-black);
+      color: var(--color-white);
+    }
+    .cv-input:focus, .cv-select:focus, .cv-textarea:focus {
+      border-color: rgba(255, 255, 255, 0.35);
+      background: rgba(255, 255, 255, 0.06);
+    }
+    .cv-textarea {
+      min-height: 78px;
+      resize: vertical;
+    }
+    .cv-file-label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 16px;
+      background: var(--color-near-black);
+      border: 1px dashed rgba(255, 255, 255, 0.22);
+      border-radius: var(--radius-card);
+      cursor: pointer;
+      color: var(--color-fog);
+      font-size: 12px;
+      transition: var(--transition-smooth);
+      margin-bottom: 18px;
+    }
+    .cv-file-label:hover {
+      border-color: var(--color-white);
+      color: var(--color-white);
+    }
+    .cv-file-input {
+      display: none;
+    }
+    .cv-file-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--color-silver);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 210px;
+    }
+    .cv-status {
+      margin-top: 14px;
+      font-size: 12px;
+      color: var(--color-vector-green);
+      font-family: 'JetBrains Mono', monospace;
+      min-height: 18px;
+    }
+
     /* CAMPAIGN TILE (Media) */
     .campaign-tile {
       background: var(--color-near-black); 
@@ -237,15 +330,6 @@
       box-shadow: 0 15px 35px rgba(255, 94, 35, 0.15);
       background: #0a0a0a;
     }
-
-    /* COMPARISON TABLE */
-    .comparison-table { width: 100%; border-collapse: collapse; margin-top: 40px; transition: var(--transition-smooth); }
-    .comparison-table th, .comparison-table td { padding: 16px 24px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.05); transition: var(--transition-smooth); }
-    .comparison-table th { font-family: 'Space Grotesk', sans-serif; font-weight: 400; color: var(--color-silver); font-size: 16px; }
-    .comparison-table tr:last-child td { border-bottom: none; }
-    .comparison-table tr:hover td { background: rgba(255,255,255,0.02); }
-    .comparison-table td:nth-child(2) { color: var(--color-ash); } 
-    .comparison-table td:nth-child(3) { color: var(--color-white); background: rgba(255,255,255,0.03); border-left: 1px solid rgba(255,255,255,0.1); border-right: 1px solid rgba(255,255,255,0.1); } 
 
     /* ========================================================
        ANIMACIONES FLUIDAS (Scroll Reveals & Enter States)
@@ -303,7 +387,7 @@
     .sk-square { height: 250px; width: 100%; border-radius: var(--radius-card); margin-bottom: 24px; }
     .sk-square-full { height: 100%; width: 100%; min-height: 250px; border-radius: var(--radius-card); }
     
-    /* MODAL (ANIMACIÓN FLUIDA APLICADA AQUÍ) */
+    /* MODAL (ANIMACIÓN FLUIDA) */
     .void-modal {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(10px);
@@ -335,20 +419,6 @@
     .legal-text p, .legal-text ul { margin-bottom: 16px; }
     .legal-text ul { padding-left: 20px; }
 
-    /* COOKIE BANNER */
-    .cookie-banner {
-      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px);
-      background: var(--color-carbon); border: 1px solid rgba(255,255,255,0.15);
-      border-radius: var(--radius-card); padding: 24px;
-      display: flex; gap: 24px; align-items: center; justify-content: space-between;
-      max-width: 800px; width: calc(100% - 48px); z-index: 1000;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.8);
-      opacity: 0; visibility: hidden; transition: var(--transition-smooth);
-    }
-    .cookie-banner.show { transform: translateX(-50%) translateY(0); opacity: 1; visibility: visible; }
-    .cookie-banner p { margin: 0; font-size: 13px; color: var(--color-silver); }
-    .cookie-buttons { display: flex; gap: 12px; flex-shrink: 0; }
-
     /* MEDIA QUERIES */
     @media (max-width: 992px) {
       .container { padding: 0 20px; } 
@@ -359,17 +429,14 @@
       .responsive-grid { grid-template-columns: 1fr; gap: 40px; }
       .interactive-panel { padding: 32px 24px; }
       .demo-panel { grid-template-columns: 1fr; gap: 32px; }
+      .cv-row { grid-template-columns: 1fr; }
       .hero-buttons { flex-direction: column; width: 100%; max-width: 320px; }
       .btn-orange-pill, .btn-dark-pill { width: 100%; text-align: center; }
       .trust-track { flex-wrap: wrap; gap: 24px 40px; justify-content: center; }
       .trust-logo { font-size: 18px; }
       .prompt-composer { padding: 8px 8px 8px 16px; margin: 32px auto 24px; }
-      .comparison-table { display: block; overflow-x: auto; white-space: nowrap; }
       .modal-content { padding: 32px 24px; }
       .void-modal { padding: 5vh 16px; }
-      .cookie-banner { flex-direction: column; text-align: center; }
-      .cookie-buttons { width: 100%; }
-      .cookie-buttons button { flex: 1; }
     }
   </style>
 </head>
@@ -385,20 +452,20 @@
       <a href="#core" class="btn-ghost">Tecnología</a>
       <a href="#facilities" class="btn-ghost">Facilities</a>
       <a href="#media" class="btn-ghost">Media</a>
+      <a href="#certificaciones" class="btn-ghost">Certificación</a>
       <button data-modal-target="saas" class="btn-ghost">Docs</button>
       <a href="https://wa.me/542645619131" target="_blank" rel="noopener noreferrer nofollow" class="btn-dark-pill">Contáctanos</a>
     </div>
   </nav>
 
-  <!-- HERO -->
+  <!-- HERO (Animación en Cascada Fluida) -->
   <header class="hero container">
     <span class="micro-label hero-element scroll-reveal delay-1" style="margin-bottom: 16px;">V 3.0.0 — Production Ready</span>
     <h1 class="hero-display hero-element scroll-reveal delay-1">Ingeniería. Seguridad. Código.</h1>
     <p class="hero-element scroll-reveal delay-2" style="margin-top: 16px; font-size: 16px;">Tecnología que protege y hace crecer su organización. Diseñamos soluciones a la medida de cada cliente, con foco en resultados medibles, continuidad operativa y protección de la información.</p>
     
     <div class="prompt-composer hero-element scroll-reveal delay-2">
-      <!-- Seguridad Adicional: Se especifica autocomplete="off" para evitar comportamientos no deseados del navegador -->
-      <input type="text" class="prompt-text" value="deploy --env production --shield active" readonly autocomplete="off" />
+      <input type="text" class="prompt-text" value="deploy --env production --shield active" readonly />
       <button class="prompt-submit" aria-label="Desplegar">
         <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
       </button>
@@ -434,6 +501,7 @@
         <div class="real-ui hidden-content scroll-reveal">
           <span class="micro-label">00 / Identidad Corporativa</span>
           <h2 class="section-display" style="margin: 16px 0 24px;">El escudo de su empresa.</h2>
+          <p>Sumate a nuestro equipo en San Juan. Completá tus datos personales, situación académica y experiencia laboral, y adjuntá tu currículum para futuras búsquedas en tecnología, seguridad o facilities.</p>
         </div>
 
         <div class="skeleton-ui interactive-panel" style="width: 100%; padding: 40px; display: block;">
@@ -448,6 +516,47 @@
           <h3 class="display-font" style="font-size: 24px; margin-bottom: 16px; color: var(--color-white);">Quiénes Somos</h3>
           <p style="margin-bottom: 16px;"><strong>Escudo Logístico SAS</strong> es una compañía radicada en San Juan, Argentina, nacida para resolver un problema crítico del sector corporativo: la fragmentación operativa.</p>
           <p style="margin-bottom: 0;">Integramos soluciones de ciberseguridad Zero Trust, desarrollo de software a medida y gestión integral de facilities. Protegemos el núcleo digital y físico de su negocio bajo un único estándar de excelencia, permitiéndole enfocarse exclusivamente en el crecimiento de su empresa.</p>
+
+          <!-- FORMULARIO DE POSTULACIÓN Y CARGA DE CV -->
+          <form id="cvForm" class="cv-form-block" novalidate>
+            <span class="micro-label">Postulaciones / Talentos</span>
+            <h4 style="font-size: 18px; margin-top: 8px; margin-bottom: 4px;">Cargar Currículum</h4>
+
+            <div class="cv-group-title">Datos personales</div>
+            <div class="cv-row">
+              <input type="text" id="cvNombre" class="cv-input" placeholder="Nombre y apellido *" required />
+              <input type="email" id="cvEmail" class="cv-input" placeholder="Correo electrónico *" required />
+            </div>
+            <div class="cv-row">
+              <input type="tel" id="cvTelefono" class="cv-input" placeholder="Teléfono / WhatsApp *" required />
+              <input type="text" id="cvLocalidad" class="cv-input" placeholder="Localidad / Provincia (ej. San Juan)" />
+            </div>
+
+            <div class="cv-group-title">Situación académica</div>
+            <div class="cv-row">
+              <select id="cvNivelAcademico" class="cv-select" required>
+                <option value="" disabled selected>Nivel / Situación académica *</option>
+                <option value="Secundario completo">Secundario completo</option>
+                <option value="Terciario / Universitario en curso">Terciario / Universitario en curso</option>
+                <option value="Terciario / Universitario graduado">Terciario / Universitario graduado</option>
+                <option value="Posgrado / Certificación técnica">Posgrado / Certificación técnica</option>
+              </select>
+              <input type="text" id="cvTitulo" class="cv-input" placeholder="Carrera, título o especialidad" />
+            </div>
+
+            <div class="cv-group-title">Experiencia laboral</div>
+            <input type="text" id="cvPuestoReciente" class="cv-input" placeholder="Último o actual puesto y empresa" />
+            <textarea id="cvExperiencia" class="cv-textarea" placeholder="Resumen de experiencia laboral, tareas y habilidades clave..."></textarea>
+
+            <label for="cvArchivo" class="cv-file-label">
+              <span>Adjuntar CV (PDF, DOC, DOCX)</span>
+              <span class="cv-file-badge" id="cvFileName">Sin archivo seleccionado</span>
+            </label>
+            <input type="file" id="cvArchivo" class="cv-file-input" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+
+            <button type="submit" class="btn-orange-pill">Enviar Postulación</button>
+            <div class="cv-status" id="cvStatus" role="status" aria-live="polite"></div>
+          </form>
         </div>
         
       </div>
@@ -471,7 +580,11 @@
 
         <div class="real-ui hidden-content scroll-reveal">
           <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80" alt="Equipo de Tecnología" class="ref-image" loading="lazy">
-          <img src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=800&q=80" alt="Monitoreo CCTV" class="ref-image" style="margin-bottom: 0;" loading="lazy">
+          <img src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&w=800&q=80" alt="Monitoreo CCTV" class="ref-image" style="margin-bottom: 24px;" loading="lazy">
+          <video class="cyber-video" controls preload="metadata" playsinline aria-label="Video institucional de ciberseguridad Escudo Logístico SAS">
+            <source src="video_1.mp4" type="video/mp4">
+            Tu navegador no soporta la reproducción de video HTML5.
+          </video>
         </div>
 
         <div class="skeleton-ui" style="width: 100%;">
@@ -524,7 +637,7 @@
           
           <div class="demo-content real-ui hidden-content scroll-reveal">
             <h3>Espacios impecables, seguros y siempre operativos.</h3>
-            <p style="margin-bottom: 32px;">Escudo Logístico SAS brinda servicios de limpieza y mantenimiento integral para empresas, institutions de salud, edificios corporativos, comercios e industrias. Nuestro compromiso es simple: que su organización funcione y luzca de manera impecable, todos los días.</p>
+            <p style="margin-bottom: 32px;">Escudo Logístico SAS brinda servicios de limpieza y mantenimiento integral para empresas, instituciones de salud, edificios corporativos, comercios e industrias. Nuestro compromiso es simple: que su organización funcione y luzca de manera impecable, todos los días.</p>
             <button data-modal-target="limpieza" class="btn-dark-pill">Ver Protocolos de Limpieza</button>
           </div>
           
@@ -582,17 +695,38 @@
           <span class="micro-label">03 / Visibilidad & Media</span>
           <h2 class="section-display" style="margin: 16px 0 24px;">Impacto masivo.</h2>
           <p style="margin-bottom: 40px;">No basta con construir la mejor herramienta, su mercado debe verla. Nuestra plataforma mediática conecta su marca con conversiones reales.</p>
-          <!-- Privacidad: rel="noopener noreferrer nofollow" para no pasar información de tu sitio al enlace externo -->
-          <a href="https://quepasaensanjuan.com/" target="_blank" rel="noopener noreferrer nofollow" class="btn-orange-pill">Visitar Portal →</a>
+          <a href="https://quepasaensanjuan.com/" target="_blank" rel="noopener noreferrer" class="btn-orange-pill">Visitar Portal →</a>
         </div>
 
         <div class="skeleton-ui" style="width: 100%;">
            <div class="skeleton-box sk-square" style="height: 180px; margin-bottom: 0;"></div>
         </div>
 
-        <div class="campaign-tile real-ui hidden-content scroll-reveal delay-1" onclick="window.open('https://quepasaensanjuan.com/', '_blank', 'noopener,noreferrer')" style="cursor: pointer;">
+        <div class="campaign-tile real-ui hidden-content scroll-reveal delay-1" onclick="window.open('https://quepasaensanjuan.com/', '_blank')" style="cursor: pointer;">
           <h3 class="display-font" style="font-size: 28px; margin-bottom: 16px; color: var(--color-white);">Qué pasa en San Juan ??</h3>
           <p style="margin: 0 auto; font-size: 13px;">Estrategia digital y vitrina publicitaria líder en Cuyo. Alcance masivo hiper-segmentado.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APARTADO FINAL: CERTIFICADO DE PROVEEDOR -->
+  <section id="certificaciones" class="section-gap" style="border-top: 1px solid rgba(255,255,255,0.05);">
+    <div class="container">
+      <div class="scroll-reveal">
+        <span class="micro-label">04 / Acreditación de Proveedores</span>
+        <h2 class="section-display" style="margin: 16px 0 48px;">Certificado de Proveedor.</h2>
+      </div>
+
+      <div class="interactive-panel demo-panel">
+        <div class="demo-content real-ui hidden-content scroll-reveal">
+          <h3>Proveedor registrado con Achilles</h3>
+          <p style="margin-bottom: 16px;">Acreditación oficial como <strong>Achilles REGIC MEMBER</strong> bajo el registro <strong>ID 00297353</strong>, respaldando el cumplimiento de estándares corporativos, trazabilidad y calificación de proveedores.</p>
+          <p style="margin-bottom: 0;">Disponible para procesos de homologación y contratación B2B.</p>
+        </div>
+
+        <div class="real-ui hidden-content scroll-reveal delay-1" style="width: 100%;">
+          <img src="certificado de proveedor.jpeg" alt="Certificado de Proveedor - Achilles REGIC MEMBER ID 00297353" class="cert-image" loading="lazy">
         </div>
       </div>
     </div>
@@ -623,15 +757,6 @@
       <div style="margin-top: 48px;" id="modalCtaWrapper">
         <a href="https://wa.me/542645619131" target="_blank" rel="noopener noreferrer nofollow" class="btn-orange-pill">Agendar Implementación</a>
       </div>
-    </div>
-  </div>
-
-  <!-- COOKIE BANNER -->
-  <div class="cookie-banner" id="cookieBanner">
-    <p>Utilizamos cookies propias y de terceros para fines analíticos y para mostrarte publicidad personalizada en base a un perfil elaborado a partir de tus hábitos de navegación. <a href="#" data-modal-target="cookies" style="color: var(--color-signal-orange); text-decoration: none;">Ver política de cookies.</a></p>
-    <div class="cookie-buttons">
-      <button id="declineCookies" class="btn-dark-pill">Rechazar</button>
-      <button id="acceptCookies" class="btn-orange-pill">Aceptar Todo</button>
     </div>
   </div>
 
@@ -695,72 +820,14 @@
       legales: {
         label: "LEGAL: ADDITIONAL_NOTES",
         title: "Notas Adicionales & Jurisdicción",
-        desc: "<h4>Confidencialidad y NDAs</h4><p>Como política base de Escudo Logístico SAS, todas las interacciones técnicas, auditorías de sistemas y negociaciones previas están amparadas bajo un Acuerdo de No Divulgación (NDA) tácito, garantizando que su topología de red y vulnerabilidades nunca serán expuestas.</p><h4>Jurisdicción Aplicable</h4><p>Para cualquier controversia legal derivada del uso de nuestros sistemas, servicios o interpretación de los contratos, las partes se someterán a la jurisdicción y competencia de los Tribunales Ordinarios de la Ciudad de San Juan, Provincia de San Juan, República Argentina, renunciando a cualquier otro fuero que pudiera corresponder.</p>",
+        desc: "<h4>Confidencialidad y NDAs</h4><p>Como política base de Escudo Logístico SAS, todas las interacciones técnicas, auditorías de sistemas y negociaciones previas están amparadas bajo un Acuerdo de No Divulgación (NDA) tácito, garantizando que su topología de red y vulnerabilidades nunca serán expuestas.</p><h4>Jurisdicción Aplicable</h4><p>Para cualquier controversia legal derivada del uso de nuestros sistemas, servicios o interpretación de los contratos, las partes se someterán a la jurisdicción y competencia de los Tribunarios Ordinarios de la Ciudad de San Juan, Provincia de San Juan, República Argentina, renunciando a cualquier otro fuero que pudiera corresponder.</p>",
         hideCta: true
       }
     };
 
-    /* FUNCIONES DE SEGUIMIENTO (Analytics & Pixel) */
-    function initTracking() {
-      // GOOGLE ANALYTICS
-      const gaScript = document.createElement('script');
-      gaScript.src = "https://www.googletagmanager.com/gtag/js?id=G-25FP8CX3PL";
-      gaScript.async = true;
-      document.head.appendChild(gaScript);
-      
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-25FP8CX3PL');
-
-      // META PIXEL (Reemplaza XXXXXXXXXXXXXXX con tu ID)
-      !function(f,b,e,v,n,t,s)
-      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)}(window, document,'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', 'XXXXXXXXXXXXXXX');
-      fbq('track', 'PageView');
-    }
-
-    /* LÓGICA DE EVENTOS Y ANIMACIONES FLUIDAS */
+    /* LÓGICA DE EVENTOS, ANIMACIONES Y FORMULARIO DE CV */
     document.addEventListener("DOMContentLoaded", () => {
       
-      // GESTIÓN DE COOKIES
-      const cookieBanner = document.getElementById('cookieBanner');
-      const acceptCookiesBtn = document.getElementById('acceptCookies');
-      const declineCookiesBtn = document.getElementById('declineCookies');
-
-      // Se usa un bloque try-catch para acceder a localStorage, ya que en algunos navegadores (ej. modo estricto de privacidad) puede fallar
-      let cookieConsent = null;
-      try {
-        cookieConsent = localStorage.getItem('cookieConsent');
-      } catch(e) {
-        console.warn("LocalStorage no disponible:", e);
-      }
-
-      if (!cookieConsent) {
-        setTimeout(() => {
-          cookieBanner.classList.add('show');
-        }, 1500);
-      } else if (cookieConsent === 'accepted') {
-        initTracking();
-      }
-
-      acceptCookiesBtn.addEventListener('click', () => {
-        try { localStorage.setItem('cookieConsent', 'accepted'); } catch(e){}
-        cookieBanner.classList.remove('show');
-        initTracking();
-      });
-
-      declineCookiesBtn.addEventListener('click', () => {
-        try { localStorage.setItem('cookieConsent', 'declined'); } catch(e){}
-        cookieBanner.classList.remove('show');
-      });
-
       // 1. Mostrar elementos iniciales del Hero
       setTimeout(() => {
         document.querySelectorAll('.hero-element').forEach(el => {
@@ -774,46 +841,36 @@
         rootMargin: "0px 0px -50px 0px", 
         threshold: 0.1
       };
-      // Verificación de soporte de IntersectionObserver (buena práctica aunque ampliamente soportado)
-      if ('IntersectionObserver' in window) {
-        const scrollObserver = new IntersectionObserver((entries, observer) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('visible');
-              observer.unobserve(entry.target); 
-            }
-          });
-        }, observerOptions);
-
-        // 3. Manejo de Esqueletos (Skeletons) optimizado
-        setTimeout(() => {
-          const skeletons = document.querySelectorAll('.skeleton-ui');
-          skeletons.forEach(el => el.style.display = 'none');
-          
-          const reals = document.querySelectorAll('.real-ui');
-          reals.forEach((el, index) => {
-            el.classList.remove('hidden-content');
-            setTimeout(() => {
-              el.classList.add('show-content');
-            }, index * 80);
-            
-            if (el.classList.contains('scroll-reveal')) {
-               scrollObserver.observe(el);
-            }
-          });
-
-          document.querySelectorAll('.scroll-reveal:not(.real-ui)').forEach(el => {
-            scrollObserver.observe(el);
-          });
-        }, 400); 
-      } else {
-        // Fallback para navegadores antiguos sin IntersectionObserver: mostrar todo directamente
-        document.querySelectorAll('.skeleton-ui').forEach(el => el.style.display = 'none');
-        document.querySelectorAll('.real-ui, .scroll-reveal').forEach(el => {
-           el.classList.remove('hidden-content');
-           el.classList.add('show-content', 'visible');
+      const scrollObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target); 
+          }
         });
-      }
+      }, observerOptions);
+
+      // 3. Manejo de Esqueletos (Skeletons)
+      setTimeout(() => {
+        const skeletons = document.querySelectorAll('.skeleton-ui');
+        skeletons.forEach(el => el.style.display = 'none');
+        
+        const reals = document.querySelectorAll('.real-ui');
+        reals.forEach((el, index) => {
+          el.classList.remove('hidden-content');
+          setTimeout(() => {
+            el.classList.add('show-content');
+          }, index * 80);
+          
+          if (el.classList.contains('scroll-reveal')) {
+             scrollObserver.observe(el);
+          }
+        });
+
+        document.querySelectorAll('.scroll-reveal:not(.real-ui)').forEach(el => {
+          scrollObserver.observe(el);
+        });
+      }, 400); 
 
       // 4. Lógica moderna para el Modal (Event Delegation)
       const overlay = document.getElementById('modalOverlay');
@@ -828,21 +885,14 @@
         document.body.style.overflow = 'auto';
       };
 
-      // Abrir modal capturando clics en botones con data-modal-target
       document.body.addEventListener('click', (e) => {
         const triggerBtn = e.target.closest('[data-modal-target]');
         if (!triggerBtn) return;
-
-        if (triggerBtn.tagName.toLowerCase() === 'a') {
-            e.preventDefault();
-        }
 
         const modalId = triggerBtn.getAttribute('data-modal-target');
         const info = dataPaneles[modalId];
 
         if (info) {
-          // Seguridad: Si en el futuro dataPaneles viene de una API, se debe sanitizar info.desc (ej. usando DOMPurify.sanitize(info.desc)) antes de usar innerHTML.
-          // Como los datos son estáticos e internos, el riesgo de XSS aquí es bajo, pero documentamos la precaución.
           mLabel.textContent = info.label;
           mTitle.textContent = info.title;
           mDesc.innerHTML = info.desc;
@@ -853,20 +903,58 @@
         }
       });
 
-      // Cerrar modal usando el botón 'X'
-      if(closeBtn) closeBtn.addEventListener('click', cerrarModal);
+      closeBtn.addEventListener('click', cerrarModal);
 
-      // Cerrar modal haciendo clic en el fondo oscuro (fuera del contenido)
-      if(overlay) overlay.addEventListener('click', (e) => {
+      overlay.addEventListener('click', (e) => {
         if (e.target === overlay) cerrarModal();
       });
 
-      // Cerrar modal presionando la tecla Escape
       document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && overlay && overlay.classList.contains('active')) {
+        if (e.key === 'Escape' && overlay.classList.contains('active')) {
           cerrarModal();
         }
       });
+
+      // 5. Lógica del formulario de CV
+      const cvForm = document.getElementById('cvForm');
+      const cvArchivo = document.getElementById('cvArchivo');
+      const cvFileName = document.getElementById('cvFileName');
+      const cvStatus = document.getElementById('cvStatus');
+
+      if (cvArchivo && cvFileName) {
+        cvArchivo.addEventListener('change', () => {
+          if (cvArchivo.files && cvArchivo.files.length > 0) {
+            cvFileName.textContent = cvArchivo.files[0].name;
+          } else {
+            cvFileName.textContent = 'Sin archivo seleccionado';
+          }
+        });
+      }
+
+      if (cvForm) {
+        cvForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const nombre = document.getElementById('cvNombre').value.trim();
+          const email = document.getElementById('cvEmail').value.trim();
+          const telefono = document.getElementById('cvTelefono').value.trim();
+          const nivel = document.getElementById('cvNivelAcademico').value;
+
+          if (!nombre || !email || !telefono || !nivel) {
+            cvStatus.style.color = 'var(--color-signal-orange)';
+            cvStatus.textContent = 'Completá nombre, correo, teléfono y situación académica.';
+            return;
+          }
+
+          const archivoTexto = (cvArchivo && cvArchivo.files && cvArchivo.files.length > 0)
+            ? ` (${cvArchivo.files[0].name})`
+            : '';
+
+          cvStatus.style.color = 'var(--color-vector-green)';
+          cvStatus.textContent = `Postulación registrada para ${nombre}${archivoTexto}.`;
+          cvForm.reset();
+          if (cvFileName) cvFileName.textContent = 'Sin archivo seleccionado';
+        });
+      }
 
     });
   </script>
