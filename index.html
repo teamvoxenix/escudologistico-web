@@ -10,7 +10,7 @@
   <link rel="canonical" href="https://escudologisticosas.com/" />
   
   <!-- SECURITY HEADERS -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: images.unsplash.com; media-src 'self' blob:; connect-src 'self'; base-uri 'self'; form-action 'self';">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https: images.unsplash.com; media-src 'self' blob:; connect-src 'self' https://*.googleapis.com https://*.firebaseio.com; base-uri 'self'; form-action 'self';">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
 
@@ -80,6 +80,11 @@
       background: var(--color-ember); 
       transform: translateY(-2px);
       box-shadow: 0 6px 20px rgba(255, 217, 0, 0.4);
+    }
+    .btn-orange-pill:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
     }
 
     .btn-dark-pill {
@@ -229,7 +234,7 @@
     
     .demo-content h3 { font-size: 34px; margin-bottom: 16px; letter-spacing: -0.34px; }
 
-    /* CV FORM STYLES (Coherente con la estética del sitio) */
+    /* CV FORM STYLES */
     .cv-form-block {
       margin-top: 28px;
       padding-top: 24px;
@@ -312,6 +317,23 @@
       color: var(--color-vector-green);
       font-family: 'JetBrains Mono', monospace;
       min-height: 18px;
+    }
+    .cv-locked-box {
+      display: none;
+      margin-top: 28px;
+      padding: 24px;
+      border-radius: var(--radius-card);
+      background: rgba(8, 195, 128, 0.06);
+      border: 1px solid rgba(8, 195, 128, 0.35);
+    }
+    .cv-locked-box.active {
+      display: block;
+    }
+    .cv-locked-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 18px;
+      color: var(--color-vector-green);
+      margin-bottom: 6px;
     }
 
     /* CAMPAIGN TILE (Media) */
@@ -445,7 +467,7 @@
   <!-- NAVEGACIÓN -->
   <nav class="nav-bar scroll-reveal visible" aria-label="Navegación principal">
     <a href="/" class="brand" aria-label="Inicio">
-      <img src="134241.png?v=22" alt="Escudo Logístico SAS" class="brand-logo" />
+      <img src="134241.png?v=23" alt="Escudo Logístico SAS" class="brand-logo" />
     </a>
     <div class="nav-links">
       <a href="#about" class="btn-ghost">Nosotros</a>
@@ -549,14 +571,20 @@
             <textarea id="cvExperiencia" class="cv-textarea" placeholder="Resumen de experiencia laboral, tareas y habilidades clave..."></textarea>
 
             <label for="cvArchivo" class="cv-file-label">
-              <span>Adjuntar CV (PDF, DOC, DOCX)</span>
+              <span>Adjuntar CV (PDF, DOC, DOCX — máx. 700 KB)</span>
               <span class="cv-file-badge" id="cvFileName">Sin archivo seleccionado</span>
             </label>
             <input type="file" id="cvArchivo" class="cv-file-input" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
 
-            <button type="submit" class="btn-orange-pill">Enviar Postulación</button>
+            <button type="submit" id="cvSubmitBtn" class="btn-orange-pill">Enviar Postulación</button>
             <div class="cv-status" id="cvStatus" role="status" aria-live="polite"></div>
           </form>
+
+          <!-- ESTADO BLOQUEADO TRAS ENVIAR -->
+          <div id="cvLockedBox" class="cv-locked-box" role="status" aria-live="polite">
+            <div class="cv-locked-title">Ya presentaste tu solicitud</div>
+            <p style="margin-bottom: 0; font-size: 13px;">Recibimos tus datos correctamente. Nuestro equipo de Recursos Humanos evaluará tu perfil para futuras búsquedas.</p>
+          </div>
         </div>
         
       </div>
@@ -646,7 +674,7 @@
           </div>
           
           <div class="real-ui hidden-content scroll-reveal delay-1" style="height: 100%;">
-            <img src="138083.jpg?v=22" alt="Limpieza Institucional" class="ref-image" loading="lazy" style="height: 100%; margin: 0; object-fit: cover; image-rendering: high-quality;">
+            <img src="138083.jpg?v=23" alt="Limpieza Institucional" class="ref-image" loading="lazy" style="height: 100%; margin: 0; object-fit: cover; image-rendering: high-quality;">
           </div>
         </div>
 
@@ -760,7 +788,35 @@
     </div>
   </div>
 
-  <script>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+
+    /* REEMPLAZÁ CON LOS DATOS DE TU PROYECTO EN FIREBASE CONSOLE */
+    const firebaseConfig = {
+      apiKey: "TU_API_KEY",
+      authDomain: "TU_PROYECTO.firebaseapp.com",
+      projectId: "TU_PROYECTO",
+      storageBucket: "TU_PROYECTO.firebasestorage.app",
+      messagingSenderId: "TU_MESSAGING_SENDER_ID",
+      appId: "TU_APP_ID"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    /* CONVERSOR DE ARCHIVO A BASE64 (SIN STORAGE) */
+    const archivoABase64 = (file) => new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const result = String(reader.result || '');
+        const base64 = result.includes(',') ? result.split(',')[1] : result;
+        resolve(base64);
+      };
+      reader.onerror = () => reject(new Error('Error leyendo el archivo adjunto.'));
+      reader.readAsDataURL(file);
+    });
+
     /* DATOS DEL MODAL */
     const dataPaneles = {
       software: {
@@ -820,12 +876,12 @@
       legales: {
         label: "LEGAL: ADDITIONAL_NOTES",
         title: "Notas Adicionales & Jurisdicción",
-        desc: "<h4>Confidencialidad y NDAs</h4><p>Como política base de Escudo Logístico SAS, todas las interacciones técnicas, auditorías de sistemas y negociaciones previas están amparadas bajo un Acuerdo de No Divulgación (NDA) tácito, garantizando que su topología de red y vulnerabilidades nunca serán expuestas.</p><h4>Jurisdicción Aplicable</h4><p>Para cualquier controversia legal derivada del uso de nuestros sistemas, servicios o interpretación de los contratos, las partes se someterán a la jurisdicción y competencia de los Tribunarios Ordinarios de la Ciudad de San Juan, Provincia de San Juan, República Argentina, renunciando a cualquier otro fuero que pudiera corresponder.</p>",
+        desc: "<h4>Confidencialidad y NDAs</h4><p>Como política base de Escudo Logístico SAS, todas las interacciones técnicas, auditorías de sistemas y negociaciones previas están amparadas bajo un Acuerdo de No Divulgación (NDA) tácito, garantizando que su topología de red y vulnerabilidades nunca serán expuestas.</p><h4>Jurisdicción Aplicable</h4><p>Para cualquier controversia legal derivada del uso de nuestros sistemas, servicios o interpretación de los contratos, las partes se someterán a la jurisdicción y competencia de los Tribunales Ordinarios de la Ciudad de San Juan, Provincia de San Juan, República Argentina, renunciando a cualquier otro fuero que pudiera corresponder.</p>",
         hideCta: true
       }
     };
 
-    /* LÓGICA DE EVENTOS, ANIMACIONES Y FORMULARIO DE CV */
+    /* LÓGICA DE EVENTOS, ANIMACIONES Y FORMULARIO FIRESTORE */
     document.addEventListener("DOMContentLoaded", () => {
       
       // 1. Mostrar elementos iniciales del Hero
@@ -915,11 +971,29 @@
         }
       });
 
-      // 5. Lógica del formulario de CV
+      // 5. Lógica del formulario de CV + Firestore (Sin Storage) + Bloqueo permanente
+      const STORAGE_KEY = 'escudo_postulacion_enviada';
+      const MAX_FILE_BYTES = 700 * 1024; // 700 KB (entra seguro en el límite de 1 MB de Firestore)
       const cvForm = document.getElementById('cvForm');
+      const cvLockedBox = document.getElementById('cvLockedBox');
       const cvArchivo = document.getElementById('cvArchivo');
       const cvFileName = document.getElementById('cvFileName');
       const cvStatus = document.getElementById('cvStatus');
+      const cvSubmitBtn = document.getElementById('cvSubmitBtn');
+
+      const bloquearFormulario = () => {
+        if (cvForm) {
+          cvForm.reset();
+          cvForm.style.display = 'none';
+        }
+        if (cvLockedBox) {
+          cvLockedBox.classList.add('active');
+        }
+      };
+
+      if (localStorage.getItem(STORAGE_KEY) === 'true') {
+        bloquearFormulario();
+      }
 
       if (cvArchivo && cvFileName) {
         cvArchivo.addEventListener('change', () => {
@@ -932,27 +1006,73 @@
       }
 
       if (cvForm) {
-        cvForm.addEventListener('submit', (e) => {
+        cvForm.addEventListener('submit', async (e) => {
           e.preventDefault();
+
+          if (localStorage.getItem(STORAGE_KEY) === 'true') {
+            bloquearFormulario();
+            return;
+          }
+
           const nombre = document.getElementById('cvNombre').value.trim();
           const email = document.getElementById('cvEmail').value.trim();
           const telefono = document.getElementById('cvTelefono').value.trim();
-          const nivel = document.getElementById('cvNivelAcademico').value;
+          const localidad = document.getElementById('cvLocalidad').value.trim();
+          const nivelAcademico = document.getElementById('cvNivelAcademico').value;
+          const titulo = document.getElementById('cvTitulo').value.trim();
+          const puestoReciente = document.getElementById('cvPuestoReciente').value.trim();
+          const experiencia = document.getElementById('cvExperiencia').value.trim();
+          const archivo = cvArchivo && cvArchivo.files ? cvArchivo.files[0] : null;
 
-          if (!nombre || !email || !telefono || !nivel) {
+          if (!nombre || !email || !telefono || !nivelAcademico) {
             cvStatus.style.color = 'var(--color-signal-orange)';
             cvStatus.textContent = 'Completá nombre, correo, teléfono y situación académica.';
             return;
           }
 
-          const archivoTexto = (cvArchivo && cvArchivo.files && cvArchivo.files.length > 0)
-            ? ` (${cvArchivo.files[0].name})`
-            : '';
+          if (archivo && archivo.size > MAX_FILE_BYTES) {
+            cvStatus.style.color = 'var(--color-signal-orange)';
+            cvStatus.textContent = 'El CV supera los 700 KB. Comprimilo a un PDF más liviano e intentá de nuevo.';
+            return;
+          }
 
-          cvStatus.style.color = 'var(--color-vector-green)';
-          cvStatus.textContent = `Postulación registrada para ${nombre}${archivoTexto}.`;
-          cvForm.reset();
-          if (cvFileName) cvFileName.textContent = 'Sin archivo seleccionado';
+          cvSubmitBtn.disabled = true;
+          cvSubmitBtn.textContent = 'Enviando...';
+          cvStatus.style.color = 'var(--color-silver)';
+          cvStatus.textContent = 'Guardando solicitud...';
+
+          try {
+            let cvBase64 = '';
+            let cvNombreArchivo = '';
+
+            if (archivo) {
+              cvBase64 = await archivoABase64(archivo);
+              cvNombreArchivo = archivo.name;
+            }
+
+            await addDoc(collection(db, 'postulaciones'), {
+              nombre,
+              email,
+              telefono,
+              localidad,
+              nivelAcademico,
+              titulo,
+              puestoReciente,
+              experiencia,
+              cvNombreArchivo,
+              cvBase64,
+              fechaEnvio: serverTimestamp()
+            });
+
+            localStorage.setItem(STORAGE_KEY, 'true');
+            bloquearFormulario();
+          } catch (error) {
+            console.error('Error al enviar postulación:', error);
+            cvStatus.style.color = 'var(--color-signal-orange)';
+            cvStatus.textContent = 'No se pudo enviar la solicitud. Intentá nuevamente en unos segundos.';
+            cvSubmitBtn.disabled = false;
+            cvSubmitBtn.textContent = 'Enviar Postulación';
+          }
         });
       }
 
