@@ -117,7 +117,7 @@
     }
     .brand-logo { height: 80px; transition: var(--transition-smooth); }
     .brand-logo:hover { transform: scale(1.02); filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.2)); }
-    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-links { display: flex; gap: 28px; align-items: center; }
 
     /* HERO & PROMPT COMPOSER */
     .hero { min-height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding-top: 80px; }
@@ -236,15 +236,16 @@
 
     /* CV FORM STYLES */
     .cv-form-block {
-      margin-top: 28px;
-      padding-top: 24px;
-      border-top: 1px solid rgba(255,255,255,0.08);
+      width: 100%;
     }
     .cv-group-title {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 15px;
       color: var(--color-silver);
       margin: 18px 0 10px;
+    }
+    .cv-group-title:first-of-type {
+      margin-top: 12px;
     }
     .cv-row {
       display: grid;
@@ -320,8 +321,7 @@
     }
     .cv-locked-box {
       display: none;
-      margin-top: 28px;
-      padding: 24px;
+      padding: 28px;
       border-radius: var(--radius-card);
       background: rgba(8, 195, 128, 0.06);
       border: 1px solid rgba(8, 195, 128, 0.35);
@@ -331,9 +331,9 @@
     }
     .cv-locked-title {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 18px;
+      font-size: 20px;
       color: var(--color-vector-green);
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
 
     /* CAMPAIGN TILE (Media) */
@@ -467,7 +467,7 @@
   <!-- NAVEGACIÓN -->
   <nav class="nav-bar scroll-reveal visible" aria-label="Navegación principal">
     <a href="/" class="brand" aria-label="Inicio">
-      <img src="134241.png?v=23" alt="Escudo Logístico SAS" class="brand-logo" />
+      <img src="134241.png?v=24" alt="Escudo Logístico SAS" class="brand-logo" />
     </a>
     <div class="nav-links">
       <a href="#about" class="btn-ghost">Nosotros</a>
@@ -475,6 +475,7 @@
       <a href="#facilities" class="btn-ghost">Facilities</a>
       <a href="#media" class="btn-ghost">Media</a>
       <a href="#certificaciones" class="btn-ghost">Certificación</a>
+      <a href="#postulaciones" class="btn-ghost">Postulaciones</a>
       <button data-modal-target="saas" class="btn-ghost">Docs</button>
       <a href="https://wa.me/542645619131" target="_blank" rel="noopener noreferrer nofollow" class="btn-dark-pill">Contáctanos</a>
     </div>
@@ -523,7 +524,6 @@
         <div class="real-ui hidden-content scroll-reveal">
           <span class="micro-label">00 / Identidad Corporativa</span>
           <h2 class="section-display" style="margin: 16px 0 24px;">El escudo de su empresa.</h2>
-          <p>Sumate a nuestro equipo en San Juan. Completá tus datos personales, situación académica y experiencia laboral, y adjuntá tu currículum para futuras búsquedas en tecnología, seguridad o facilities.</p>
         </div>
 
         <div class="skeleton-ui interactive-panel" style="width: 100%; padding: 40px; display: block;">
@@ -538,53 +538,6 @@
           <h3 class="display-font" style="font-size: 24px; margin-bottom: 16px; color: var(--color-white);">Quiénes Somos</h3>
           <p style="margin-bottom: 16px;"><strong>Escudo Logístico SAS</strong> es una compañía radicada en San Juan, Argentina, nacida para resolver un problema crítico del sector corporativo: la fragmentación operativa.</p>
           <p style="margin-bottom: 0;">Integramos soluciones de ciberseguridad Zero Trust, desarrollo de software a medida y gestión integral de facilities. Protegemos el núcleo digital y físico de su negocio bajo un único estándar de excelencia, permitiéndole enfocarse exclusivamente en el crecimiento de su empresa.</p>
-
-          <!-- FORMULARIO DE POSTULACIÓN Y CARGA DE CV -->
-          <form id="cvForm" class="cv-form-block" novalidate>
-            <span class="micro-label">Postulaciones / Talentos</span>
-            <h4 style="font-size: 18px; margin-top: 8px; margin-bottom: 4px;">Cargar Currículum</h4>
-
-            <div class="cv-group-title">Datos personales</div>
-            <div class="cv-row">
-              <input type="text" id="cvNombre" class="cv-input" placeholder="Nombre y apellido *" required />
-              <input type="email" id="cvEmail" class="cv-input" placeholder="Correo electrónico *" required />
-            </div>
-            <div class="cv-row">
-              <input type="tel" id="cvTelefono" class="cv-input" placeholder="Teléfono / WhatsApp *" required />
-              <input type="text" id="cvLocalidad" class="cv-input" placeholder="Localidad / Provincia (ej. San Juan)" />
-            </div>
-
-            <div class="cv-group-title">Situación académica</div>
-            <div class="cv-row">
-              <select id="cvNivelAcademico" class="cv-select" required>
-                <option value="" disabled selected>Nivel / Situación académica *</option>
-                <option value="Secundario completo">Secundario completo</option>
-                <option value="Terciario / Universitario en curso">Terciario / Universitario en curso</option>
-                <option value="Terciario / Universitario graduado">Terciario / Universitario graduado</option>
-                <option value="Posgrado / Certificación técnica">Posgrado / Certificación técnica</option>
-              </select>
-              <input type="text" id="cvTitulo" class="cv-input" placeholder="Carrera, título o especialidad" />
-            </div>
-
-            <div class="cv-group-title">Experiencia laboral</div>
-            <input type="text" id="cvPuestoReciente" class="cv-input" placeholder="Último o actual puesto y empresa" />
-            <textarea id="cvExperiencia" class="cv-textarea" placeholder="Resumen de experiencia laboral, tareas y habilidades clave..."></textarea>
-
-            <label for="cvArchivo" class="cv-file-label">
-              <span>Adjuntar CV (PDF, DOC, DOCX — máx. 700 KB)</span>
-              <span class="cv-file-badge" id="cvFileName">Sin archivo seleccionado</span>
-            </label>
-            <input type="file" id="cvArchivo" class="cv-file-input" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
-
-            <button type="submit" id="cvSubmitBtn" class="btn-orange-pill">Enviar Postulación</button>
-            <div class="cv-status" id="cvStatus" role="status" aria-live="polite"></div>
-          </form>
-
-          <!-- ESTADO BLOQUEADO TRAS ENVIAR -->
-          <div id="cvLockedBox" class="cv-locked-box" role="status" aria-live="polite">
-            <div class="cv-locked-title">Ya presentaste tu solicitud</div>
-            <p style="margin-bottom: 0; font-size: 13px;">Recibimos tus datos correctamente. Nuestro equipo de Recursos Humanos evaluará tu perfil para futuras búsquedas.</p>
-          </div>
         </div>
         
       </div>
@@ -674,7 +627,7 @@
           </div>
           
           <div class="real-ui hidden-content scroll-reveal delay-1" style="height: 100%;">
-            <img src="138083.jpg?v=23" alt="Limpieza Institucional" class="ref-image" loading="lazy" style="height: 100%; margin: 0; object-fit: cover; image-rendering: high-quality;">
+            <img src="138083.jpg?v=24" alt="Limpieza Institucional" class="ref-image" loading="lazy" style="height: 100%; margin: 0; object-fit: cover; image-rendering: high-quality;">
           </div>
         </div>
 
@@ -738,7 +691,7 @@
     </div>
   </section>
 
-  <!-- APARTADO FINAL: CERTIFICADO DE PROVEEDOR -->
+  <!-- SECCIÓN 04: CERTIFICADO DE PROVEEDOR -->
   <section id="certificaciones" class="section-gap" style="border-top: 1px solid rgba(255,255,255,0.05);">
     <div class="container">
       <div class="scroll-reveal">
@@ -747,15 +700,105 @@
       </div>
 
       <div class="interactive-panel demo-panel">
+        <div class="skeleton-ui" style="width: 100%;">
+          <div class="skeleton-box sk-title"></div>
+          <div class="skeleton-box sk-text"></div>
+          <div class="skeleton-box sk-text-short"></div>
+        </div>
+
         <div class="demo-content real-ui hidden-content scroll-reveal">
           <h3>Proveedor registrado con Achilles</h3>
           <p style="margin-bottom: 16px;">Acreditación oficial como <strong>Achilles REGIC MEMBER</strong> bajo el registro <strong>ID 00297353</strong>, respaldando el cumplimiento de estándares corporativos, trazabilidad y calificación de proveedores.</p>
           <p style="margin-bottom: 0;">Disponible para procesos de homologación y contratación B2B.</p>
         </div>
 
+        <div class="skeleton-ui" style="height: 100%;">
+          <div class="skeleton-box sk-square-full"></div>
+        </div>
+
         <div class="real-ui hidden-content scroll-reveal delay-1" style="width: 100%;">
           <img src="certificado de proveedor.jpeg" alt="Certificado de Proveedor - Achilles REGIC MEMBER ID 00297353" class="cert-image" loading="lazy">
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCIÓN 05: CARGAR CURRÍCULUM (AL ÚLTIMO DE LA WEB, DEBAJO DE PROVEEDORES) -->
+  <section id="postulaciones" class="section-gap" style="border-top: 1px solid rgba(255,255,255,0.05);">
+    <div class="container">
+      <div class="responsive-grid" style="align-items: start;">
+        
+        <div class="skeleton-ui" style="width: 100%;">
+          <div class="skeleton-box sk-title" style="width: 50%;"></div>
+          <div class="skeleton-box sk-title" style="margin-bottom: 24px;"></div>
+          <div class="skeleton-box sk-text"></div>
+          <div class="skeleton-box sk-text-short"></div>
+        </div>
+
+        <div class="real-ui hidden-content scroll-reveal">
+          <span class="micro-label">05 / Postulaciones & Talentos</span>
+          <h2 class="section-display" style="margin: 16px 0 24px;">Cargar Currículum.</h2>
+          <p style="margin-bottom: 16px;">Sumate al equipo de <strong>Escudo Logístico SAS</strong> en San Juan. Completá tus datos personales, situación académica y experiencia laboral, y adjuntá tu currículum para futuras búsquedas en tecnología, ciberseguridad o facilities.</p>
+          <p style="margin-bottom: 0;">Toda la información enviada se procesa bajo estricta confidencialidad conforme a la Ley N° 25.326 de Protección de Datos Personales.</p>
+        </div>
+
+        <div class="skeleton-ui interactive-panel" style="width: 100%; padding: 40px; display: block;">
+          <div class="skeleton-box sk-title" style="margin-bottom: 24px;"></div>
+          <div class="skeleton-box sk-text"></div>
+          <div class="skeleton-box sk-text"></div>
+          <div class="skeleton-box sk-text"></div>
+          <div class="skeleton-box sk-btn" style="margin-top: 24px;"></div>
+        </div>
+
+        <div class="interactive-panel real-ui hidden-content scroll-reveal delay-1" style="padding: 40px; display: block;">
+          <!-- FORMULARIO DE POSTULACIÓN Y CARGA DE CV -->
+          <form id="cvForm" class="cv-form-block" novalidate>
+            <h3 class="display-font" style="font-size: 24px; margin-bottom: 6px; color: var(--color-white);">Formulario de Postulación</h3>
+            <p style="margin-bottom: 16px; font-size: 13px;">Completá los campos obligatorios (*) y adjuntá tu CV en PDF o Word.</p>
+
+            <div class="cv-group-title">Datos personales</div>
+            <div class="cv-row">
+              <input type="text" id="cvNombre" class="cv-input" placeholder="Nombre y apellido *" required />
+              <input type="email" id="cvEmail" class="cv-input" placeholder="Correo electrónico *" required />
+            </div>
+            <div class="cv-row">
+              <input type="tel" id="cvTelefono" class="cv-input" placeholder="Teléfono / WhatsApp *" required />
+              <input type="text" id="cvLocalidad" class="cv-input" placeholder="Localidad / Provincia (ej. San Juan)" />
+            </div>
+
+            <div class="cv-group-title">Situación académica</div>
+            <div class="cv-row">
+              <select id="cvNivelAcademico" class="cv-select" required>
+                <option value="" disabled selected>Nivel / Situación académica *</option>
+                <option value="Secundario completo">Secundario completo</option>
+                <option value="Terciario / Universitario en curso">Terciario / Universitario en curso</option>
+                <option value="Terciario / Universitario graduado">Terciario / Universitario graduado</option>
+                <option value="Posgrado / Certificación técnica">Posgrado / Certificación técnica</option>
+              </select>
+              <input type="text" id="cvTitulo" class="cv-input" placeholder="Carrera, título o especialidad" />
+            </div>
+
+            <div class="cv-group-title">Experiencia laboral</div>
+            <input type="text" id="cvPuestoReciente" class="cv-input" placeholder="Último o actual puesto y empresa" />
+            <textarea id="cvExperiencia" class="cv-textarea" placeholder="Resumen de experiencia laboral, tareas y habilidades clave..."></textarea>
+
+            <label for="cvArchivo" class="cv-file-label">
+              <span>Adjuntar CV (PDF, DOC, DOCX — máx. 700 KB)</span>
+              <span class="cv-file-badge" id="cvFileName">Sin archivo seleccionado</span>
+            </label>
+            <input type="file" id="cvArchivo" class="cv-file-input" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+
+            <button type="submit" id="cvSubmitBtn" class="btn-orange-pill">Enviar Postulación</button>
+            <div class="cv-status" id="cvStatus" role="status" aria-live="polite"></div>
+          </form>
+
+          <!-- ESTADO BLOQUEADO TRAS ENVIAR -->
+          <div id="cvLockedBox" class="cv-locked-box" role="status" aria-live="polite">
+            <div class="cv-locked-title">Ya presentaste tu solicitud</div>
+            <p style="margin-bottom: 0; font-size: 13px;">Recibimos tus datos correctamente. Nuestro equipo de Recursos Humanos evaluará tu perfil para futuras búsquedas.</p>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
